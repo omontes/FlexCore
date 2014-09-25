@@ -9,7 +9,7 @@ function getClientes() {
     $.ajax({
         
         type: 'GET',
-        url: rootURL + "/clientes/getClientes",
+        url: rootURL + "/propositos/getPropositos",
         dataType: "json",
         success: function(data) {
             $('#h1').append("Consulta Realizada");
