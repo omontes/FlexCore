@@ -1,0 +1,536 @@
+/* 
+    Created on : Aug 17, 2014, 4:53:05 PM
+    Author     : M. Taylor
+*/
+
+/* Required field START */
+
+@import url(http://fonts.googleapis.com/css?family=Oswald);
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300);
+@import url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+
+
+
+.required-field-block {
+    position: relative;   
+}
+
+.required-field-block .required-icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin: -0.25em 0.25em 0em;
+    background-color: #E8E8E8;
+    border-color: #E8E8E8;
+    padding: 0.5em 0.8em;
+    color: rgba(0, 0, 0, 0.65);
+    text-transform: uppercase;
+    font-weight: normal;
+    border-radius: 0.325em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: background 0.1s linear;
+    -moz-transition: background 0.1s linear;
+    transition: background 0.1s linear;
+    font-size: 75%;
+}
+
+.required-field-block .required-icon {
+    background-color: transparent;
+    position: absolute;
+    top: 0em;
+    right: 0em;
+    z-index: 10;
+    margin: 0em;
+    width: 30px;
+    height: 30px;
+    padding: 0em;
+    text-align: center;
+    -webkit-transition: color 0.2s ease;
+    -moz-transition: color 0.2s ease;
+    transition: color 0.2s ease;
+}
+
+.required-field-block .required-icon:after {
+    position: absolute;
+    content: "";
+    right: 1px;
+    top: 1px;
+    z-index: -1;
+    width: 0em;
+    height: 0em;
+    border-top: 0em solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 30px solid transparent;
+    border-left: 0em solid transparent;
+    border-right-color: inherit;
+    -webkit-transition: border-color 0.2s ease;
+    -moz-transition: border-color 0.2s ease;
+    transition: border-color 0.2s ease;
+}
+
+.required-field-block .required-icon .text {
+    color: #B80000;
+    font-size: 26px;
+    margin: -3px 0 0 12px;
+}
+/* Required field END */
+
+
+/* Button  START */
+
+body{
+    font-family: 'Oswald', sans-serif;
+}
+
+.btn{
+    margin: 4px;
+    box-shadow: 1px 1px 5px #888888;
+}
+
+.btn-xs{
+    font-weight: 300;
+}
+
+.btn-hot {
+    color: #fff;
+    background-color: #db5566;
+    border-bottom:2px solid #af4451;
+}
+
+.btn-hot:hover, .btn-sky.active:focus, .btn-hot:focus, .open>.dropdown-toggle.btn-hot {
+    color: #fff;
+    background-color: #df6a78;
+    border-bottom:2px solid #b25560;
+    outline: none;}
+
+
+.btn-hot:active, .btn-hot.active {
+    color: #fff;
+    background-color: #c04b59;
+    border-top:2px solid #9a3c47;
+    margin-top: 2px;
+}
+
+.btn-sunny {
+    color: #fff;
+    background-color: #f4ad49;
+    border-bottom:2px solid #c38a3a;
+}
+
+.btn-sunny:hover, .btn-sky.active:focus, .btn-sunny:focus, .open>.dropdown-toggle.btn-sunny {
+    color: #fff;
+    background-color: #f5b75f;
+    border-bottom:2px solid #c4924c;
+    outline: none;
+}
+
+
+.btn-sunny:active, .btn-sunny.active {
+    color: #fff;
+    background-color: #d69840;
+    border-top:2px solid #ab7a33;
+    margin-top: 2px;
+}
+
+.btn-fresh {
+    color: #fff;
+    background-color: #51bf87;
+    border-bottom:2px solid #41996c;
+}
+
+.btn-fresh:hover, .btn-sky.active:focus, .btn-fresh:focus, .open>.dropdown-toggle.btn-fresh {
+    color: #fff;
+    background-color: #66c796;
+    border-bottom:2px solid #529f78;
+    outline: none;
+}
+
+
+.btn-fresh:active, .btn-fresh.active {
+    color: #fff;
+    background-color: #47a877;
+    border-top:2px solid #39865f;
+    outline: none;
+    outline-offset: none;
+    margin-top: 2px;
+}
+
+.btn-sky {
+    color: #fff;
+    background-color: #0bacd3;
+    border-bottom:2px solid #098aa9;
+}
+
+.btn-sky:hover,.btn-sky.active:focus, .btn-sky:focus, .open>.dropdown-toggle.btn-sky {
+    color: #fff;
+    background-color: #29b6d8;
+    border-bottom:2px solid #2192ad;
+    outline: none;
+}
+
+.btn-sky:active, .btn-sky.active {
+    color: #fff;
+    background-color: #0a97b9;
+    border-top:2px solid #087994;
+    outline-offset: none;
+    margin-top: 2px;
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus {
+    outline: none;
+    outline-offset: 0px;
+}
+
+/* Button  END */
+
+body{background: #eee url(http://subtlepatterns.com/patterns/sativa.png);}
+html,body{
+    position: relative;
+    height: 100%;
+}
+
+.login-container{
+    position: relative;
+    width: 300px;
+    padding: 10px 40px 10px;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #ccc;
+}
+
+#output{
+    position: absolute;
+    width: 300px;
+    top: -75px;
+    left: 0;
+    color: #fff;
+}
+
+#output.alert-success{
+    background: rgb(25, 204, 25);
+}
+
+#output.alert-danger{
+    background: rgb(228, 105, 105);
+}
+
+
+.login-container::before,.login-container::after{
+    content: "";
+    position: absolute;
+    width: 100%;height: 100%;
+    top: 3.5px;left: 0;
+    background: #fff;
+    z-index: -1;
+    -webkit-transform: rotateZ(4deg);
+    -moz-transform: rotateZ(4deg);
+    -ms-transform: rotateZ(4deg);
+    border: 1px solid #ccc;
+
+}
+
+.login-container::after{
+    top: 5px;
+    z-index: -2;
+    -webkit-transform: rotateZ(-2deg);
+    -moz-transform: rotateZ(-2deg);
+    -ms-transform: rotateZ(-2deg);
+
+}
+
+.avatar{
+    width: 100px;height: 100px;
+    margin: 10px auto 30px;
+    border-radius: 100%;
+    border: 2px solid #aaa;
+    background-size: cover;
+}
+
+.form-box input{
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    height:40px;
+    border: 1px solid #ccc;;
+    background: #fafafa;
+    transition:0.2s ease-in-out;
+
+}
+
+.form-box input:focus{
+    outline: 0;
+    background: #eee;
+}
+
+.form-box input[type="text"]{
+    border-radius: 5px 5px 0 0;
+    text-transform: lowercase;
+}
+
+.form-box input[type="password"]{
+    border-radius: 0 0 5px 5px;
+    border-top: 0;
+}
+
+.form-box button.login{
+    margin-top:15px;
+    padding: 10px 20px;
+}
+
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(20px);
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(20px);
+        -ms-transform: translateY(20px);
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+
+.fadeInUp {
+    -webkit-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+}
+
+.row{
+    margin-top:40px;
+    padding: 0 10px;
+}
+.clickable{
+    cursor: pointer;   
+}
+
+.panel-heading div {
+    margin-top: -18px;
+    font-size: 15px;
+}
+.panel-heading div span{
+    margin-left:5px;
+}
+.panel-body{
+    display: none;
+}
+
+.bs-header {
+    color: #FFF;
+    text-align: center;
+    background-color: #5fb0e4;
+    background-image: url('../img/triangles.jpg');
+    text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
+    background-repeat: no-repeat;
+    background-position: center center; 
+    background-size: cover;
+}
+
+.bs-footer {
+    color: #FFF;
+    text-align: center;
+    background-color: #5fb0e4;
+    background-image: url('../img/truck.jpg');
+    text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
+    background-repeat: no-repeat;
+    background-position: center center; 
+    background-size: cover;
+    height:400px;
+}
+
+.invoice-title h2, .invoice-title h3 {
+    display: inline-block;
+}
+
+.table > tbody > tr > .no-line {
+    border-top: none;
+}
+
+.table > thead > tr > .no-line {
+    border-bottom: none;
+}
+
+.table > tbody > tr > .thick-line {
+    border-top: 2px solid;
+}
+
+
+.container-factura{
+    position: relative;
+    background-color: #5fb0e4;
+}
+
+.tabla-factura{
+    width: 400px;
+}
+
+.subtitulo-factura{
+    color:#428BCA;
+}
+
+.titulo-factura{
+
+    color: #FFF;
+    background-color: #5fb0e4;
+    background-image: url('../img/triangles.jpg');
+    text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
+    background-repeat: no-repeat;
+    background-position: center center; 
+    background-size: cover;
+}
+
+.campo-numero{
+    text-decoration: underline;
+    color:blue;
+}
+
+.campo-estado{
+    text-decoration: underline;
+    color:blue;
+}
+
+.container-repo {
+    padding-top: 40px; 
+}
+#details {
+    font-family: "Quicksand", sans-serif;
+    font-size: 60px;
+}
+#home-box > h2 {
+    font-family: "Quicksand", sans-serif;
+    font-weight: 400; line-height: 1.1;
+    color: #5fb0e4;
+}
+.price {
+    font-size: 25px; float: left;
+}
+.pricing_header {
+    background: none repeat scroll 0% 0% #5fb0e4;
+    border-radius: 5px 5px 0px 0px;
+    transition: background 0.4s ease-out 0s;
+}
+.pricing_header h3 { 
+    text-align:center;
+    line-height: 25px;
+    padding: 15px 0px; 
+    margin: 0px;
+    font-family: "Quicksand", sans-serif;
+    font-weight: 200;
+    color: #FFF; }
+
+.list-group-item:first-child {
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+}
+
+.off {
+    text-decoration: line-through;
+    color: rgb(44, 62, 80);
+}
+
+.space {
+    height: 2px;
+    background-color:rgb(44, 62, 80);
+}
+
+.fa.pull-right {
+    margin-left: 0.1em;   
+}
+
+.date-picker,
+.date-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    color: rgb(75, 77, 78);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.date-container {
+    padding: 0px 40px;   
+}
+.date-picker h2, .date-picker h4 {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 200;
+}
+.date-container .date {
+    text-align: center;
+}
+.date-picker span.fa {
+    position: absolute;
+    font-size: 4em;
+    font-weight: 100;
+    padding: 8px 0px 7px;
+    cursor: pointer;
+    top: 0px;
+}
+.date-picker span.fa[data-type="subtract"] {
+    left: 0px;
+}
+.date-picker span.fa[data-type="add"] {
+    right: 0px;
+}
+.date-picker span[data-toggle="calendar"] {
+    display: block;
+    position: absolute;
+    top: -7px;
+    right: 45px;
+    font-size: 1em !important;
+    cursor: pointer;
+}
+
+.date-picker .input-datepicker {
+    display: none;
+    position: absolute;
+    top: 50%;
+    margin-top: -17px;
+    width:100%;
+}
+.date-picker .input-datepicker.show-input {
+    display: table;
+}
+
+@media (min-width: 768px) and (max-width: 1010px) {
+    .date-picker h2{
+        font-size: 1.5em; 
+        font-weight: 400;  
+    }    
+    .date-picker h4 {
+        font-size: 1.1em;
+    }  
+    .date-picker span.fa {
+        font-size: 3em;
+    } 
+}
