@@ -29,7 +29,7 @@ public class ClienteDAO extends ConnectionManager implements TransaccionesClient
             ResultSet rs = statement.executeQuery(consultarClientes);
             while (rs.next()) {
                 ClienteDTO cliente = new ClienteDTO();
-                cliente.setIdCliente(rs.getInt("idCliente"));
+                cliente.setCustomerIF(rs.getInt("idCliente"));
                 listaClientes.add(cliente);
             }
             statement.close();
@@ -51,7 +51,7 @@ public class ClienteDAO extends ConnectionManager implements TransaccionesClient
          try {
              String SQL = "{call crearClienteFisico (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
              preparedCall = conexion.prepareCall(SQL);
-             preparedCall.setInt(1, cliente.getIdCliente());
+             preparedCall.setInt(1, cliente.getCustomerIF());
              preparedCall.setString(2, cliente.getNombre());
              preparedCall.setString(3, cliente.getDireccion());
              preparedCall.setInt(4, cliente.getTelCasa());
@@ -78,7 +78,7 @@ public class ClienteDAO extends ConnectionManager implements TransaccionesClient
         try {
              String SQL = "{call crearClienteJuridico (?, ?, ?, ?, ?, ?, ?)}";
              preparedCall = conexion.prepareCall(SQL);
-             preparedCall.setInt(1, cliente.getIdCliente());
+             preparedCall.setInt(1, cliente.getCustomerIF());
              preparedCall.setString(2, cliente.getNombre());
              preparedCall.setString(3, cliente.getDireccion());
              preparedCall.setInt(4, cliente.getTelCasa());
@@ -102,7 +102,7 @@ public class ClienteDAO extends ConnectionManager implements TransaccionesClient
         try {
             String SQL = "{call actualizarClienteFisico (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             preparedCall = conexion.prepareCall(SQL);
-            preparedCall.setInt(1, cliente.getIdCliente());
+            preparedCall.setInt(1, cliente.getCustomerIF());
             preparedCall.setString(2, cliente.getNombre());
             preparedCall.setString(3, cliente.getDireccion());
             preparedCall.setInt(4, cliente.getTelCasa());
@@ -130,7 +130,7 @@ public class ClienteDAO extends ConnectionManager implements TransaccionesClient
         try {
             String SQL = "{call actualizarClienteJuridico (?, ?, ?, ?, ?, ?, ?)}";
             preparedCall = conexion.prepareCall(SQL);
-            preparedCall.setInt(1, cliente.getIdCliente());
+            preparedCall.setInt(1, cliente.getCustomerIF());
             preparedCall.setString(2, cliente.getNombre());
             preparedCall.setString(3, cliente.getDireccion());
             preparedCall.setInt(4, cliente.getTelCasa());

@@ -41,8 +41,4 @@ public class CuentaAhorroAutomaticoDAO extends ConnectionManager implements Tran
         }
         return cuenta;
     }
-
-    public CuentaAhorroAutomaticoDTO crearCuentaAhorroVista(CuentaAhorroAutomaticoDTO cuentaAhorroAutomatico) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

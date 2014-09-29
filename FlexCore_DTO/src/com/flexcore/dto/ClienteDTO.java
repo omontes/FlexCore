@@ -11,7 +11,7 @@ package com.flexcore.dto;
  * @author Oscar Montes
  */
 public class ClienteDTO {
-    private int idCliente;
+    private int customerIF;
     private String nombre;
     private String direccion;
     private int telCasa;
@@ -21,15 +21,15 @@ public class ClienteDTO {
     /**
      * @return the idCliente
      */
-    public int getIdCliente() {
-        return idCliente;
+    public int getCustomerIF() {
+        return customerIF;
     }
 
     /**
      * @param idCliente the idCliente to set
      */
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
+    public void setCustomerIF(int idCliente) {
+        this.customerIF = idCliente;
     }
 
     /**

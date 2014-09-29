@@ -52,6 +52,7 @@ public class ClientesWS {
     }
     
     @POST
+    @Path("/crearClientesFisicos")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public ClienteFisicoDTO create(ClienteFisicoDTO clienteNuevo) throws SQLException, NamingException, Exception {
@@ -60,9 +61,11 @@ public class ClientesWS {
     }
     
     @POST
+    @Path("/crearClientesJuridicos")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public ClienteJuridicoDTO create(ClienteJuridicoDTO clienteNuevo) throws SQLException, NamingException, Exception {
+        System.out.println("sdas");
         ClienteDAO cliente_dao = new ClienteDAO();
         return cliente_dao.crearClienteJuridico(clienteNuevo);
     }
