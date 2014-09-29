@@ -31,6 +31,8 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(com.flexcore.REST.ClientesWS.class);
+        resources.add(com.flexcore.REST.CuentaAhorroAutomaticoWS.class);
+        resources.add(com.flexcore.REST.CuentaAhorroVistaWS.class);
         resources.add(com.flexcore.REST.PropositosWS.class);
         resources.add(com.flexcore.corsfilter.CorsFilter.class);
     }
