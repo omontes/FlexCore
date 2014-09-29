@@ -87,13 +87,13 @@ function clienteJuridicoToJSON() {
 
 // POST un cuentaAhorroVIsta
 function postCuentaAhorroVista() {
-    console.log('postCliente');
+    console.log('postCuentaAhorroVista');
     $.ajax({
         type: 'POST',
         contentType: 'application/json',
-        url: rootURL + "/cuentaAhorroVista/cuentaAhorroVista",
+        url: rootURL + "/cuentaAhorroVista/crearCuentaAhorroVista",
         dataType: "json",
-        data: clienteJuridicoToJSON(),
+        data: cuentaAhorroVistaToJSON(),
          success: function(data) {
             $('#h1').append("Consulta Realizada");
             //renderClientes(data);
