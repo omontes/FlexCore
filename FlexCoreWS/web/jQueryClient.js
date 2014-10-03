@@ -2,7 +2,8 @@
 var rootURL = "http://localhost:8080/FlexCoreWS/webresources";
 
 // Retrieve Employees list when application starts 
-postClienteFisico();
+
+postCuentaAhorroAutomatico();
 //GET
 function getClientes() {
     //console.log('getClientes');
@@ -105,13 +106,42 @@ function postCuentaAhorroVista() {
 //JSON de cliente Juridico
 function cuentaAhorroVistaToJSON() {
     var ol = JSON.stringify({
-        "customerIF": "999",
-        "nombre": "POLICE",
-        "direccion": "casa azul",
-        "telCasa": "2290",
-        "telOficina": "311221",
-        "celular": "343324",
-        "cedulaJuridica": "192211"
+        "numCuenta": "1",
+        "descripcion": "Dinero de Drogas",
+        "tipoMoneda": "1"
+    });
+    alert(ol);
+    return ol;
+}
+
+// POST un cuentaAhorroVIsta
+function postCuentaAhorroAutomatico() {
+    console.log('postCuentaAhorroAutomatico');
+    $.ajax({
+        type: 'POST',
+        contentType: 'application/json',
+        url: rootURL + "/cuentaAhorroAutomatico/crearCuentaAhorroAutomatico",
+        dataType: "json",
+        data: cuentaAhorroAutomaticoToJSON(),
+         success: function(data) {
+            $('#h1').append("Consulta Realizada");
+            //renderClientes(data);
+        }
+       
+    });
+}
+
+//JSON de cliente Juridico
+function cuentaAhorroAutomaticoToJSON() {
+    var ol = JSON.stringify({
+        "numCuenta": "1",
+        "tiempoDeducciones": "4",
+        "tipoTiempo": "1",
+        "fechaInicio": new java.sql.Date(cal.getTimeInMillis()),
+        "tiempoAhorroMeses": "10",
+        "numCuentaDeducciones": "1",
+        "montoAhorro": "12.22",
+        "estadoAhorro": "1"
     });
     alert(ol);
     return ol;

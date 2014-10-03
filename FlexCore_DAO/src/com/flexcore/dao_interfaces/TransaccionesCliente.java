@@ -21,4 +21,7 @@ public interface TransaccionesCliente {
     ClienteJuridicoDTO crearClienteJuridico(ClienteJuridicoDTO cliente) throws Exception;
     ClienteFisicoDTO actualizarClienteFisico(ClienteFisicoDTO cliente) throws Exception;
     ClienteJuridicoDTO actualizarClienteJuridico(ClienteJuridicoDTO cliente) throws Exception;
+    void eliminarCliente(int idCliente) throws Exception;
+    ArrayList <ClienteFisicoDTO> verClientesFisicos() throws Exception;
+    ArrayList <ClienteJuridicoDTO> verClientesJuridicos() throws Exception;
 }

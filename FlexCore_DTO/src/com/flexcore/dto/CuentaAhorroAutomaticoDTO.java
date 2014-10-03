@@ -7,6 +7,7 @@
 package com.flexcore.dto;
 
 import java.sql.Date;
+import java.util.Calendar;
 
 /**
  *
@@ -74,8 +75,9 @@ public class CuentaAhorroAutomaticoDTO {
     /**
      * @param fechaInicio the fechaInicio to set
      */
-    public void setFechaInicio(Date fechaInicio) {
-        this.fechaInicio = fechaInicio;
+    public void setFechaInicio() {
+        Calendar cal = Calendar.getInstance();
+        this.fechaInicio = new java.sql.Date(cal.getTimeInMillis());
     }
 
     /**

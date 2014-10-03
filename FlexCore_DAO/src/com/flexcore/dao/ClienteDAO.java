@@ -149,5 +149,87 @@ public class ClienteDAO extends ConnectionManager implements TransaccionesClient
     return cliente ;
     }
 
+    @Override
+    public void eliminarCliente(int idCliente) throws Exception {
+        CallableStatement preparedCall = null;
+        try {
+            String SQL = "{call eliminarCliente (?)}";
+            preparedCall = conexion.prepareCall(SQL);
+            preparedCall.setInt(1, idCliente);
+            preparedCall.executeUpdate();
+            preparedCall.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+	       } finally {
+            this.cerrarConexion();
+        }
+    }
+
+    @Override
+    public ArrayList<ClienteFisicoDTO> verClientesFisicos() throws Exception {
+         ArrayList<ClienteFisicoDTO> listaClientes = new ArrayList<>();
+         CallableStatement preparedCall = null;
+         try{
+            String SQL = "{call obtenerClientesFisicos ()}";
+            ResultSet rs = statement.executeQuery(SQL);
+            while (rs.next()) {
+                ClienteFisicoDTO cliente = new ClienteFisicoDTO();
+                cliente.setCustomerIF(rs.getInt("customerIF"));
+                cliente.setNombre(rs.getString("nombre"));
+                cliente.setDireccion(rs.getString("direccion"));
+                cliente.setTelCasa(rs.getInt("telCasa"));
+                cliente.setTelOficina(rs.getInt("telOficina"));
+                cliente.setCelular(rs.getInt("celular"));
+                cliente.setCedula(rs.getInt("cedula"));
+                cliente.setFotografia(rs.getString("fotografia"));
+                cliente.setPrimerApellido(rs.getString("primerApellido"));
+                cliente.setSegundoApellido(rs.getString("segundoApellido"));
+                listaClientes.add(cliente);
+            }
+            statement.close();
+            return listaClientes;
+
+        } catch (Exception e) {
+            System.out.println("Error al realizar la consulta de obtener "
+                    + "todos los clientes fisicos");
+            throw (e);
+
+        } finally {
+            this.cerrarConexion();
+        }
+    }
+
+    @Override
+    public ArrayList<ClienteJuridicoDTO> verClientesJuridicos() throws Exception {
+        ArrayList<ClienteJuridicoDTO> listaClientes = new ArrayList<>();
+         CallableStatement preparedCall = null;
+         try{
+            String SQL = "{call obtenerClientesJuridicos ()}";
+            ResultSet rs = statement.executeQuery(SQL);
+            while (rs.next()) {
+                ClienteJuridicoDTO cliente = new ClienteJuridicoDTO();
+                cliente.setCustomerIF(rs.getInt("customerIF"));
+                cliente.setNombre(rs.getString("nombre"));
+                cliente.setDireccion(rs.getString("direccion"));
+                cliente.setTelCasa(rs.getInt("telCasa"));
+                cliente.setTelOficina(rs.getInt("telOficina"));
+                cliente.setCelular(rs.getInt("celular"));
+                cliente.setCedulaJuridica(rs.getInt("cedulaJuridica"));
+                listaClientes.add(cliente);
+            }
+            statement.close();
+            return listaClientes;
+
+        } catch (Exception e) {
+            System.out.println("Error al realizar la consulta de obtener "
+                    + "todos los clientes juridico");
+            throw (e);
+
+        } finally {
+            this.cerrarConexion();
+        }
+    }
+
     
 }
