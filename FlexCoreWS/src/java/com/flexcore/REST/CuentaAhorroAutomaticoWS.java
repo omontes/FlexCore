@@ -30,6 +30,7 @@ import javax.ws.rs.core.UriInfo;
 public class CuentaAhorroAutomaticoWS {
 
     @POST
+    @Path("/crearCuentaAhorroAutomatico")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public CuentaAhorroAutomaticoDTO create(CuentaAhorroAutomaticoDTO cuentaAhorroAutomatico) throws SQLException, NamingException, Exception {

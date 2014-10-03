@@ -16,12 +16,15 @@ import java.sql.CallableStatement;
  * @author Carlos
  */
 public class CuentaAhorroAutomaticoDAO extends ConnectionManager implements TransaccionesCuentaAhorroAutomatico {
+    
+    
 
     @Override
     public CuentaAhorroAutomaticoDTO crearCuentaAhorroAutomatico(CuentaAhorroAutomaticoDTO cuenta) throws Exception {
         CallableStatement preparedCall = null;
         try {
              String SQL = "{call crearCuentaAhorroAutomatico (?, ?, ?, ?, ?, ?, ?, ?)}";
+             cuenta.setFechaInicio();
              preparedCall = conexion.prepareCall(SQL);
              preparedCall.setInt(1, cuenta.getNumCuenta());
              preparedCall.setInt(2, cuenta.getTiempoDeducciones());
@@ -40,9 +43,5 @@ public class CuentaAhorroAutomaticoDAO extends ConnectionManager implements Tran
             this.cerrarConexion();
         }
         return cuenta;
-    }
-
-    public CuentaAhorroAutomaticoDTO crearCuentaAhorroVista(CuentaAhorroAutomaticoDTO cuentaAhorroAutomatico) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

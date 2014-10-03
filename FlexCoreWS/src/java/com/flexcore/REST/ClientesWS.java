@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.naming.NamingException;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -52,6 +53,7 @@ public class ClientesWS {
     }
     
     @POST
+    @Path("/crearClientesFisicos")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public ClienteFisicoDTO create(ClienteFisicoDTO clienteNuevo) throws SQLException, NamingException, Exception {
@@ -60,9 +62,11 @@ public class ClientesWS {
     }
     
     @POST
+    @Path("/crearClientesJuridicos")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public ClienteJuridicoDTO create(ClienteJuridicoDTO clienteNuevo) throws SQLException, NamingException, Exception {
+        System.out.println("sdas");
         ClienteDAO cliente_dao = new ClienteDAO();
         return cliente_dao.crearClienteJuridico(clienteNuevo);
     }
@@ -84,4 +88,12 @@ public class ClientesWS {
         ClienteDAO cliente_dao = new ClienteDAO();
         return cliente_dao.actualizarClienteJuridico(cliente);
     }
+    
+    @DELETE 
+    @Path("{id}")
+    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+    public void deleteCliente(@PathParam("id") int id) throws SQLException, NamingException, Exception {
+		ClienteDAO cliente_dao = new ClienteDAO();
+                cliente_dao.eliminarCliente(id);
+	}
 }
