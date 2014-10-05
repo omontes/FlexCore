@@ -41,7 +41,6 @@ public class CuentaAhorroVistaDAO extends ConnectionManager implements Transacci
     @Override
     public ArrayList<CuentaAhorroVistaDTO> verCuentasAhorroVista() throws Exception {
         ArrayList<CuentaAhorroVistaDTO> listaClientes = new ArrayList<>();
-         CallableStatement preparedCall = null;
          try{
             String SQL = "{call obtenerCuentasAhorroVista()}";
             ResultSet rs = statement.executeQuery(SQL);
