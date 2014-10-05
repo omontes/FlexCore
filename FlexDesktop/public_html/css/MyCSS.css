@@ -357,7 +357,7 @@ html,body{
     color: #FFF;
     text-align: center;
     background-color: #5fb0e4;
-    background-image: url('../img/truck.jpg');
+    background-image: url('../img/gnb.jpg');
     text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
     background-repeat: no-repeat;
     background-position: center center; 
@@ -533,4 +533,10 @@ html,body{
     .date-picker span.fa {
         font-size: 3em;
     } 
+}
+
+.foto {
+    background-image: url('../img/default.png');
+    background-size: 50px 50px;
+    background-repeat: no-repeat;
 }
