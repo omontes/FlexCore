@@ -8,9 +8,12 @@ package com.flexcore.REST;
 
 import com.flexcore.dao.CuentaAhorroAutomaticoDAO;
 import com.flexcore.dto.CuentaAhorroAutomaticoDTO;
+import com.google.gson.Gson;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.naming.NamingException;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -28,6 +31,24 @@ import javax.ws.rs.core.UriInfo;
  */
 @Path("cuentaAhorroAutomatico")
 public class CuentaAhorroAutomaticoWS {
+    
+    @GET
+    @Path("/getCuentasAhorroAutomatico")
+    @Produces("application/json")
+    public String getClientes() {
+        String feeds = null;
+        try {
+            CuentaAhorroAutomaticoDAO cuenta_dao = new CuentaAhorroAutomaticoDAO();
+            ArrayList<CuentaAhorroAutomaticoDTO> feedData = null;
+            feedData=cuenta_dao.verCuentasAhorroAutomatico();
+            Gson gson = new Gson();
+            feeds = gson.toJson(feedData);
+            
+        } catch (Exception e) {
+            System.out.println("No se pudo obtnener las cuentas ahorro automatico"); //Console 
+        }
+        return feeds;
+    }
 
     @POST
     @Path("/crearCuentaAhorroAutomatico")
@@ -36,5 +57,22 @@ public class CuentaAhorroAutomaticoWS {
     public CuentaAhorroAutomaticoDTO create(CuentaAhorroAutomaticoDTO cuentaAhorroAutomatico) throws SQLException, NamingException, Exception {
         CuentaAhorroAutomaticoDAO cliente_dao = new CuentaAhorroAutomaticoDAO();
         return cliente_dao.crearCuentaAhorroAutomatico(cuentaAhorroAutomatico);
+    }
+    
+    @POST
+    @Path("/updateCuentaAhorroAutomatico")
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public CuentaAhorroAutomaticoDTO update(CuentaAhorroAutomaticoDTO cuenta) throws SQLException, NamingException, Exception {
+        CuentaAhorroAutomaticoDAO cuenta_dao = new CuentaAhorroAutomaticoDAO();
+        return cuenta_dao.actualizarCuentaAhorroAutomatico(cuenta);
+    }
+    
+    @DELETE 
+    @Path("{id}")
+    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+    public void deleteCuentaAhorroAutomatico(@PathParam("id") int numCuenta) throws SQLException, NamingException, Exception {
+		CuentaAhorroAutomaticoDAO cuenta_dao = new CuentaAhorroAutomaticoDAO();
+                cuenta_dao.eliminarCuentaAhorroAutomatico(numCuenta);
     }
 }

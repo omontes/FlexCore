@@ -7,11 +7,15 @@
 package com.flexcore.dao_interfaces;
 
 import com.flexcore.dto.CuentaAhorroAutomaticoDTO;
+import java.util.ArrayList;
 
 /**
  *
  * @author Carlos
  */
 public interface TransaccionesCuentaAhorroAutomatico {
+    ArrayList<CuentaAhorroAutomaticoDTO> verCuentasAhorroAutomatico() throws Exception;
     CuentaAhorroAutomaticoDTO crearCuentaAhorroAutomatico(CuentaAhorroAutomaticoDTO cuenta) throws Exception;
+    CuentaAhorroAutomaticoDTO actualizarCuentaAhorroAutomatico(CuentaAhorroAutomaticoDTO cuenta) throws Exception;
+    void eliminarCuentaAhorroAutomatico(int numCuenta) throws Exception;
 }

@@ -16,12 +16,14 @@ import java.util.Calendar;
 public class CuentaAhorroAutomaticoDTO {
     private int numCuenta;
     private int tiempoDeducciones;
-    private int tipotiempo;
+    private int tipoTiempo;
     private Date fechaInicio;
     private int tiempoAhorroMeses;
-    private int CuentaDeduccion;
-    private int montoAhorro;
+    private int numCuentaDeduccion;
+    private double montoAhorro;
     private boolean estadoAhorro;
+    private Date fechaUltimaActualizacion;
+    private int idProposito;
 
     /**
      * @return the numCuenta
@@ -52,32 +54,17 @@ public class CuentaAhorroAutomaticoDTO {
     }
 
     /**
-     * @return the tipotiempo
+     * @return the tipoTiempo
      */
-    public int getTipotiempo() {
-        return tipotiempo;
+    public int getTipoTiempo() {
+        return tipoTiempo;
     }
 
     /**
-     * @param tipotiempo the tipotiempo to set
+     * @param tipoTiempo the tipoTiempo to set
      */
-    public void setTipotiempo(int tipotiempo) {
-        this.tipotiempo = tipotiempo;
-    }
-
-    /**
-     * @return the fechaInicio
-     */
-    public Date getFechaInicio() {
-        return fechaInicio;
-    }
-
-    /**
-     * @param fechaInicio the fechaInicio to set
-     */
-    public void setFechaInicio() {
-        Calendar cal = Calendar.getInstance();
-        this.fechaInicio = new java.sql.Date(cal.getTimeInMillis());
+    public void setTipoTiempo(int tipoTiempo) {
+        this.tipoTiempo = tipoTiempo;
     }
 
     /**
@@ -95,30 +82,30 @@ public class CuentaAhorroAutomaticoDTO {
     }
 
     /**
-     * @return the CuentaDeduccion
+     * @return the numCuentaDeduccion
      */
-    public int getCuentaDeduccion() {
-        return CuentaDeduccion;
+    public int getNumCuentaDeduccion() {
+        return numCuentaDeduccion;
     }
 
     /**
-     * @param CuentaDeduccion the CuentaDeduccion to set
+     * @param numCuentaDeduccion the CuentaDeduccion to set
      */
-    public void setCuentaDeduccion(int CuentaDeduccion) {
-        this.CuentaDeduccion = CuentaDeduccion;
+    public void setNumCuentaDeduccion(int numCuentaDeduccion) {
+        this.numCuentaDeduccion = numCuentaDeduccion;
     }
 
     /**
      * @return the montoAhorro
      */
-    public int getMontoAhorro() {
+    public double getMontoAhorro() {
         return montoAhorro;
     }
 
     /**
      * @param montoAhorro the montoAhorro to set
      */
-    public void setMontoAhorro(int montoAhorro) {
+    public void setMontoAhorro(double montoAhorro) {
         this.montoAhorro = montoAhorro;
     }
 
@@ -134,5 +121,47 @@ public class CuentaAhorroAutomaticoDTO {
      */
     public void setEstadoAhorro(boolean estadoAhorro) {
         this.estadoAhorro = estadoAhorro;
+    }
+
+    /**
+     * @return the fechaUltimaActualizacion
+     */
+    public Date getFechaUltimaActualizacion() {
+        return fechaUltimaActualizacion;
+    }
+
+    /**
+     * @param fechaUltimaActualizacion the fechaUltimaActualizacion to set
+     */
+    public void setFechaUltimaActualizacion(Date fechaUltimaActualizacion) {
+        this.fechaUltimaActualizacion = fechaUltimaActualizacion;
+    }
+
+    /**
+     * @return the fechaInicio
+     */
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
+
+    /**
+     * @param fechaInicio the fechaInicio to set
+     */
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    /**
+     * @return the idProposito
+     */
+    public int getIdProposito() {
+        return idProposito;
+    }
+
+    /**
+     * @param idProposito the idProposito to set
+     */
+    public void setIdProposito(int idProposito) {
+        this.idProposito = idProposito;
     }
 }
