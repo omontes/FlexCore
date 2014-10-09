@@ -15,14 +15,13 @@ import java.sql.Date;
 public class CuentaAhorroAutomaticoDTO {
     private int numCuenta;
     private int tiempoDeducciones;
-    private int tipoTiempo;
+    private String tipoTiempo;
     private Date fechaInicio;
     private int tiempoAhorroMeses;
     private int numCuentaDeduccion;
     private double montoAhorro;
     private boolean estadoAhorro;
-    private Date fechaUltimaActualizacion;
-    private int idProposito;
+    private String idProposito;
 
     /**
      * @return the numCuenta
@@ -55,14 +54,14 @@ public class CuentaAhorroAutomaticoDTO {
     /**
      * @return the tipoTiempo
      */
-    public int getTipoTiempo() {
+    public String getTipoTiempo() {
         return tipoTiempo;
     }
 
     /**
      * @param tipoTiempo the tipoTiempo to set
      */
-    public void setTipoTiempo(int tipoTiempo) {
+    public void setTipoTiempo(String tipoTiempo) {
         this.tipoTiempo = tipoTiempo;
     }
 
@@ -121,21 +120,6 @@ public class CuentaAhorroAutomaticoDTO {
     public void setEstadoAhorro(boolean estadoAhorro) {
         this.estadoAhorro = estadoAhorro;
     }
-
-    /**
-     * @return the fechaUltimaActualizacion
-     */
-    public Date getFechaUltimaActualizacion() {
-        return fechaUltimaActualizacion;
-    }
-
-    /**
-     * @param fechaUltimaActualizacion the fechaUltimaActualizacion to set
-     */
-    public void setFechaUltimaActualizacion(Date fechaUltimaActualizacion) {
-        this.fechaUltimaActualizacion = fechaUltimaActualizacion;
-    }
-
     /**
      * @return the fechaInicio
      */
@@ -153,14 +137,14 @@ public class CuentaAhorroAutomaticoDTO {
     /**
      * @return the idProposito
      */
-    public int getIdProposito() {
+    public String getIdProposito() {
         return idProposito;
     }
 
     /**
      * @param idProposito the idProposito to set
      */
-    public void setIdProposito(int idProposito) {
+    public void setIdProposito(String idProposito) {
         this.idProposito = idProposito;
     }
 }
