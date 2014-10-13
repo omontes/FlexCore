@@ -52,6 +52,182 @@ public class ClientesWS {
         return feeds;
     }
     
+    @GET
+    @Path("/getClientesFisicos")
+    @Produces("application/json")
+    public String getClientesFisicos() {
+        String feeds = null;
+        try {
+            ClienteDAO cliente_dao = new ClienteDAO();
+            ArrayList<ClienteFisicoDTO> feedData = null;
+            feedData=cliente_dao.verClientesFisicos();
+            Gson gson = new Gson();
+            feeds = gson.toJson(feedData);
+            
+        } catch (Exception e) {
+            System.out.println("No se pudo obtnener los clientes"); //Console 
+        }
+        return feeds;
+    }
+    
+    @GET
+    @Path("/getClientesJuridicos")
+    @Produces("application/json")
+    public String getClientesJuridicos() {
+        String feeds = null;
+        try {
+            ClienteDAO cliente_dao = new ClienteDAO();
+            ArrayList<ClienteJuridicoDTO> feedData = null;
+            feedData=cliente_dao.verClientesJuridicos();
+            Gson gson = new Gson();
+            feeds = gson.toJson(feedData);
+            
+        } catch (Exception e) {
+            System.out.println("No se pudo obtnener los clientes"); //Console 
+        }
+        return feeds;
+    }
+    
+    @GET
+    @Path("/getCantidadClientesFisicos")
+    @Produces("application/json")
+    public String getCantidadClientesFisicos() {
+        String feeds = null;
+        try {
+            ClienteDAO cliente_dao = new ClienteDAO();
+            int feedData = cliente_dao.obtenerCantidadClientesFisicos();
+            Gson gson = new Gson();
+            feeds = gson.toJson(feedData);
+            
+        } catch (Exception e) {
+            System.out.println("No se pudo obtnener la cantidad de clientes"); //Console 
+        }
+        return feeds;
+    }
+    
+    @GET
+    @Path("/getCantidadClientesJuridicos")
+    @Produces("application/json")
+    public String getCantidadClientesJuridicos() {
+        String feeds = null;
+        try {
+            ClienteDAO cliente_dao = new ClienteDAO();
+            int feedData = cliente_dao.obtenerCantidadClientesJuridicos();
+            Gson gson = new Gson();
+            feeds = gson.toJson(feedData);
+            
+        } catch (Exception e) {
+            System.out.println("No se pudo obtnener la cantidad de clientes"); //Console 
+        }
+        return feeds;
+    }
+    
+    @GET
+    @Path("/getClientesFisicosPaginados")
+    @Produces("application/json")
+    public String getClientesFisicosPaginados(int pagina) {
+        String feeds = null;
+        try {
+            ClienteDAO cliente_dao = new ClienteDAO();
+            ArrayList<ClienteFisicoDTO> feedData = null;
+            feedData=cliente_dao.verClientesFisicosPaginados(pagina);
+            Gson gson = new Gson();
+            feeds = gson.toJson(feedData);
+            
+        } catch (Exception e) {
+            System.out.println("No se pudo obtnener los clientes"); //Console 
+        }
+        return feeds;
+    }
+    
+    @GET
+    @Path("/getClientesJuridicosPaginados")
+    @Produces("application/json")
+    public String getClientesJuridicosPaginados(int pagina) {
+        String feeds = null;
+        try {
+            ClienteDAO cliente_dao = new ClienteDAO();
+            ArrayList<ClienteJuridicoDTO> feedData = null;
+            feedData=cliente_dao.verClientesJuridicosPaginados(pagina);
+            Gson gson = new Gson();
+            feeds = gson.toJson(feedData);
+            
+        } catch (Exception e) {
+            System.out.println("No se pudo obtnener los clientes"); //Console 
+        }
+        return feeds;
+    }
+    
+    @GET
+    @Path("/getCantidadClientesFisicosBusqueda")
+    @Produces("application/json")
+    public String getCantidadClientesFisicosBusqueda(String entrada) {
+        String feeds = null;
+        try {
+            ClienteDAO cliente_dao = new ClienteDAO();
+            int feedData = cliente_dao.obtenerCantidadClientesFisicosBusqueda(entrada);
+            Gson gson = new Gson();
+            feeds = gson.toJson(feedData);
+            
+        } catch (Exception e) {
+            System.out.println("No se pudo obtenener la cantidad de clientes"); //Console 
+        }
+        return feeds;
+    }
+    
+    @GET
+    @Path("/getCantidadClientesJuridicosBusqueda")
+    @Produces("application/json")
+    public String getCantidadClientesJuridicosBusqueda(String entrada) {
+        String feeds = null;
+        try {
+            ClienteDAO cliente_dao = new ClienteDAO();
+            int feedData = cliente_dao.obtenerCantidadClientesJuridicosBusqueda(entrada);
+            Gson gson = new Gson();
+            feeds = gson.toJson(feedData);
+            
+        } catch (Exception e) {
+            System.out.println("No se pudo obtenener la cantidad de clientes"); //Console 
+        }
+        return feeds;
+    }
+    
+    @GET
+    @Path("/getClientesFisicosPaginadosBusqueda")
+    @Produces("application/json")
+    public String getClientesFisicosPaginadosBusqueda(int pagina, String entrada) {
+        String feeds = null;
+        try {
+            ClienteDAO cliente_dao = new ClienteDAO();
+            ArrayList<ClienteFisicoDTO> feedData = null;
+            feedData=cliente_dao.verClientesFisicosPaginadosBusqueda(pagina, entrada);
+            Gson gson = new Gson();
+            feeds = gson.toJson(feedData);
+            
+        } catch (Exception e) {
+            System.out.println("No se pudo obtenener los clientes"); //Console 
+        }
+        return feeds;
+    }
+    
+    @GET
+    @Path("/getClientesJuridicosPaginadosBusqueda")
+    @Produces("application/json")
+    public String getClientesJuridicosPaginadosBusqueda(int pagina, String entrada) {
+        String feeds = null;
+        try {
+            ClienteDAO cliente_dao = new ClienteDAO();
+            ArrayList<ClienteJuridicoDTO> feedData = null;
+            feedData=cliente_dao.verClientesJuridicosPaginadosBusqueda(pagina, entrada);
+            Gson gson = new Gson();
+            feeds = gson.toJson(feedData);
+            
+        } catch (Exception e) {
+            System.out.println("No se pudo obtenener los clientes"); //Console 
+        }
+        return feeds;
+    }
+    
     @POST
     @Path("/crearClientesFisicos")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})

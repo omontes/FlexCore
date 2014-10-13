@@ -231,5 +231,245 @@ public class ClienteDAO extends ConnectionManager implements TransaccionesClient
         }
     }
 
+    @Override
+    public int obtenerCantidadClientesFisicos() throws Exception {
+        int cantidadClientes = 0;
+        try {
+             String SQL = "{call obtenerCantidadClientesFisicos ()}";
+             ResultSet rs = statement.executeQuery(SQL);
+             while(rs.next()){
+                 cantidadClientes = rs.getInt(1);
+             }
+             statement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            this.cerrarConexion();
+        }
+        return cantidadClientes;
+    }
+
+    @Override
+    public int obtenerCantidadClientesJuridicos() throws Exception {
+        int cantidadClientes = 0;
+        try {
+             String SQL = "{call obtenerCantidadClientesJuridicos ()}";
+             ResultSet rs = statement.executeQuery(SQL);
+             while(rs.next()){
+                 cantidadClientes = rs.getInt(1);
+             }
+             statement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            this.cerrarConexion();
+        }
+        return cantidadClientes;
+    }
+
+    @Override
+    public ArrayList<ClienteFisicoDTO> verClientesFisicosPaginados(int pagina) throws Exception {
+        CallableStatement preparedCall = null;
+        ArrayList<ClienteFisicoDTO> listaClientes = new ArrayList<>();
+         try{
+            int datoInicial = (pagina - 1)*10;
+            int datoFinal = pagina*10;
+            String SQL = "{call obtenerClientesFisicosPaginados (?, ?)}";
+            preparedCall = conexion.prepareCall(SQL);
+            preparedCall.setInt(1, datoInicial);
+            preparedCall.setInt(2, datoFinal);
+            preparedCall.executeQuery();
+            ResultSet rs = preparedCall.getResultSet();
+            while (rs.next()) {
+                ClienteFisicoDTO cliente = new ClienteFisicoDTO();
+                cliente.setCustomerIF(rs.getInt("customerIF"));
+                cliente.setNombre(rs.getString("nombre"));
+                cliente.setDireccion(rs.getString("direccion"));
+                cliente.setTelCasa(rs.getInt("telCasa"));
+                cliente.setTelOficina(rs.getInt("telOficina"));
+                cliente.setCelular(rs.getInt("celular"));
+                cliente.setCedula(rs.getInt("cedula"));
+                cliente.setFotografia(rs.getString("fotografia"));
+                cliente.setPrimerApellido(rs.getString("primerApellido"));
+                cliente.setSegundoApellido(rs.getString("segundoApellido"));
+                listaClientes.add(cliente);
+            }
+            statement.close();
+            return listaClientes;
+
+        } catch (Exception e) {
+            System.out.println("Error al realizar la consulta de obtener "
+                    + "todos los clientes fisicos");
+            throw (e);
+
+        } finally {
+            this.cerrarConexion();
+        }
+    }
+
+    @Override
+    public ArrayList<ClienteJuridicoDTO> verClientesJuridicosPaginados(int pagina) throws Exception {
+        CallableStatement preparedCall = null;
+        ArrayList<ClienteJuridicoDTO> listaClientes = new ArrayList<>();
+         try{
+            int datoInicial = (pagina - 1)*10;
+            int datoFinal = pagina*10;
+            String SQL = "{call obtenerClientesJuridicosPaginados (?, ?)}";
+            preparedCall = conexion.prepareCall(SQL);
+            preparedCall.setInt(1, datoInicial);
+            preparedCall.setInt(2, datoFinal);
+            preparedCall.executeQuery();
+            ResultSet rs = preparedCall.getResultSet();
+            while (rs.next()) {
+                ClienteJuridicoDTO cliente = new ClienteJuridicoDTO();
+                cliente.setCustomerIF(rs.getInt("customerIF"));
+                cliente.setNombre(rs.getString("nombre"));
+                cliente.setDireccion(rs.getString("direccion"));
+                cliente.setTelCasa(rs.getInt("telCasa"));
+                cliente.setTelOficina(rs.getInt("telOficina"));
+                cliente.setCelular(rs.getInt("celular"));
+                cliente.setCedulaJuridica(rs.getInt("cedulaJuridica"));
+                listaClientes.add(cliente);
+            }
+            statement.close();
+            return listaClientes;
+
+        } catch (Exception e) {
+            System.out.println("Error al realizar la consulta de obtener "
+                    + "todos los clientes juridicos");
+            throw (e);
+
+        } finally {
+            this.cerrarConexion();
+        }
+    }
+
+    @Override
+    public ArrayList<ClienteFisicoDTO> verClientesFisicosPaginadosBusqueda(int pagina, String entrada) throws Exception {
+        CallableStatement preparedCall = null;
+        ArrayList<ClienteFisicoDTO> listaClientes = new ArrayList<>();
+         try{
+            int datoInicial = (pagina - 1)*10;
+            int datoFinal = pagina*10;
+            String SQL = "{call obtenerClientesFisicosBusquedaPaginado (?, ?, ?)}";
+            preparedCall = conexion.prepareCall(SQL);
+            preparedCall.setInt(1, datoInicial);
+            preparedCall.setInt(2, datoFinal);
+            preparedCall.setString(3, entrada);
+            preparedCall.executeQuery();
+            ResultSet rs = preparedCall.getResultSet();
+            while (rs.next()) {
+                ClienteFisicoDTO cliente = new ClienteFisicoDTO();
+                cliente.setCustomerIF(rs.getInt("customerIF"));
+                cliente.setNombre(rs.getString("nombre"));
+                cliente.setDireccion(rs.getString("direccion"));
+                cliente.setTelCasa(rs.getInt("telCasa"));
+                cliente.setTelOficina(rs.getInt("telOficina"));
+                cliente.setCelular(rs.getInt("celular"));
+                cliente.setCedula(rs.getInt("cedula"));
+                cliente.setFotografia(rs.getString("fotografia"));
+                cliente.setPrimerApellido(rs.getString("primerApellido"));
+                cliente.setSegundoApellido(rs.getString("segundoApellido"));
+                listaClientes.add(cliente);
+            }
+            statement.close();
+            return listaClientes;
+
+        } catch (Exception e) {
+            System.out.println("Error al realizar la consulta de obtener "
+                    + "todos los clientes fisicos");
+            throw (e);
+
+        } finally {
+            this.cerrarConexion();
+        }
+    }
+
+    @Override
+    public ArrayList<ClienteJuridicoDTO> verClientesJuridicosPaginadosBusqueda(int pagina, String entrada) throws Exception {
+        CallableStatement preparedCall = null;
+        ArrayList<ClienteJuridicoDTO> listaClientes = new ArrayList<>();
+         try{
+            int datoInicial = (pagina - 1)*10;
+            int datoFinal = pagina*10;
+            String SQL = "{call obtenerClientesJuridicosBusquedaPaginado (?, ?, ?)}";
+            preparedCall = conexion.prepareCall(SQL);
+            preparedCall.setInt(1, datoInicial);
+            preparedCall.setInt(2, datoFinal);
+            preparedCall.setString(3, entrada);
+            preparedCall.executeQuery();
+            ResultSet rs = preparedCall.getResultSet();
+            while (rs.next()) {
+                ClienteJuridicoDTO cliente = new ClienteJuridicoDTO();
+                cliente.setCustomerIF(rs.getInt("customerIF"));
+                cliente.setNombre(rs.getString("nombre"));
+                cliente.setDireccion(rs.getString("direccion"));
+                cliente.setTelCasa(rs.getInt("telCasa"));
+                cliente.setTelOficina(rs.getInt("telOficina"));
+                cliente.setCelular(rs.getInt("celular"));
+                cliente.setCedulaJuridica(rs.getInt("cedulaJuridica"));
+                listaClientes.add(cliente);
+            }
+            statement.close();
+            return listaClientes;
+
+        } catch (Exception e) {
+            System.out.println("Error al realizar la consulta de obtener "
+                    + "todos los clientes juridicos");
+            throw (e);
+
+        } finally {
+            this.cerrarConexion();
+        }
+    }
+
+    @Override
+    public int obtenerCantidadClientesFisicosBusqueda(String entrada) throws Exception {
+        CallableStatement preparedCall = null;
+        int cantidadClientes = 0;
+        try {
+            String SQL = "{call obtenerCantidadClientesFisicosBusqueda (?)}";
+            preparedCall = conexion.prepareCall(SQL);
+            preparedCall.setString(1, entrada);
+            preparedCall.executeQuery();
+            ResultSet rs = preparedCall.getResultSet();
+             while(rs.next()){
+                 cantidadClientes = rs.getInt(1);
+             }
+             statement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            this.cerrarConexion();
+        }
+        return cantidadClientes;
+    }
+
+    @Override
+    public int obtenerCantidadClientesJuridicosBusqueda(String entrada) throws Exception {
+        CallableStatement preparedCall = null;
+        int cantidadClientes = 0;
+        try {
+            String SQL = "{call obtenerCantidadClientesJuridicosBusqueda (?)}";
+            preparedCall = conexion.prepareCall(SQL);
+            preparedCall.setString(1, entrada);
+            preparedCall.executeQuery();
+            ResultSet rs = preparedCall.getResultSet();
+             while(rs.next()){
+                 cantidadClientes = rs.getInt(1);
+             }
+             statement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            this.cerrarConexion();
+        }
+        return cantidadClientes;
+    }
+
     
 }

@@ -24,4 +24,12 @@ public interface TransaccionesCliente {
     void eliminarCliente(int idCliente) throws Exception;
     ArrayList <ClienteFisicoDTO> verClientesFisicos() throws Exception;
     ArrayList <ClienteJuridicoDTO> verClientesJuridicos() throws Exception;
+    int obtenerCantidadClientesFisicos() throws Exception;
+    int obtenerCantidadClientesJuridicos() throws Exception;
+    ArrayList <ClienteFisicoDTO> verClientesFisicosPaginados(int pagina) throws Exception;
+    ArrayList <ClienteJuridicoDTO> verClientesJuridicosPaginados(int pagina) throws Exception;
+    int obtenerCantidadClientesFisicosBusqueda(String entrada) throws Exception;
+    int obtenerCantidadClientesJuridicosBusqueda(String entrada) throws Exception;
+    ArrayList <ClienteFisicoDTO> verClientesFisicosPaginadosBusqueda(int pagina, String entrada) throws Exception;
+    ArrayList <ClienteJuridicoDTO> verClientesJuridicosPaginadosBusqueda(int pagina, String entrada) throws Exception;
 }
