@@ -4,72 +4,27 @@
         <title>Clientes</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
-
         <!-- CSS -->
         <!-- CSS Bootstrap -->
         <link href="css/MyCSS.css" rel="stylesheet" type="text/css">
-        <link href="css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
-        <link href="css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css">
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <!-- DataTables CSS -->
+        <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+
 
         <!-- Scripts -->
         <!-- jQuery -->
         <script src="js/jquery.min.js"></script>
         <!-- JS Bootstrap -->
         <script src="js/bootstrap.js"></script>
+        <!-- DataTables -->
+        <script type="text/javascript" src="js/jquery.dataTables.js"></script>
         <!-- Metodos Javascript del cliente con jQuery usando JAX-RS y Jersey-->
         <script src="js/jQueryClient.js"></script>
         <!-- Metodos Javascript de la interfaz-->
         <script src="js/DesignScripts.js"></script>
         <!-- Metodos de la pagina actual-->
-        <script>
-            $(document).ready(function() {
-                $("#delete-value").hide();
-                //getClientes();
-                $(".cli-add").click(function() {
-                    $("#edit-cliente #Heading").html("Agregar Cliente");
-                    $("#edit-cliente #cedula").prop('disabled', false);
-                    $("#edit-cliente #cedula").val("");
-                    $("#edit-cliente #cuenta").val("");
-                    $("#edit-cliente #nombre").val("");
-                    $("#edit-cliente #telefono").val("");
-                    $("#edit-cliente #ruta").val("");
-                    $("#edit-cliente #puntos").val("");
-                    $("#edit-cliente #tipo").val("");
-                    $("#edit-cliente .btn-cli-post").show();
-                    $("#edit-cliente .btn-cli-update").hide();
-                });
-                $('body').on('click', '.cli-edit', function() {
-                    $("#edit-cliente #Heading").html("Editar Cliente");
-                    $("#edit-cliente #cedula").prop('disabled', true);
-                    $("#edit-cliente #cedula").val($(this).parents("tr").children("#campo-cedula").html());
-                    $("#edit-cliente #cuenta").val($(this).parents("tr").children("#campo-cuenta").html());
-                    $("#edit-cliente #nombre").val($(this).parents("tr").children("#campo-nombre").html());
-                    $("#edit-cliente #telefono").val($(this).parents("tr").children("#campo-telefono").html());
-                    $("#edit-cliente #ruta").val($(this).parents("tr").children("#campo-ruta").html());
-                    $("#edit-cliente #puntos").val($(this).parents("tr").children("#campo-puntos").html());
-                    $("#edit-cliente #tipo").val($(this).parents("tr").children("#campo-tipo").html());
-                    $("#edit-cliente .btn-cli-post").hide();
-                    $("#edit-cliente .btn-cli-update").show();
-                });
-                $(".btn-cli-post").click(function() {
-                    $('#edit-cliente').modal('hide');
-                    postCliente();
-                });
-                $(".btn-cli-update").click(function() {
-                    $('#edit-cliente').modal('hide');
-                    updateCliente();
-                });
-                $('body').on('click', '.cli-delete', function() {
-                    $("#delete-value").val($(this).parents("tr").children("#campo-cedula").html());
-                });
-                $(".btn-cli-delete").click(function() {
-                    $('#delete-cliente').modal('hide');
-                    deleteCliente();
-                });
-            });
-        </script>
+        <script src="js/Clientes.js"></script>
     </head>
     <body>
         <input id="delete-value" type="text" class="form-control">
@@ -85,7 +40,11 @@
                 <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Clientes</h3>
+                            <h3 class="panel-title">n</h3>
+                            <div id="tab" class="btn-group" data-toggle="buttons-radio">
+                                <a href="#cli-fisicos" id="cli-fisicos-radio" class="btn btn-large btn-info active" data-toggle="tab">Clientes Fisicos</a>
+                                <a href="#cli-juridicos" id="cli-juridicos-radio" class="btn btn-large btn-info" data-toggle="tab">Clientes Juridicos</a>
+                            </div>
                             <div class="pull-right">
                                 <span class="clickable filter" data-toggle="tooltip" title="Buscar" data-container="body">
                                     <i class="glyphicon glyphicon-search"></i>
@@ -98,46 +57,42 @@
                         <div class="panel-body">
                             <input type="text" class="form-control" id="cli-table-filter" data-action="filter" data-filters="#cli-table" placeholder="Buscar Clientes" />
                         </div>
-                        <table class="table table-hover" id="cli-table">
-                            <thead>
-                                <tr>
-                                    <th>CIF</th>
-                                    <th>Cédula</th>
-                                    <th>Nombre</th>
-                                    <th>Direccion</th>
-                                    <th>Telefono</th>
-                                    <th>Foto</th>
-                                    <th>Docs</th>
-                                    <th>Editar</th>
-                                    <th>Eliminar</th> 
-                                </tr>
-                            </thead>
-                            <tbody id="cli-table-body">
-                                <tr>
-                                    <td id="campo-cif">1234567890</td>
-                                    <td id="campo-cedula">115260289</td>
-                                    <td id="campo-nombre">Kilgore</td>
-                                    <td id="campo-direccion">san pedro</td>
-                                    <td id="campo-telefono">22304136</td>
-                                    <td id="campo-foto" class='foto'></td>
-                                    <!-- TODO agregar el metodo de clidocs-->
-                                    <td><p><button class="btn btn-primary btn-xs cli-docs" data-title="Documentos-cliente" data-toggle="modal" data-target="#documentos-cliente" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-folder-open"></span></button></p></td>
-                                    <td><p><button class="btn btn-primary btn-xs cli-edit" data-title="Edit-cliente" data-toggle="modal" data-target="#edit-cliente" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                                    <td><p><button class="btn btn-danger btn-xs cli-delete" data-title="Delete-cliente" data-toggle="modal" data-target="#delete-cliente" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></button></p></td>
-                                </tr>
-                                <tr>
-                                    <td id="campo-cif">1234567890</td>
-                                    <td id="campo-cedula">115260289</td>
-                                    <td id="campo-nombre">Kilgore</td>
-                                    <td id="campo-direccion">san pedro</td>
-                                    <td id="campo-telefono">22304136</td>
-                                    <td id="campo-foto" class='foto'></td>
-                                    <td><p><button class="btn btn-primary btn-xs" data-title="Documentos-cliente" data-toggle="modal" data-target="#documentos-cliente" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-folder-open"></span></button></p></td>
-                                    <td><p><button class="btn btn-primary btn-xs cli-edit" data-title="Edit-cliente" data-toggle="modal" data-target="#edit-cliente" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                                    <td><p><button class="btn btn-danger btn-xs cli-delete" data-title="Delete-cliente" data-toggle="modal" data-target="#delete-cliente" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></button></p></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="cli-fisicos">
+                                <table id="cli-fisicos-table" class="display" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>CIF</th>
+                                            <th>Cédula</th>
+                                            <th>Nombre</th>
+                                            <th>Direccion</th>
+                                            <th>Telefono</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th> 
+                                        </tr>
+                                    </thead>
+                                    <tbody> </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="cli-juridicos">
+                                <table id="cli-juridicos-table" class="display" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>CIF</th>
+                                            <th>Cédula</th>
+                                            <th>Direccion</th>
+                                            <th>Telefono</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th> 
+                                        </tr>
+                                    </thead>
+                                    <tbody> </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
