@@ -3,7 +3,8 @@ var rootURL = "http://localhost:8080/FlexCoreWS/webresources";
 
 // Retrieve Employees list when application starts 
 
-postCuentaAhorroAutomatico();
+postClienteFisico();
+
 //GET
 function getClientes() {
     //console.log('getClientes');
