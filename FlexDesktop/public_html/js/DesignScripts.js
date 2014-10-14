@@ -1,7 +1,7 @@
 // se carga de la consulta de numero de paginas
-var paginas = 10;
+//var paginas = 10;
 // se carga de la consulta de datos
-var datastring = [
+/**var datastring = [
     {
       "name": "Tiger Nixon",
       "position": "System Architect",
@@ -82,9 +82,9 @@ var datastring = [
       "office": "Edinburgh",
       "extn": "1667"
     }
-];
+];**/
 // cada tabla tiene un array de objetos que tiene dentro
-var datastringaux = [];
+//var datastringaux = [];
 
 $(document).ready(function() {
     
