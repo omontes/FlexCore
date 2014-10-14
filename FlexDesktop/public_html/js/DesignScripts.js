@@ -125,41 +125,10 @@ function emptyPages(atributos, data, antes, despues) {
 
 
 ////////////////////////////////////////////////////////////////////////////////
-(function() {
-    'use strict';
-    var $ = jQuery;
-    $.fn.extend({
-        filterTable: function() {
-            return this.each(function() {
-                $(this).on('keyup', function(e) {
-                    $('.filterTable_no_results').remove();
-                    var search = $(this).val().toLowerCase();
-                    
-                    //Consultas de busqueda\\
-                    
-                });
-            });
-        }
-    });
-    $('[data-action="filter"]').filterTable();
-})(jQuery);
+
 ////////////////////////////////////////////////////////////////////////////////
 
-$(function() {
-    // attach table filter plugin to inputs
-    $('[data-action="filter"]').filterTable();
 
-    $('.container').on('click', '.panel-heading span.filter', function(e) {
-        var $this = $(this),
-                $panel = $this.parents('.panel');
-
-        $panel.find('.panel-body').slideToggle();
-        if ($this.css('display') !== 'none') {
-            $panel.find('.panel-body input').focus();
-        }
-    });
-    $('[data-toggle="tooltip"]').tooltip();
-});
 
 $(document).ready(function() {
     $("#mytable #checkall").click(function() {
