@@ -1,16 +1,205 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Pagos</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
+        <!-- CSS -->
+        <!-- CSS Bootstrap -->
+        <link href="css/MyCSS.css" rel="stylesheet" type="text/css">
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+        <!-- DataTables CSS -->
+        <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+
+
+        <!-- Scripts -->
+        <!-- jQuery -->
+        <script src="js/jquery.min.js"></script>
+        <!-- JS Bootstrap -->
+        <script src="js/bootstrap.js"></script>
+        <!-- DataTables -->
+        <script type="text/javascript" src="js/jquery.dataTables.js"></script>
+        <!-- Metodos Javascript de la interfaz-->
+        <script src="js/DesignScripts.js"></script>
+        <!-- Metodos de la pagina actual-->
+        <script src="js/Pagos.js"></script>
     </head>
     <body>
-        <div>TODO write content</div>
+        <input id="delete-value" type="text" class="form-control">
+        <div class="bs-header" id="content">
+            <div class="container">
+                <h1>FlexDesktop - Pagos</h1>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="login-container">
+                <div id="output"></div>
+                <div class="form-box">
+                    <input id="cedula-cliente" type="text" class="form-control">
+                    <button id="login-cliente" class="btn btn-info">Login</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabla Clientes-->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">n</h3>
+                            <div id="tab" class="btn-group" data-toggle="buttons-radio">
+                                <a href="#cli-fisicos" id="cli-fisicos-radio" class="btn btn-large btn-info active" data-toggle="tab">Clientes Fisicos</a>
+                                <a href="#cli-juridicos" id="cli-juridicos-radio" class="btn btn-large btn-info" data-toggle="tab">Clientes Juridicos</a>
+                            </div>
+                            <div class="pull-right">
+                                <span class="clickable filter" data-toggle="tooltip" title="Buscar" data-container="body">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </span>
+                                <span class="clickable cli-add" title="Agregar Cliente" data-container="body"  data-toggle="modal" data-target="#edit-cliente" data-placement="top">
+                                    <i class="glyphicon glyphicon-plus-sign"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <input type="text" class="form-control" id="cli-table-filter" data-action="filter" data-filters="#cli-table" placeholder="Buscar Clientes" />
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="cli-fisicos">
+                                <table id="cli-fisicos-table" class="display" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>CIF</th>
+                                            <th>Cédula</th>
+                                            <th>Nombre</th>
+                                            <th>Direccion</th>
+                                            <th>Telefono</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th> 
+                                        </tr>
+                                    </thead>
+                                    <tbody> </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="cli-juridicos">
+                                <table id="cli-juridicos-table" class="display" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>CIF</th>
+                                            <th>Cédula</th>
+                                            <th>Direccion</th>
+                                            <th>Telefono</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th> 
+                                        </tr>
+                                    </thead>
+                                    <tbody> </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Edit/Add Clientes-->
+        <div class="modal fade" id="edit-cliente" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 class="modal-title custom_align" id="Heading"></h3>
+                    </div>
+                    <div class="modal-body">
+                        <label>
+                            Customer identification file:
+                            <input id="cif" type="text" placeholder="CIF" class="form-control" disabled>
+                        </label>
+                        <label>
+                            Numero de cedula:
+                            <input id="cedula" type="text" placeholder="Cédula" class="form-control">
+                        </label>
+                        <label>
+                            Nombre completo:
+                            <input id="nombre" type="text" placeholder="Nombre" class="form-control">
+                        </label>
+                        <label>
+                            Direccion:
+                            <input id="direccion" type="text" placeholder="Direccion" class="form-control">
+                        </label>
+                        <label>
+                            Telefono:
+                            <input id="telefono" type="text" placeholder="Telefono" class="form-control">
+                        </label>
+                    </div>
+                    <div class="modal-footer ">
+                        <button type="button" class="btn btn-info btn-lg btn-cli-post" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Agregar</button>
+                        <button type="button" class="btn btn-info btn-lg btn-cli-update" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+                    </div>
+                </div>
+                <!-- /.modal-content --> 
+            </div>
+            <!-- /.modal-dialog --> 
+        </div>
+
+        <!--modal delete-->
+        <div class="modal fade" id="delete-cliente" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title custom_align" id="Heading">Borrar Esta Entrada</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info"><span class="glyphicon glyphicon-warning-sign"></span> Seguro que desea eliminar este cliente?</div>
+                    </div>
+                    <div class="modal-footer ">
+                        <button type="button" class="btn btn-info btn-cli-delete" ><span class="glyphicon glyphicon-ok-sign"></span> Si</button>
+                        <button type="button" class="btn btn-info" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+                    </div>
+                </div>
+                <!-- /.modal-content --> 
+            </div>
+            <!-- /.modal-dialog --> 
+        </div>
+
+        <!--modal adjuntos-->
+        <div class="modal fade" id="files-cliente" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title custom_align" id="Heading">Archivos adjuntos</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info"><span class="glyphicon glyphicon-warning-sign"></span> ?</div>
+                    </div>
+                </div>
+                <!-- /.modal-content --> 
+            </div>
+            <!-- /.modal-dialog --> 
+        </div>
+
+        <!--modal foto-->
+        <div class="modal fade" id="photo-cliente" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title custom_align" id="Heading">Foto</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info"><span class="glyphicon glyphicon-warning-sign"></span> ?</div>
+                    </div>
+                </div>
+                <!-- /.modal-content --> 
+            </div>
+            <!-- /.modal-dialog --> 
+        </div>
+
     </body>
 </html>

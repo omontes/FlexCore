@@ -1,7 +1,7 @@
 // se carga de la consulta de numero de paginas
-var paginas = 10;
+//var paginas = 10;
 // se carga de la consulta de datos
-var datastring = [
+/**var datastring = [
     {
       "name": "Tiger Nixon",
       "position": "System Architect",
@@ -82,12 +82,11 @@ var datastring = [
       "office": "Edinburgh",
       "extn": "1667"
     }
-];
+];**/
 // cada tabla tiene un array de objetos que tiene dentro
-var datastringaux = [];
+//var datastringaux = [];
 
 $(document).ready(function() {
-    
     
 });
 
@@ -122,44 +121,6 @@ function emptyPages(atributos, data, antes, despues) {
     }
     return(res);
 }
-
-
-////////////////////////////////////////////////////////////////////////////////
-(function() {
-    'use strict';
-    var $ = jQuery;
-    $.fn.extend({
-        filterTable: function() {
-            return this.each(function() {
-                $(this).on('keyup', function(e) {
-                    $('.filterTable_no_results').remove();
-                    var search = $(this).val().toLowerCase();
-                    
-                    //Consultas de busqueda\\
-                    
-                });
-            });
-        }
-    });
-    $('[data-action="filter"]').filterTable();
-})(jQuery);
-////////////////////////////////////////////////////////////////////////////////
-
-$(function() {
-    // attach table filter plugin to inputs
-    $('[data-action="filter"]').filterTable();
-
-    $('.container').on('click', '.panel-heading span.filter', function(e) {
-        var $this = $(this),
-                $panel = $this.parents('.panel');
-
-        $panel.find('.panel-body').slideToggle();
-        if ($this.css('display') !== 'none') {
-            $panel.find('.panel-body input').focus();
-        }
-    });
-    $('[data-toggle="tooltip"]').tooltip();
-});
 
 $(document).ready(function() {
     $("#mytable #checkall").click(function() {

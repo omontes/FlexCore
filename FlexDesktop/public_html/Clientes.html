@@ -19,8 +19,6 @@
         <script src="js/bootstrap.js"></script>
         <!-- DataTables -->
         <script type="text/javascript" src="js/jquery.dataTables.js"></script>
-        <!-- Metodos Javascript del cliente con jQuery usando JAX-RS y Jersey-->
-        <script src="js/jQueryClient.js"></script>
         <!-- Metodos Javascript de la interfaz-->
         <script src="js/DesignScripts.js"></script>
         <!-- Metodos de la pagina actual-->
@@ -81,7 +79,8 @@
                                     <thead>
                                         <tr>
                                             <th>CIF</th>
-                                            <th>Cédula</th>
+                                            <th>Cédula Juridica</th>
+                                            <th>Nombre</th>
                                             <th>Direccion</th>
                                             <th>Telefono</th>
                                             <th></th>
@@ -107,40 +106,30 @@
                         <h3 class="modal-title custom_align" id="Heading"></h3>
                     </div>
                     <div class="modal-body">
-                        <div class="required-field-block">
+                        <label>
+                            Customer identification file:
+                            <input id="cif" type="text" placeholder="CIF" class="form-control" disabled>
+                        </label>
+                        <label>
+                            Numero de cedula:
                             <input id="cedula" type="text" placeholder="Cédula" class="form-control">
-                            <div class="required-icon">
-                                <div class="text">*</div>
-                            </div>
-                        </div>
-                        <div>
-                            <input id="cuenta" type="text" placeholder="Número de Cuenta" class="form-control">
-                        </div>
-                        <div class="required-field-block">
+                        </label>
+                        <label>
+                            Nombre completo:
                             <input id="nombre" type="text" placeholder="Nombre" class="form-control">
-                            <div class="required-icon">
-                                <div class="text">*</div>
-                            </div>
-                        </div>
-                        <div class="required-field-block">
-                            <input id="telefono" type="text" placeholder="Teléfono" class="form-control">
-                            <div class="required-icon">
-                                <div class="text">*</div>
-                            </div>
-                        </div>
-                        <div>
-                            <input id="ruta" type="text" placeholder="ID de Ruta" class="form-control">
-                        </div>
-                        <div>
-                            <input id="puntos" type="text" placeholder="Puntos" class="form-control" disabled>
-                        </div>
-                        <div>
-                            <input id="tipo" type="text" placeholder="Tipo de Cuenta" class="form-control" disabled>
-                        </div>
+                        </label>
+                        <label>
+                            Direccion:
+                            <input id="direccion" type="text" placeholder="Direccion" class="form-control">
+                        </label>
+                        <label>
+                            Telefono:
+                            <input id="telefono" type="text" placeholder="Telefono" class="form-control">
+                        </label>
                     </div>
                     <div class="modal-footer ">
-                        <button type="button" class="btn btn-warning btn-lg btn-cli-post" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Agregar</button>
-                        <button type="button" class="btn btn-warning btn-lg btn-cli-update" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+                        <button type="button" class="btn btn-info btn-lg btn-cli-post" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Agregar</button>
+                        <button type="button" class="btn btn-info btn-lg btn-cli-update" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
                     </div>
                 </div>
                 <!-- /.modal-content --> 
@@ -157,11 +146,45 @@
                         <h4 class="modal-title custom_align" id="Heading">Borrar Esta Entrada</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> Seguro que desea eliminar este cliente?</div>
+                        <div class="alert alert-info"><span class="glyphicon glyphicon-warning-sign"></span> Seguro que desea eliminar este cliente?</div>
                     </div>
                     <div class="modal-footer ">
-                        <button type="button" class="btn btn-warning btn-cli-delete" ><span class="glyphicon glyphicon-ok-sign"></span> Si</button>
-                        <button type="button" class="btn btn-warning" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+                        <button type="button" class="btn btn-info btn-cli-delete" ><span class="glyphicon glyphicon-ok-sign"></span> Si</button>
+                        <button type="button" class="btn btn-info" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+                    </div>
+                </div>
+                <!-- /.modal-content --> 
+            </div>
+            <!-- /.modal-dialog --> 
+        </div>
+        
+        <!--modal adjuntos-->
+        <div class="modal fade" id="files-cliente" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title custom_align" id="Heading">Archivos adjuntos</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info"><span class="glyphicon glyphicon-warning-sign"></span> ?</div>
+                    </div>
+                </div>
+                <!-- /.modal-content --> 
+            </div>
+            <!-- /.modal-dialog --> 
+        </div>
+        
+        <!--modal foto-->
+        <div class="modal fade" id="photo-cliente" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title custom_align" id="Heading">Foto</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info"><span class="glyphicon glyphicon-warning-sign"></span> ?</div>
                     </div>
                 </div>
                 <!-- /.modal-content --> 

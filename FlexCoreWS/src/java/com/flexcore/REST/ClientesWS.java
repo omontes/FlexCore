@@ -121,11 +121,11 @@ public class ClientesWS {
         }
         return feeds;
     }
-    
+  
     @GET
-    @Path("/getClientesFisicosPaginados")
+    @Path("/getClientesFisicosPaginados/{pagina}")
     @Produces("application/json")
-    public String getClientesFisicosPaginados(int pagina) {
+    public String getClientesFisicosPaginados(@PathParam("pagina") int pagina) {
         String feeds = null;
         try {
             ClienteDAO cliente_dao = new ClienteDAO();
@@ -141,9 +141,9 @@ public class ClientesWS {
     }
     
     @GET
-    @Path("/getClientesJuridicosPaginados")
+    @Path("/getClientesJuridicosPaginados/{pagina}")
     @Produces("application/json")
-    public String getClientesJuridicosPaginados(int pagina) {
+    public String getClientesJuridicosPaginados(@PathParam("pagina") int pagina) {
         String feeds = null;
         try {
             ClienteDAO cliente_dao = new ClienteDAO();
@@ -159,9 +159,9 @@ public class ClientesWS {
     }
     
     @GET
-    @Path("/getCantidadClientesFisicosBusqueda")
+    @Path("/getCantidadClientesFisicosBusqueda/{entrada}")
     @Produces("application/json")
-    public String getCantidadClientesFisicosBusqueda(String entrada) {
+    public String getCantidadClientesFisicosBusqueda(@PathParam("entrada") String entrada) {
         String feeds = null;
         try {
             ClienteDAO cliente_dao = new ClienteDAO();
@@ -176,9 +176,9 @@ public class ClientesWS {
     }
     
     @GET
-    @Path("/getCantidadClientesJuridicosBusqueda")
+    @Path("/getCantidadClientesJuridicosBusqueda/{entrada}")
     @Produces("application/json")
-    public String getCantidadClientesJuridicosBusqueda(String entrada) {
+    public String getCantidadClientesJuridicosBusqueda(@PathParam("entrada") String entrada) {
         String feeds = null;
         try {
             ClienteDAO cliente_dao = new ClienteDAO();
@@ -193,11 +193,13 @@ public class ClientesWS {
     }
     
     @GET
-    @Path("/getClientesFisicosPaginadosBusqueda")
+    @Path("/getClientesFisicosPaginadosBusqueda/{pagina}/{busqueda}")
     @Produces("application/json")
-    public String getClientesFisicosPaginadosBusqueda(int pagina, String entrada) {
+    public String getClientesFisicosPaginadosBusqueda(@PathParam("pagina") int pagina, @PathParam("busqueda") String entrada) {
         String feeds = null;
         try {
+            System.out.println("************");
+            System.out.println(entrada);
             ClienteDAO cliente_dao = new ClienteDAO();
             ArrayList<ClienteFisicoDTO> feedData = null;
             feedData=cliente_dao.verClientesFisicosPaginadosBusqueda(pagina, entrada);
@@ -211,9 +213,9 @@ public class ClientesWS {
     }
     
     @GET
-    @Path("/getClientesJuridicosPaginadosBusqueda")
+    @Path("/getClientesJuridicosPaginadosBusqueda/{pagina}/{busqueda}")
     @Produces("application/json")
-    public String getClientesJuridicosPaginadosBusqueda(int pagina, String entrada) {
+    public String getClientesJuridicosPaginadosBusqueda(@PathParam("pagina") int pagina, @PathParam("busqueda") String entrada) {
         String feeds = null;
         try {
             ClienteDAO cliente_dao = new ClienteDAO();
