@@ -293,3 +293,11 @@ tr.shown td.photo{
 }
 
 
+.login-container{
+    position: relative;
+    width: 300px;
+    padding: 10px 40px 10px;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #ccc;
+}
