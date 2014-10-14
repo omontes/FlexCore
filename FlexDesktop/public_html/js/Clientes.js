@@ -1,4 +1,4 @@
-var rootURL = "http://localhost:8080/FlexCoreWS/webresources";
+var rootURL = "http://localhost:8080/FlexCoreWS/webresources/";
 
 // GET paginas de los clientes fisicos
 function getPaginasFisicos(busqueda) {
