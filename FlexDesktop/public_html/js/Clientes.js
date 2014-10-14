@@ -36,7 +36,46 @@ $(document).ready(function() {
         });
     }
 
+// POST un cliente
+    function postClienteFisico() {
+        console.log('postCliente');
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json',
+            url: rootURL + "clientes/crearClientesFisicos",
+            dataType: "json",
+            data: clienteFisicoToJSON(),
+            success: function() {
+                getPaginasFisicos(stringBusqueda);
+                getClientesFisicos(1, stringBusqueda);
+            }
+        });
+    }
 
+// UPDATE un cliente
+    function updateClienteFisico() {
+        console.log('updateCliente');
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json',
+            url: rootURL + "clientes/updateFisico",
+            dataType: "json",
+            data: clienteFisicoToJSON(),
+            success: function() {
+                getPaginasFisicos(stringBusqueda);
+                getClientesFisicos(1, stringBusqueda);
+            }
+        });
+    }
+
+// DELETE un cliente
+    function deleteCliente() {
+        console.log('deleteCliente');
+        $.ajax({
+            type: 'DELETE',
+            url: rootURL + 'clientes/' + $("#delete-value").val()
+        });
+    }
 
 
 // GET paginas de los clientes juridicos
@@ -154,9 +193,60 @@ $(document).ready(function() {
         getClientesFisicos(1, stringBusqueda);
     });
 
-    //$("#delete-value").hide();
+    $('#cli-fisicos-radio').on('click', function() {
+        if (cliente_actual !== 1)
+            cliente_actual = 1;
+        getPaginasJuridicos(stringBusqueda);
+        getClientesJuridicos(1, stringBusqueda);
+    });
+
+    (function() {
+        'use strict';
+        var $ = jQuery;
+        $.fn.extend({
+            filterTable: function() {
+                return this.each(function() {
+                    $(this).on('keyup', function(e) {
+                        $('.filterTable_no_results').remove();
+                        stringBusqueda = $(this).val().toLowerCase();
+                        if (stringBusqueda === "")
+                            stringBusqueda = "ALL";
+                        if (cliente_actual === 0) {
+                            getPaginasFisicos(stringBusqueda);
+                            getClientesFisicos(1, stringBusqueda);
+                        }
+                        else {
+                            getPaginasJuridicos(stringBusqueda);
+                            getClientesJuridicos(1, stringBusqueda);
+                        }
+                    });
+                });
+            }
+        });
+        $('[data-action="filter"]').filterTable();
+    })(jQuery);
+
+    $(function() {
+        // attach table filter plugin to inputs
+        $('[data-action="filter"]').filterTable();
+
+        $('.container').on('click', '.panel-heading span.filter', function(e) {
+            var $this = $(this),
+                    $panel = $this.parents('.panel');
+
+            $panel.find('.panel-body').slideToggle();
+            if ($this.css('display') !== 'none') {
+                $panel.find('.panel-body input').focus();
+            }
+        });
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+
+    $("#delete-value").hide();
     $(".cli-add").click(function() {
         $("#edit-cliente #Heading").html("Agregar Cliente");
+        $("#edit-cliente #cif").val("");
         $("#edit-cliente #cedula").val("");
         $("#edit-cliente #nombre").val("");
         $("#edit-cliente #direccion").val("");
@@ -168,6 +258,7 @@ $(document).ready(function() {
         var tr = $(this).closest('tr');
         var row = table_fisicos.row(tr);
         $("#edit-cliente #Heading").html("Editar Cliente");
+        $("#edit-cliente #cif").val(row.data().customerIF);
         $("#edit-cliente #cedula").val(row.data().cedula);
         $("#edit-cliente #nombre").val(row.data().nombre);
         $("#edit-cliente #direccion").val(row.data().direccion);
@@ -179,13 +270,13 @@ $(document).ready(function() {
     });
     $(".btn-cli-post").click(function() {
         $('#edit-cliente').modal('hide');
-        postCliente();
+        postClienteFisico();
     });
     $(".btn-cli-update").click(function() {
         $('#edit-cliente').modal('hide');
-        updateCliente();
+        updateClienteFisico();
     });
-    $('#cli-fisicos tbody').on('click', 'td.delete', function() {      
+    $('#cli-fisicos tbody').on('click', 'td.delete', function() {
         var tr = $(this).closest('tr');
         var row = table_fisicos.row(tr);
         $("#delete-value").val(row.data().customerIF);
@@ -199,3 +290,12 @@ $(document).ready(function() {
 });
 
 
+function clienteFisicoToJSON() {
+    return JSON.stringify({
+        "customerIF": $("#edit-cliente #cif").val(),
+        "cedula": $("#edit-cliente #cedula").val(),
+        "nombre": $("#edit-cliente #nombre").val(),
+        "direccion": $("#edit-cliente #direccion").val(),
+        "telCasa": $("#edit-cliente #telefono").val()
+    });
+}
