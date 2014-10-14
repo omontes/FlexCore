@@ -30,7 +30,6 @@ $(document).ready(function() {
                 var datastringaux = [];
                 datastringaux = emptyPages(['"customerIF"', '"cedula"', '"nombre"', '"direccion"', '"telCasa"'],
                         datastring, table_fisicos.page.info().page, paginas - 1 - table_fisicos.page.info().page);
-                alert(datastring);
                 table_fisicos.clear();
                 table_fisicos.rows.add(datastringaux).draw(false);
             }
@@ -65,7 +64,6 @@ $(document).ready(function() {
              var datastringaux = [];
              datastringaux = emptyPages(['"customerIF"', '"cedula"', '"nombre"', '"direccion"', '"telCasa"'],
              datastring, table_fisicos.page.info().page, paginas - 1 - table_fisicos.page.info().page);
-             alert(datastring);
              table_fisicos.clear();
              table_fisicos.rows.add(datastringaux).draw(false);**/
             }
@@ -156,29 +154,28 @@ $(document).ready(function() {
         getClientesFisicos(1, stringBusqueda);
     });
 
-    $("#delete-value").hide();
+    //$("#delete-value").hide();
     $(".cli-add").click(function() {
         $("#edit-cliente #Heading").html("Agregar Cliente");
-        $("#edit-cliente #cedula").prop('disabled', false);
         $("#edit-cliente #cedula").val("");
-        $("#edit-cliente #cuenta").val("");
         $("#edit-cliente #nombre").val("");
+        $("#edit-cliente #direccion").val("");
         $("#edit-cliente #telefono").val("");
-        $("#edit-cliente #ruta").val("");
-        $("#edit-cliente #puntos").val("");
-        $("#edit-cliente #tipo").val("");
         $("#edit-cliente .btn-cli-post").show();
         $("#edit-cliente .btn-cli-update").hide();
     });
     $('#cli-fisicos tbody').on('click', 'td.edit', function() {
-        console.log('gg');
-        $('#edit-cliente').modal();
         var tr = $(this).closest('tr');
         var row = table_fisicos.row(tr);
         $("#edit-cliente #Heading").html("Editar Cliente");
-        $("#edit-cliente #nombre").val(row.data().name);
+        $("#edit-cliente #cedula").val(row.data().cedula);
+        $("#edit-cliente #nombre").val(row.data().nombre);
+        $("#edit-cliente #direccion").val(row.data().direccion);
+        $("#edit-cliente #telefono").val(row.data().telCasa);
         $("#edit-cliente .btn-cli-post").hide();
         $("#edit-cliente .btn-cli-update").show();
+        if ($("#edit-cliente #nombre").val() !== "")
+            $('#edit-cliente').modal();
     });
     $(".btn-cli-post").click(function() {
         $('#edit-cliente').modal('hide');
@@ -188,8 +185,12 @@ $(document).ready(function() {
         $('#edit-cliente').modal('hide');
         updateCliente();
     });
-    $('body').on('click', '.cli-delete', function() {
-        $("#delete-value").val($(this).parents("tr").children("#campo-cedula").html());
+    $('#cli-fisicos tbody').on('click', 'td.delete', function() {      
+        var tr = $(this).closest('tr');
+        var row = table_fisicos.row(tr);
+        $("#delete-value").val(row.data().customerIF);
+        if ($("#delete-value").val() !== "")
+            $('#delete-cliente').modal();
     });
     $(".btn-cli-delete").click(function() {
         $('#delete-cliente').modal('hide');
