@@ -198,8 +198,6 @@ public class ClientesWS {
     public String getClientesFisicosPaginadosBusqueda(@PathParam("pagina") int pagina, @PathParam("busqueda") String entrada) {
         String feeds = null;
         try {
-            System.out.println("************");
-            System.out.println(entrada);
             ClienteDAO cliente_dao = new ClienteDAO();
             ArrayList<ClienteFisicoDTO> feedData = null;
             feedData=cliente_dao.verClientesFisicosPaginadosBusqueda(pagina, entrada);
