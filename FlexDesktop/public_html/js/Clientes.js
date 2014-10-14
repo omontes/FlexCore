@@ -1,4 +1,4 @@
-var rootURL = "http://localhost:8080/FlexCoreWS/webresources";
+var rootURL = "http://localhost:8080/FlexCoreWS/webresources/";
 
 // GET paginas de los clientes fisicos
 function getPaginasFisicos(busqueda) {
@@ -53,8 +53,8 @@ function getClientesJuridicos(pagina,busqueda) {
 }
 
 $(document).ready(function() {
-    getPaginasFisicos("");
-    getClientesFisicos(1,"");
+    getPaginasFisicos("ALL");
+    getClientesFisicos(1,"ALL");
     var cliente_actual = 0;
     datastringaux = emptyPages(['"name"', '"position"', '"salary"', '"start_date"', '"office"'],
             datastring, 0, paginas - 1);
