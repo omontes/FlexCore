@@ -56,7 +56,7 @@ $(document).ready(function() {
     getPaginasFisicos("ALL");
     getClientesFisicos(1,"ALL");
     var cliente_actual = 0;
-    datastringaux = emptyPages(['"name"', '"position"', '"salary"', '"start_date"', '"office"'],
+    datastringaux = emptyPages(['"customerIF"', '"cedula"', '"nombre"', '"direccion"', '"telCasa"'],
             datastring, 0, paginas - 1);
     var table_fisicos = $('#cli-fisicos-table').DataTable({
         "info": false,
@@ -65,11 +65,11 @@ $(document).ready(function() {
         "bFilter": false,
         "data": datastringaux,
         "columns": [
-            {"data": "name"},
-            {"data": "position"},
-            {"data": "salary"},
-            {"data": "start_date"},
-            {"data": "office"},
+            {"data": "customerIF"},
+            {"data": "cedula"},
+            {"data": "nombre"},
+            {"data": "direccion"},
+            {"data": "telCasa"},
             {
                 "class": 'photo',
                 "data": null,
