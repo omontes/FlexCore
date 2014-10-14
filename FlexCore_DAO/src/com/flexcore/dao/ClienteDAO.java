@@ -49,18 +49,17 @@ public class ClienteDAO extends ConnectionManager implements TransaccionesClient
     public ClienteFisicoDTO crearClienteFisico(ClienteFisicoDTO cliente) throws Exception {
         CallableStatement preparedCall = null;
          try {
-             String SQL = "{call crearClienteFisico (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+             String SQL = "{call crearClienteFisico (?, ?, ?, ?, ?, ?, ?, ?, ?)}";
              preparedCall = conexion.prepareCall(SQL);
-             preparedCall.setInt(1, cliente.getCustomerIF());
-             preparedCall.setString(2, cliente.getNombre());
-             preparedCall.setString(3, cliente.getDireccion());
-             preparedCall.setInt(4, cliente.getTelCasa());
-             preparedCall.setInt(5, cliente.getTelOficina());
-             preparedCall.setInt(6, cliente.getCelular());
-             preparedCall.setInt(7, cliente.getCedula());
-             preparedCall.setString(8, cliente.getFotografia());
-             preparedCall.setString(9, cliente.getPrimerApellido());
-             preparedCall.setString(10, cliente.getSegundoApellido());
+             preparedCall.setString(1, cliente.getNombre());
+             preparedCall.setString(2, cliente.getDireccion());
+             preparedCall.setInt(3, cliente.getTelCasa());
+             preparedCall.setInt(4, cliente.getTelOficina());
+             preparedCall.setInt(5, cliente.getCelular());
+             preparedCall.setInt(6, cliente.getCedula());
+             preparedCall.setString(7, cliente.getFotografia());
+             preparedCall.setString(8, cliente.getPrimerApellido());
+             preparedCall.setString(9, cliente.getSegundoApellido());
              preparedCall.executeUpdate();
              preparedCall.close();
         } catch (Exception e) {
