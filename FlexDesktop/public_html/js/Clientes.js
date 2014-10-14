@@ -1,6 +1,7 @@
 $(document).ready(function() {
     var rootURL = "http://localhost:8080/FlexCoreWS/webresources/";
-    var paginas;
+    var paginasfisicos;
+    var paginasjuridicos;
     var cliente_actual = 0;
     var stringBusqueda = "ALL";
 
@@ -13,7 +14,7 @@ $(document).ready(function() {
             url: rootURL + "clientes/getCantidadClientesFisicosBusqueda/" + busqueda,
             dataType: "json",
             success: function(data) {
-                paginas = Math.ceil(data / 10);
+                paginasfisicos = Math.ceil(data / 10);
             }
         });
     }
@@ -29,7 +30,7 @@ $(document).ready(function() {
                 var datastring = data;
                 var datastringaux = [];
                 datastringaux = emptyPages(['"customerIF"', '"cedula"', '"nombre"', '"direccion"', '"telCasa"'],
-                        datastring, table_fisicos.page.info().page, paginas - 1 - table_fisicos.page.info().page);
+                        datastring, table_fisicos.page.info().page, paginasfisicos - 1 - table_fisicos.page.info().page);
                 table_fisicos.clear();
                 table_fisicos.rows.add(datastringaux).draw(false);
             }
@@ -86,7 +87,7 @@ $(document).ready(function() {
             url: rootURL + "clientes/getCantidadClientesJuridicosBusqueda/" + busqueda,
             dataType: "json",
             success: function(data) {
-                paginas = Math.ceil(data / 10);
+                paginasjuridicos = Math.ceil(data / 10);
             }
         });
     }
@@ -98,13 +99,13 @@ $(document).ready(function() {
             type: 'GET',
             url: rootURL + "clientes/getClientesJuridicosPaginadosBusqueda/" + pagina + "/" + busqueda,
             dataType: "json",
-            success: function(data) {/**
+            success: function(data) {
              var datastring = data;
              var datastringaux = [];
-             datastringaux = emptyPages(['"customerIF"', '"cedula"', '"nombre"', '"direccion"', '"telCasa"'],
-             datastring, table_fisicos.page.info().page, paginas - 1 - table_fisicos.page.info().page);
-             table_fisicos.clear();
-             table_fisicos.rows.add(datastringaux).draw(false);**/
+             datastringaux = emptyPages(['"customerIF"', '"cedulaJuridica"', '"nombre"', '"direccion"', '"telCasa"'],
+             datastring, table_juridicos.page.info().page, paginasjuridicos - 1 - table_juridicos.page.info().page);
+             table_juridicos.clear();
+             table_juridicos.rows.add(datastringaux).draw(false);
             }
         });
     }
@@ -149,17 +150,17 @@ $(document).ready(function() {
     getPaginasFisicos(stringBusqueda);
     getClientesFisicos(1, stringBusqueda);
 
-
     var table_juridicos = $('#cli-juridicos-table').DataTable({
         "info": false,
         "lengthChange": false,
         "ordering": false,
         "bFilter": false,
         "columns": [
-            {"data": "name"},
-            {"data": "position"},
-            {"data": "salary"},
-            {"data": "start_date"},
+            {"data": "customerIF"},
+            {"data": "cedulaJuridica"},
+            {"data": "nombre"},
+            {"data": "direccion"},
+            {"data": "telCasa"},
             {
                 "class": 'files',
                 "data": null,
@@ -180,25 +181,29 @@ $(document).ready(function() {
             }
         ]
     });
-    getPaginasJuridicos(stringBusqueda);
-    getClientesJuridicos(1, stringBusqueda);
 
     $('#cli-fisicos-table').on('page.dt', function() {
         getPaginasFisicos(stringBusqueda);
         getClientesFisicos(table_fisicos.page.info().page + 1, stringBusqueda);
+    });
+    $('#cli-juridicos-table').on('page.dt', function() {
+        getPaginasJuridicos(stringBusqueda);
+        getClientesJuridicos(table_juridicos.page.info().page + 1, stringBusqueda);
     });
     $('#cli-fisicos-radio').on('click', function() {
         if (cliente_actual !== 0)
             cliente_actual = 0;
         getPaginasFisicos(stringBusqueda);
         getClientesFisicos(1, stringBusqueda);
+        table_fisicos.draw();
     });
 
-    $('#cli-fisicos-radio').on('click', function() {
+    $('#cli-juridicos-radio').on('click', function() {
         if (cliente_actual !== 1)
             cliente_actual = 1;
         getPaginasJuridicos(stringBusqueda);
         getClientesJuridicos(1, stringBusqueda);
+        table_juridicos.draw();
     });
 
     (function() {
