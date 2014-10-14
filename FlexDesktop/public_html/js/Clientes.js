@@ -184,7 +184,8 @@ $(document).ready(function() {
     getClientesJuridicos(1, stringBusqueda);
 
     $('#cli-fisicos-table').on('page.dt', function() {
-        getClientesFisicos(table_fisicos.page.info().page, stringBusqueda);
+        getPaginasFisicos(stringBusqueda);
+        getClientesFisicos(table_fisicos.page.info().page + 1, stringBusqueda);
     });
     $('#cli-fisicos-radio').on('click', function() {
         if (cliente_actual !== 0)
@@ -214,10 +215,12 @@ $(document).ready(function() {
                         if (cliente_actual === 0) {
                             getPaginasFisicos(stringBusqueda);
                             getClientesFisicos(1, stringBusqueda);
+                            table_fisicos.draw();
                         }
                         else {
                             getPaginasJuridicos(stringBusqueda);
                             getClientesJuridicos(1, stringBusqueda);
+                            table_juridicos.draw();
                         }
                     });
                 });
