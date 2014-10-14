@@ -287,8 +287,19 @@ $(document).ready(function() {
         $('#delete-cliente').modal('hide');
         deleteCliente();
     });
+    $('#cli-fisicos tbody').on('click', 'td.photo', function() {
+        var tr = $(this).closest('tr');
+        var row = table_fisicos.row(tr);
+        if (row.data().nombre !== "")
+            $('#photo-cliente').modal();
+    });
+    $('#cli-fisicos tbody').on('click', 'td.files', function() {
+        var tr = $(this).closest('tr');
+        var row = table_fisicos.row(tr);
+        if (row.data().nombre !== "")
+            $('#files-cliente').modal();
+    });
 });
-
 
 function clienteFisicoToJSON() {
     return JSON.stringify({

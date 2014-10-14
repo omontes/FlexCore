@@ -88,7 +88,6 @@
 
 $(document).ready(function() {
     
-    
 });
 
 
@@ -122,13 +121,6 @@ function emptyPages(atributos, data, antes, despues) {
     }
     return(res);
 }
-
-
-////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////
-
-
 
 $(document).ready(function() {
     $("#mytable #checkall").click(function() {
