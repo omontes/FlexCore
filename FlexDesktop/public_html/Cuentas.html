@@ -51,7 +51,11 @@
                 <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Cuentas</h3>
+                            <h3 class="panel-title">n</h3>
+                            <div id="tab" class="btn-group" data-toggle="buttons-radio">
+                                <a href="#cue-auto" id="cli-fisicos-radio" class="btn btn-large btn-info active" data-toggle="tab">Cuentas de Ahorro Automatico</a>
+                                <a href="#cue-vista" id="cli-juridicos-radio" class="btn btn-large btn-info" data-toggle="tab">Cuentas de Ahorro Vista</a>
+                            </div>
                             <div class="pull-right">
                                 <span class="clickable filter" data-toggle="tooltip" title="Buscar" data-container="body">
                                     <i class="glyphicon glyphicon-search"></i>
@@ -62,28 +66,49 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <input type="text" class="form-control" id="cue-table-filter" data-action="filter" data-filters="#cue-table" placeholder="Buscar Cuentas" />
+                            <input type="text" class="form-control" id="cli-table-filter" data-action="filter" data-filters="#cli-table" placeholder="Buscar Clientes" />
                         </div>
-
-                        <table id="cue-table" class="display" cellspacing="0" width="100%">
-                            <thead>
-                                <tr>
-                                    <th>#Cuenta</th>
-                                    <th>Descripcion</th>
-                                    <th>Direccion</th>
-                                    <th>Telefono</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th> 
-                                </tr>
-                            </thead>
-                            <tbody> </tbody>
-                        </table>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="cli-fisicos">
+                                <table id="cli-fisicos-table" class="display" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>CIF</th>
+                                            <th>Cédula</th>
+                                            <th>Nombre</th>
+                                            <th>Direccion</th>
+                                            <th>Telefono</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th> 
+                                        </tr>
+                                    </thead>
+                                    <tbody> </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="cli-juridicos">
+                                <table id="cli-juridicos-table" class="display" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>CIF</th>
+                                            <th>Cédula</th>
+                                            <th>Direccion</th>
+                                            <th>Telefono</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th> 
+                                        </tr>
+                                    </thead>
+                                    <tbody> </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
 
         <!-- Modal Edit/Add Clientes-->
         <div class="modal fade" id="edit-cliente" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
