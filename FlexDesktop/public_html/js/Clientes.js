@@ -1,5 +1,34 @@
+var rootURL = "http://localhost:8080/FlexCoreWS/webresources";
+
+// GET paginas de los clientes fisicos
+function getPaginasFisicos() {
+    console.log('getCantidadClientesFisicos');
+    $.ajax({
+        type: 'GET',
+        url: rootURL + "clientes/getCantidadClientesFisicos",
+        dataType: "json",
+        success: function(data) {
+            paginas = data;
+        }
+    });
+}
+
+// GET todos los clientes fisicos
+function getClientesFisicos() {
+    console.log('getClientesFisicosPaginados');
+    $.ajax({
+        type: 'GET',
+        url: rootURL + "clientes/getClientesFisicosPaginados",
+        dataType: "json",
+        success: function(data) {
+            datastring = data;
+        }
+    });
+}
 
 $(document).ready(function() {
+    getPaginasFisicos();
+    getClientesFisicos();
     var cliente_actual = 0;
     datastringaux = emptyPages(['"name"', '"position"', '"salary"', '"start_date"', '"office"'],
             datastring, 0, paginas - 1);
