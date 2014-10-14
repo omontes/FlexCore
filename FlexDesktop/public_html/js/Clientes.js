@@ -1,11 +1,11 @@
 var rootURL = "http://localhost:8080/FlexCoreWS/webresources";
 
 // GET paginas de los clientes fisicos
-function getPaginasFisicos() {
+function getPaginasFisicos(busqueda) {
     console.log('getCantidadClientesFisicos');
     $.ajax({
         type: 'GET',
-        url: rootURL + "clientes/getCantidadClientesFisicos",
+        url: rootURL + "clientes/getCantidadClientesFisicosBusqueda/"+busqueda,
         dataType: "json",
         success: function(data) {
             paginas = data;
@@ -14,11 +14,11 @@ function getPaginasFisicos() {
 }
 
 // GET todos los clientes fisicos
-function getClientesFisicos() {
+function getClientesFisicos(pagina,busqueda) {
     console.log('getClientesFisicosPaginados');
     $.ajax({
         type: 'GET',
-        url: rootURL + "clientes/getClientesFisicosPaginados",
+        url: rootURL + "clientes/getClientesFisicosPaginadosBusqueda/"+pagina+"/"+busqueda,
         dataType: "json",
         success: function(data) {
             datastring = data;
@@ -27,8 +27,8 @@ function getClientesFisicos() {
 }
 
 $(document).ready(function() {
-    getPaginasFisicos();
-    getClientesFisicos();
+    getPaginasFisicos("");
+    getClientesFisicos(1,"");
     var cliente_actual = 0;
     datastringaux = emptyPages(['"name"', '"position"', '"salary"', '"start_date"', '"office"'],
             datastring, 0, paginas - 1);
