@@ -15,7 +15,7 @@ function getPaginasFisicos(busqueda) {
 
 // GET todos los clientes fisicos
 function getClientesFisicos(pagina,busqueda) {
-    console.log('getClientesFisicosPaginados');
+    console.log('getClientesFisicos');
     $.ajax({
         type: 'GET',
         url: rootURL + "clientes/getClientesFisicosPaginadosBusqueda/"+pagina+"/"+busqueda,
@@ -26,9 +26,35 @@ function getClientesFisicos(pagina,busqueda) {
     });
 }
 
+// GET paginas de los clientes juridicos
+function getPaginasJuridicos(busqueda) {
+    console.log('getCantidadClientesJuridicos');
+    $.ajax({
+        type: 'GET',
+        url: rootURL + "clientes/getCantidadClientesJuridicosBusqueda/"+busqueda,
+        dataType: "json",
+        success: function(data) {
+            paginas = data;
+        }
+    });
+}
+
+// GET todos los clientes juridicos
+function getClientesJuridicos(pagina,busqueda) {
+    console.log('getClientesJuridicos');
+    $.ajax({
+        type: 'GET',
+        url: rootURL + "clientes/getClientesJuridicosPaginadosBusqueda/"+pagina+"/"+busqueda,
+        dataType: "json",
+        success: function(data) {
+            datastring = data;
+        }
+    });
+}
+
 $(document).ready(function() {
-    getPaginasFisicos("");
-    getClientesFisicos(1,"");
+    getPaginasFisicos("ALL");
+    getClientesFisicos(1,"ALL");
     var cliente_actual = 0;
     datastringaux = emptyPages(['"name"', '"position"', '"salary"', '"start_date"', '"office"'],
             datastring, 0, paginas - 1);
