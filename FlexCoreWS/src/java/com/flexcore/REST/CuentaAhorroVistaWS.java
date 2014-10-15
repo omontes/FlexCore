@@ -33,23 +33,40 @@ import javax.ws.rs.core.UriInfo;
 public class CuentaAhorroVistaWS {
     
     @GET
-    @Path("/getCuentasAhorroVista")
+    @Path("/getCuentasAhorroPaginadosBusqueda/{pagina}/{busqueda}/{customerIF}")
     @Produces("application/json")
-    public String getClientes() {
+    public String getCuentasAhorroVista(@PathParam("pagina") int pagina, @PathParam("busqueda") String busqueda,
+            @PathParam("customerIF") int customerIF) {
         String feeds = null;
         try {
             CuentaAhorroVistaDAO cuenta_dao = new CuentaAhorroVistaDAO();
             ArrayList<CuentaAhorroVistaDTO> feedData = null;
-            feedData=cuenta_dao.verCuentasAhorroVista();
+            feedData=cuenta_dao.verCuentasAhorroVista(pagina,busqueda,customerIF);
             Gson gson = new Gson();
             feeds = gson.toJson(feedData);
             
         } catch (Exception e) {
-            System.out.println("No se pudo obtnener las cuentas"); //Console 
+            System.out.println("No se pudo obtener las cuentas de ahorro vista"); //Console 
         }
         return feeds;
     }
-
+       @GET
+    @Path("/getCantidadCuentasAhorroBusqueda/{entrada}/{customerIF}")
+    @Produces("application/json")
+    public String getCantidadClientesJuridicosBusqueda(@PathParam("entrada") String entrada,@PathParam("customerIF") int customerIF) {
+        String feeds = null;
+        try {
+            CuentaAhorroVistaDAO cuenta_dao = new CuentaAhorroVistaDAO();
+            int feedData = cuenta_dao.obtenerCantidadCuentasAhorroVista(entrada,customerIF);
+            Gson gson = new Gson();
+            feeds = gson.toJson(feedData);
+            
+        } catch (Exception e) {
+            System.out.println("No se pudo obtenener la cantidad de cuentas "
+                    + "ahorro vista"); //Console 
+        }
+        return feeds;
+    }
     @POST
     @Path("/crearCuentaAhorroVista")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})

@@ -1,4 +1,4 @@
- // The root URL for the RESTful services
+// The root URL for the RESTful services
 var rootURL = "http://localhost:8080/FlexCoreWS/webresources";
 
 // Retrieve Employees list when application starts 

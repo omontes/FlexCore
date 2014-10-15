@@ -6,6 +6,8 @@
 
 package com.flexcore.dto;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author Carlos
@@ -14,6 +16,8 @@ public class CuentaAhorroVistaDTO {
     private int numCuenta;
     private String descripcion;
     private int tipoMoneda;
+    private BigDecimal saldoReal;
+    private BigDecimal saldoTemporal;
 
     /**
      * @return the numCuenta
@@ -55,5 +59,33 @@ public class CuentaAhorroVistaDTO {
      */
     public void setTipoMoneda(int tipoMoneda) {
         this.tipoMoneda = tipoMoneda;
+    }
+
+    /**
+     * @return the saldoReal
+     */
+    public BigDecimal getSaldoReal() {
+        return saldoReal;
+    }
+
+    /**
+     * @param saldoReal the saldoReal to set
+     */
+    public void setSaldoReal(BigDecimal saldoReal) {
+        this.saldoReal = saldoReal;
+    }
+
+    /**
+     * @return the saldoTemporal
+     */
+    public BigDecimal getSaldoTemporal() {
+        return saldoTemporal;
+    }
+
+    /**
+     * @param saldoTemporal the saldoTemporal to set
+     */
+    public void setSaldoTemporal(BigDecimal saldoTemporal) {
+        this.saldoTemporal = saldoTemporal;
     }
 }
