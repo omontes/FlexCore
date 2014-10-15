@@ -64,8 +64,8 @@ $(document).ready(function() {
             dataType: "json",
             data: cuentaAutoToJSON(),
             success: function() {
-                getPaginasAuto(stringBusqueda);
-                getCuentasAuto(1, stringBusqueda);
+                getPaginasAuto(stringBusqueda, stringCIF);
+                getCuentasAuto(1, stringBusqueda, stringCIF);
             }
         });
     }
@@ -80,8 +80,8 @@ $(document).ready(function() {
             dataType: "json",
             data: cuentaAutoToJSON(),
             success: function() {
-                getPaginasAuto(stringBusqueda);
-                getCuentasAuto(1, stringBusqueda);
+                getPaginasAuto(stringBusqueda, stringCIF);
+                getCuentasAuto(1, stringBusqueda, stringCIF);
             }
         });
     }
@@ -94,12 +94,12 @@ $(document).ready(function() {
             url: rootURL + 'cuentas/' + $("#delete-value").val(),
             success: function() {
                 if (cuenta_actual === 0) {
-                    getPaginasAuto(stringBusqueda);
-                    getCuentasAuto(1, stringBusqueda);
+                    getPaginasAuto(stringBusqueda, stringCIF);
+                    getCuentasAuto(1, stringBusqueda, stringCIF);
                 }
                 if (cuenta_actual === 1) {
-                    getPaginasVista(stringBusqueda);
-                    getCuentasVista(1, stringBusqueda);
+                    getPaginasVista(stringBusqueda, stringCIF);
+                    getCuentasVista(1, stringBusqueda, stringCIF);
                 }
             }
         });
@@ -146,8 +146,8 @@ $(document).ready(function() {
             dataType: "json",
             data: cuentaVistaToJSON(),
             success: function() {
-                getPaginasVista(stringBusqueda);
-                getCuentasVista(1, stringBusqueda);
+                getPaginasVista(stringBusqueda, stringCIF);
+                getCuentasVista(1, stringBusqueda, stringCIF);
             }
         });
     }
@@ -162,8 +162,8 @@ $(document).ready(function() {
             dataType: "json",
             data: cuentaVistaToJSON(),
             success: function() {
-                getPaginasVista(stringBusqueda);
-                getCuentasVista(1, stringBusqueda);
+                getPaginasVista(stringBusqueda, stringCIF);
+                getCuentasVista(1, stringBusqueda, stringCIF);
             }
         });
     }
@@ -229,26 +229,26 @@ $(document).ready(function() {
     });
 
     $('#cue-auto-table').on('page.dt', function() {
-        getPaginasAuto(stringBusqueda);
-        getCuentasAuto(table_auto.page.info().page + 1, stringBusqueda);
+        getPaginasAuto(stringBusqueda, stringCIF);
+        getCuentasAuto(table_auto.page.info().page + 1, stringBusqueda, stringCIF);
     });
     $('#cue-vista-table').on('page.dt', function() {
-        getPaginasVista(stringBusqueda);
-        getCuentasVista(table_vista.page.info().page + 1, stringBusqueda);
+        getPaginasVista(stringBusqueda, stringCIF);
+        getCuentasVista(table_vista.page.info().page + 1, stringBusqueda, stringCIF);
     });
     $('#cue-auto-radio').on('click', function() {
         if (cuenta_actual !== 0)
             cuenta_actual = 0;
-        getPaginasAuto(stringBusqueda);
-        getCuentasAuto(1, stringBusqueda);
+        getPaginasAuto(stringBusqueda, stringCIF);
+        getCuentasAuto(1, stringBusqueda, stringCIF);
         table_auto.draw();
     });
 
     $('#cue-vista-radio').on('click', function() {
         if (cuenta_actual !== 1)
             cuenta_actual = 1;
-        getPaginasVista(stringBusqueda);
-        getCuentasVista(1, stringBusqueda);
+        getPaginasVista(stringBusqueda, stringCIF);
+        getCuentasVista(1, stringBusqueda, stringCIF);
         table_vista.draw();
     });
 
@@ -264,13 +264,13 @@ $(document).ready(function() {
                         if (stringBusqueda === "")
                             stringBusqueda = "ALL";
                         if (cuenta_actual === 0) {
-                            getPaginasAuto(stringBusqueda);
-                            getCuentasAuto(1, stringBusqueda);
+                            getPaginasAuto(stringBusqueda, stringCIF);
+                            getCuentasAuto(1, stringBusqueda, stringCIF);
                             table_auto.draw();
                         }
                         else {
-                            getPaginasVista(stringBusqueda);
-                            getCuentasVista(1, stringBusqueda);
+                            getPaginasVista(stringBusqueda, stringCIF);
+                            getCuentasVista(1, stringBusqueda, stringCIF);
                             table_vista.draw();
                         }
                     });
