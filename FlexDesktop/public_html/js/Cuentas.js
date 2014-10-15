@@ -4,14 +4,31 @@ $(document).ready(function() {
     var paginasvista;
     var cuenta_actual = 0;
     var stringBusqueda = "ALL";
+    var stringCIF;
 
 
+// GET paginas de los cuentas auto
+    function login(CIF) {
+        $.ajax({
+            type: 'GET',
+            url: rootURL + "clientes/verificarCliente/" + CIF,
+            dataType: "json",
+            success: function(data) {
+                if (data === 1) {
+                    getPaginasAuto(stringBusqueda, CIF);
+                    getCuentasAuto(1, stringBusqueda, CIF);
+                    $("#container-login").hide();
+                    $("#container-cuentas").show();
+                }
+            }
+        });
+    }
     // GET paginas de los cuentas auto
-    function getPaginasAuto(busqueda) {
+    function getPaginasAuto(busqueda, CIF) {
         console.log('getCantidadCuentasAuto');
         $.ajax({
             type: 'GET',
-            url: rootURL + "cuentas/getCantidadCuentasAutoBusqueda/" + busqueda,
+            url: rootURL + "cuentas/getCantidadCuentasAutoBusqueda/" + busqueda + "/" + CIF,
             dataType: "json",
             success: function(data) {
                 paginasauto = Math.ceil(data / 10);
@@ -20,11 +37,11 @@ $(document).ready(function() {
     }
 
 // GET  cuentas auto por pagina y busqueda
-    function getCuentasAuto(pagina, busqueda) {
+    function getCuentasAuto(pagina, busqueda, CIF) {
         console.log('getCuentasAuto');
         $.ajax({
             type: 'GET',
-            url: rootURL + "cuentas/getCuentasAutoPaginadosBusqueda/" + pagina + "/" + busqueda,
+            url: rootURL + "cuentas/getCuentasAutoPaginadosBusqueda/" + pagina + "/" + busqueda + "/" + CIF,
             dataType: "json",
             success: function(data) {
                 var datastring = data;
@@ -90,11 +107,11 @@ $(document).ready(function() {
 
 
 // GET paginas de los cuentas vista
-    function getPaginasVista(busqueda) {
+    function getPaginasVista(busqueda, CIF) {
         console.log('getCantidadCuentasVista');
         $.ajax({
             type: 'GET',
-            url: rootURL + "cuentas/getCantidadCuentasVistaBusqueda/" + busqueda,
+            url: rootURL + "cuentas/getCantidadCuentasVistaBusqueda/" + busqueda + "/" + CIF,
             dataType: "json",
             success: function(data) {
                 paginasvista = Math.ceil(data / 10);
@@ -103,11 +120,11 @@ $(document).ready(function() {
     }
 
 // GET todos los cuentas vista
-    function getCuentasVista(pagina, busqueda) {
+    function getCuentasVista(pagina, busqueda, CIF) {
         console.log('getCuentasVista');
         $.ajax({
             type: 'GET',
-            url: rootURL + "cuentas/getCuentasVistaPaginadosBusqueda/" + pagina + "/" + busqueda,
+            url: rootURL + "cuentas/getCuentasVistaPaginadosBusqueda/" + pagina + "/" + busqueda + "/" + CIF,
             dataType: "json",
             success: function(data) {
                 var datastring = data;
@@ -119,7 +136,6 @@ $(document).ready(function() {
             }
         });
     }
-
     // POST un cuenta
     function postCuentaVista() {
         console.log('postCuenta');
@@ -180,8 +196,7 @@ $(document).ready(function() {
             }
         ]
     });
-    getPaginasAuto(stringBusqueda);
-    getCuentasAuto(1, stringBusqueda);
+
 
     var table_vista = $('#cue-vista-table').DataTable({
         "info": false,
@@ -205,6 +220,12 @@ $(document).ready(function() {
                 "width": "15%"
             }
         ]
+    });
+
+    $("#container-cuentas").hide();
+    $('#login-cliente').on('click', function() {
+        stringCIF=$('#cif').val();
+        login(stringCIF);
     });
 
     $('#cue-auto-table').on('page.dt', function() {
