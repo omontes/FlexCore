@@ -75,15 +75,14 @@ public class ClienteDAO extends ConnectionManager implements TransaccionesClient
     public ClienteJuridicoDTO crearClienteJuridico(ClienteJuridicoDTO cliente) throws Exception {
         CallableStatement preparedCall = null;
         try {
-             String SQL = "{call crearClienteJuridico (?, ?, ?, ?, ?, ?, ?)}";
+             String SQL = "{call crearClienteJuridico (?, ?, ?, ?, ?, ?)}";
              preparedCall = conexion.prepareCall(SQL);
-             preparedCall.setInt(1, cliente.getCustomerIF());
-             preparedCall.setString(2, cliente.getNombre());
-             preparedCall.setString(3, cliente.getDireccion());
-             preparedCall.setInt(4, cliente.getTelCasa());
-             preparedCall.setInt(5, cliente.getTelOficina());
-             preparedCall.setInt(6, cliente.getCelular());
-             preparedCall.setInt(7, cliente.getCedulaJuridica());
+             preparedCall.setString(1, cliente.getNombre());
+             preparedCall.setString(2, cliente.getDireccion());
+             preparedCall.setInt(3, cliente.getTelCasa());
+             preparedCall.setInt(4, cliente.getTelOficina());
+             preparedCall.setInt(5, cliente.getCelular());
+             preparedCall.setInt(6, cliente.getCedulaJuridica());
              preparedCall.executeUpdate();
              preparedCall.close();
         } catch (Exception e) {
