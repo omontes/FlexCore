@@ -23,14 +23,26 @@
         <script src="js/bootstrap.js"></script>
         <!-- DataTables -->
         <script type="text/javascript" src="js/jquery.dataTables.js"></script>
-        <!-- Metodos Javascript del cliente con jQuery usando JAX-RS y Jersey-->
-        <script src="js/jQueryClient.js"></script>
         <!-- Metodos Javascript de la interfaz-->
         <script src="js/DesignScripts.js"></script>
         <!-- Metodos de la pagina actual-->
         <script></script>
     </head>
     <body>
+        <script>
+            $(document).ready(function() {
+                $('#menu').change(function() {
+                    alert($(this).find('option:selected').attr('value'));
+                });
+            });
+        </script>
+        <select id="menu">
+            <option value=1>Volvo</option>
+            <option value=2>Saab</option>
+            <option value=3>Opel</option>
+            <option value=4>Audi</option>
+        </select>
+
         <div class="container">
             <div class="row">
                 <div class="bs-header" id="content">

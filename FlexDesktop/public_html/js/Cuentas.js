@@ -328,41 +328,33 @@ $(document).ready(function() {
     $('#cue-auto tbody').on('click', 'td.edit', function() {
         var tr = $(this).closest('tr');
         var row = table_auto.row(tr);
-        $("#edit-cuenta #apellido1").prop('disabled', false);
-        $("#edit-cuenta #apellido1").prop('disabled', false);
         $("#edit-cuenta #Heading").html("Editar Cuenta");
-        $("#edit-cuenta #cif").val(row.data().customerIF);
-        $("#edit-cuenta #cedula").val(row.data().cedula);
-        $("#edit-cuenta #nombre").val(row.data().nombre);
-        $("#edit-cuenta #apellido1").val(row.data().primerApellido);
-        $("#edit-cuenta #apellido2").val(row.data().segundoApellido);
-        $("#edit-cuenta #direccion").val(row.data().direccion);
-        $("#edit-cuenta #telcasa").val(row.data().telCasa);
-        $("#edit-cuenta #telofi").val(row.data().telOficina);
-        $("#edit-cuenta #celular").val(row.data().celular);
+        $("#edit-cuenta #cuenta").val(row.data().numCuenta);
+        $("#edit-cuenta #fecha").val(row.data().fechaInicio);
+        $("#edit-cuenta #real").val(row.data().saldoReal);
+        $("#edit-cuenta #temporal").val(row.data().saldoTemporal);
+        $("#edit-cuenta #monto").val(row.data().montoAhorro);
+        $("#edit-cuenta #meses").val(row.data().tiempoAhorroMeses);
+        $("#edit-cuenta #tiempo").val(row.data().tiempoDeducciones);
+        $("label").hide();
+        $(".auto").show();
         $("#edit-cuenta .btn-cue-post").hide();
         $("#edit-cuenta .btn-cue-update").show();
-        if ($("#edit-cuenta #nombre").val() !== "")
+        if ($("#edit-cuenta #cuenta").val() !== "")
             $('#edit-cuenta').modal();
     });
     $('#cue-vista tbody').on('click', 'td.edit', function() {
         var tr = $(this).closest('tr');
         var row = table_vista.row(tr);
-        $("#edit-cuenta #apellido1").prop('disabled', true);
-        $("#edit-cuenta #apellido1").prop('disabled', true);
         $("#edit-cuentacuenta #Heading").html("Editar Cuenta");
-        $("#edit-cuenta #cif").val(row.data().customerIF);
-        $("#edit-cuenta #cedula").val(row.data().cedulaJuridica);
-        $("#edit-cuenta #nombre").val(row.data().nombre);
-        $("#edit-cuenta #apellido1").val("");
-        $("#edit-cuenta #apellido2").val("");
-        $("#edit-cuenta #direccion").val(row.data().direccion);
-        $("#edit-cuenta #telcasa").val(row.data().telCasa);
-        $("#edit-cuenta #telofi").val(row.data().telOficina);
-        $("#edit-cuenta #celular").val(row.data().celular);
+        $("#edit-cuenta #cuenta").val(row.data().numCuenta);
+        $("#edit-cuenta #real").val(row.data().saldoReal);
+        $("#edit-cuenta #temporal").val(row.data().saldoTemporal);
+        $("label").hide();
+        $(".vista").show();
         $("#edit-cuenta .btn-cue-post").hide();
         $("#edit-cuenta .btn-cue-update").show();
-        if ($("#edit-cuenta #nombre").val() !== "")
+        if ($("#edit-cuenta #cuenta").val() !== "")
             $('#edit-cuenta').modal();
     });
     $(".btn-cue-post").click(function() {
