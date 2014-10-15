@@ -32,4 +32,5 @@ public interface TransaccionesCliente {
     int obtenerCantidadClientesJuridicosBusqueda(String entrada) throws Exception;
     ArrayList <ClienteFisicoDTO> verClientesFisicosPaginadosBusqueda(int pagina, String entrada) throws Exception;
     ArrayList <ClienteJuridicoDTO> verClientesJuridicosPaginadosBusqueda(int pagina, String entrada) throws Exception;
+    int verificarCliente(int customerIF);
 }

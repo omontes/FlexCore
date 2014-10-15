@@ -69,7 +69,23 @@ public class ClientesWS {
         }
         return feeds;
     }
-    
+       
+    @GET
+    @Path("/verificarCliente/{customerIF}")
+    @Produces("application/json")
+    public String verificarCliente(@PathParam("customerIF") int customerIF) {
+        String feeds = null;
+        try {
+            ClienteDAO cliente_dao = new ClienteDAO();
+            int feedData=cliente_dao.verificarCliente(customerIF);
+            Gson gson = new Gson();
+            feeds = gson.toJson(feedData);
+            
+        } catch (Exception e) {
+            System.out.println("No se pudo verificar el cliente"); //Console 
+        }
+        return feeds;
+    }
     @GET
     @Path("/getClientesJuridicos")
     @Produces("application/json")

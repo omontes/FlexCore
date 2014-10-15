@@ -469,5 +469,28 @@ public class ClienteDAO extends ConnectionManager implements TransaccionesClient
         return cantidadClientes;
     }
 
+    @Override
+    public int verificarCliente(int customerIF) {
+        CallableStatement preparedCall = null;
+        int existe = 0;
+        try {
+            String SQL = "{call verSiExisteCliente (?)}";
+            preparedCall = conexion.prepareCall(SQL);
+            preparedCall.setInt(1, customerIF);
+            preparedCall.executeQuery();
+            ResultSet rs = preparedCall.getResultSet();
+             while(rs.next()){
+                 existe = rs.getInt("idCliente");
+             }
+             statement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            this.cerrarConexion();
+        }
+        return existe;
+    }
+
     
 }
