@@ -20,12 +20,17 @@ import java.util.ArrayList;
 public class CuentaAhorroAutomaticoDAO extends ConnectionManager implements TransaccionesCuentaAhorroAutomatico {
     
     @Override
-    public ArrayList<CuentaAhorroAutomaticoDTO> verCuentasAhorroAutomatico() throws Exception {
+    public ArrayList<CuentaAhorroAutomaticoDTO> verCuentasAhorroAutomatico(int pagina, String busqueda) throws Exception {
          ArrayList<CuentaAhorroAutomaticoDTO> listaClientes = new ArrayList<>();
          CallableStatement preparedCall = null;
          try{
-            String SQL = "{call obtenerCuentasAhorroAutomatico()}";
+            int datoInicial = (pagina - 1)*10;
+            int datoFinal = pagina*10;
+            String SQL = "{call obtenerCuentasAhorroAutomatico(?,?,?)}";
             preparedCall = conexion.prepareCall(SQL);
+            preparedCall.setInt(1, datoInicial);
+            preparedCall.setInt(2, datoFinal);
+            preparedCall.setString(3, busqueda);
             ResultSet rs =  preparedCall.executeQuery();
             while (rs.next()) {
                 CuentaAhorroAutomaticoDTO cuenta = new CuentaAhorroAutomaticoDTO();
