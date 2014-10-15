@@ -10,9 +10,11 @@ getClientes();
 function getClientes() {
     //console.log('getClientes');
     $.ajax({
+        //ff
         
         type: 'GET',
-        url: rootURL + "/cuentaAhorroAutomatico/getCuentasAhorroAutomatico",
+        //url: rootURL + "/cuentaAhorroAutomatico/getCuentasAhorroAutomatico/1/1"
+        url: rootURL + "/cuentaAhorroAutomatico/getCantidadCuentasAhorroAutomatico/1",
         dataType: "json",
         success: function(data) {
             $('#h1').append("Consulta Realizada");

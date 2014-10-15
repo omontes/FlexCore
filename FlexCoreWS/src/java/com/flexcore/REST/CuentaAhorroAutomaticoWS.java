@@ -6,6 +6,7 @@
 
 package com.flexcore.REST;
 
+import com.flexcore.dao.ClienteDAO;
 import com.flexcore.dao.CuentaAhorroAutomaticoDAO;
 import com.flexcore.dto.CuentaAhorroAutomaticoDTO;
 import com.google.gson.Gson;
@@ -33,14 +34,14 @@ import javax.ws.rs.core.UriInfo;
 public class CuentaAhorroAutomaticoWS {
     
     @GET
-    @Path("/getCuentasAhorroAutomatico")
+    @Path("/getCuentasAhorroAutomatico/{pagina}/{busqueda}")
     @Produces("application/json")
-    public String getCuentas() {
+    public String getCuentas(@PathParam("pagina") int pagina, @PathParam("busqueda") String busqueda) {
         String feeds = null;
         try {
             CuentaAhorroAutomaticoDAO cuenta_dao = new CuentaAhorroAutomaticoDAO();
             ArrayList<CuentaAhorroAutomaticoDTO> feedData = null;
-            feedData=cuenta_dao.verCuentasAhorroAutomatico();
+            feedData=cuenta_dao.verCuentasAhorroAutomatico(pagina,busqueda);
             Gson gson = new Gson();
             feeds = gson.toJson(feedData);
             
@@ -49,6 +50,24 @@ public class CuentaAhorroAutomaticoWS {
         }
         return feeds;
     }
+      @GET
+    @Path("/getCantidadCuentasAhorroAutomatico/{entrada}")
+    @Produces("application/json")
+    public String getCantidadClientesJuridicosBusqueda(@PathParam("entrada") String entrada) {
+        String feeds = null;
+        try {
+            CuentaAhorroAutomaticoDAO cuenta_dao = new CuentaAhorroAutomaticoDAO();
+            int feedData = cuenta_dao.obtenerCantidadCuentasAhorroAutomatico(entrada);
+            Gson gson = new Gson();
+            feeds = gson.toJson(feedData);
+            
+        } catch (Exception e) {
+            System.out.println("No se pudo obtenener la cantidad de cuentas "
+                    + "ahorro automatico"); //Console 
+        }
+        return feeds;
+    }
+    
 
     @POST
     @Path("/crearCuentaAhorroAutomatico")
