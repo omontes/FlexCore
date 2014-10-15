@@ -35,7 +35,7 @@ public class CuentaAhorroAutomaticoWS {
     @GET
     @Path("/getCuentasAhorroAutomatico")
     @Produces("application/json")
-    public String getClientes() {
+    public String getCuentas() {
         String feeds = null;
         try {
             CuentaAhorroAutomaticoDAO cuenta_dao = new CuentaAhorroAutomaticoDAO();

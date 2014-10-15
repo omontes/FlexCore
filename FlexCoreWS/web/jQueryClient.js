@@ -3,7 +3,7 @@ var rootURL = "http://localhost:8080/FlexCoreWS/webresources";
 
 // Retrieve Employees list when application starts 
 
-postClienteFisico();
+//postClienteFisico();
 
 getClientes();
 //GET
@@ -12,7 +12,7 @@ function getClientes() {
     $.ajax({
         
         type: 'GET',
-        url: rootURL + "/clientes/getClientesFisicosPaginadosBusqueda/1/J",
+        url: rootURL + "/cuentaAhorroAutomatico/getCuentasAhorroAutomatico",
         dataType: "json",
         success: function(data) {
             $('#h1').append("Consulta Realizada");
