@@ -29,7 +29,7 @@ import javax.ws.rs.core.UriInfo;
  *
  * @author Carlos
  */
-@Path("cuentas")
+@Path("cuentaAhorroVista")
 public class CuentaAhorroVistaWS {
     
     @GET

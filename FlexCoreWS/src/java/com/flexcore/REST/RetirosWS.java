@@ -40,9 +40,9 @@ public class RetirosWS {
     }
     
     @GET
-    @Path("/verRetiros")
+    @Path("/verRetiros/{idCuenta}")
     @Produces("application/json")
-    public String getClientes(int idCuenta) {
+    public String getClientes(@PathParam("idCuenta") int idCuenta) {
         String feeds = null;
         try {
             RetirosDAO pagos_dao = new RetirosDAO();

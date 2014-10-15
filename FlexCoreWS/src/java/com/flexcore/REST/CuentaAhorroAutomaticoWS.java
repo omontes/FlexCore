@@ -30,7 +30,7 @@ import javax.ws.rs.core.UriInfo;
  *
  * @author Carlos
  */
-@Path("cuentas")
+@Path("cuentaAhorroAutomatico")
 public class CuentaAhorroAutomaticoWS {
     
     @GET
