@@ -33,14 +33,14 @@ import javax.ws.rs.core.UriInfo;
 public class CuentaAhorroAutomaticoWS {
     
     @GET
-    @Path("/getCuentasAhorroAutomatico")
+    @Path("/getCuentasAhorroAutomatico/{pagina}/{busqueda}")
     @Produces("application/json")
-    public String getCuentas() {
+    public String getCuentas(@PathParam("pagina") int pagina, @PathParam("busqueda") String busqueda) {
         String feeds = null;
         try {
             CuentaAhorroAutomaticoDAO cuenta_dao = new CuentaAhorroAutomaticoDAO();
             ArrayList<CuentaAhorroAutomaticoDTO> feedData = null;
-            feedData=cuenta_dao.verCuentasAhorroAutomatico();
+            feedData=cuenta_dao.verCuentasAhorroAutomatico(pagina,busqueda);
             Gson gson = new Gson();
             feeds = gson.toJson(feedData);
             
