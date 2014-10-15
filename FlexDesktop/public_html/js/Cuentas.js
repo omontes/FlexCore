@@ -28,7 +28,7 @@ $(document).ready(function() {
         console.log('getCantidadCuentasAuto');
         $.ajax({
             type: 'GET',
-            url: rootURL + "cuentas/getCantidadCuentasAutoBusqueda/" + busqueda + "/" + CIF,
+            url: rootURL + "cuentaAhorroAutomatico/getCantidadCuentasAutoBusqueda/" + busqueda + "/" + CIF,
             dataType: "json",
             success: function(data) {
                 paginasauto = Math.ceil(data / 10);
@@ -41,7 +41,7 @@ $(document).ready(function() {
         console.log('getCuentasAuto');
         $.ajax({
             type: 'GET',
-            url: rootURL + "cuentas/getCuentasAutoPaginadosBusqueda/" + pagina + "/" + busqueda + "/" + CIF,
+            url: rootURL + "cuentaAhorroAutomatico/getCuentasAutoPaginadosBusqueda/" + pagina + "/" + busqueda + "/" + CIF,
             dataType: "json",
             success: function(data) {
                 var datastring = data;
@@ -60,7 +60,7 @@ $(document).ready(function() {
         $.ajax({
             type: 'POST',
             contentType: 'application/json',
-            url: rootURL + "cuentas/crearCuentasAuto",
+            url: rootURL + "cuentaAhorroAutomatico/crearCuentasAuto",
             dataType: "json",
             data: cuentaAutoToJSON(),
             success: function() {
@@ -76,7 +76,7 @@ $(document).ready(function() {
         $.ajax({
             type: 'POST',
             contentType: 'application/json',
-            url: rootURL + "cuentas/updateAuto",
+            url: rootURL + "cuentaAhorroAutomatico/updateAuto",
             dataType: "json",
             data: cuentaAutoToJSON(),
             success: function() {
@@ -111,7 +111,7 @@ $(document).ready(function() {
         console.log('getCantidadCuentasVista');
         $.ajax({
             type: 'GET',
-            url: rootURL + "cuentas/getCantidadCuentasVistaBusqueda/" + busqueda + "/" + CIF,
+            url: rootURL + "cuentaAhorroVista/getCantidadCuentasVistaBusqueda/" + busqueda + "/" + CIF,
             dataType: "json",
             success: function(data) {
                 paginasvista = Math.ceil(data / 10);
@@ -124,7 +124,7 @@ $(document).ready(function() {
         console.log('getCuentasVista');
         $.ajax({
             type: 'GET',
-            url: rootURL + "cuentas/getCuentasVistaPaginadosBusqueda/" + pagina + "/" + busqueda + "/" + CIF,
+            url: rootURL + "cuentaAhorroVista/getCuentasVistaPaginadosBusqueda/" + pagina + "/" + busqueda + "/" + CIF,
             dataType: "json",
             success: function(data) {
                 var datastring = data;
@@ -142,7 +142,7 @@ $(document).ready(function() {
         $.ajax({
             type: 'POST',
             contentType: 'application/json',
-            url: rootURL + "cuentas/crearCuentasVista",
+            url: rootURL + "cuentaAhorroVista/crearCuentasVista",
             dataType: "json",
             data: cuentaVistaToJSON(),
             success: function() {
@@ -158,7 +158,7 @@ $(document).ready(function() {
         $.ajax({
             type: 'POST',
             contentType: 'application/json',
-            url: rootURL + "cuentas/updateVista",
+            url: rootURL + "cuentaAhorroVista/updateVista",
             dataType: "json",
             data: cuentaVistaToJSON(),
             success: function() {
