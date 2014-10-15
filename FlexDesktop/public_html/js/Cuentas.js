@@ -14,7 +14,7 @@ $(document).ready(function() {
             url: rootURL + "clientes/verificarCliente/" + CIF,
             dataType: "json",
             success: function(data) {
-                if (data === true) {
+                if (data === 1) {
                     getPaginasAuto(stringBusqueda, CIF);
                     getCuentasAuto(1, stringBusqueda, CIF);
                     $("#container-login").hide();
