@@ -48,7 +48,7 @@ $(document).ready(function() {
             data: clienteFisicoToJSON(),
             success: function() {
                 getPaginasFisicos(stringBusqueda);
-                getClientesFisicos(1, stringBusqueda);
+                getClientesFisicos(table_juridicos.page.info().page + 1, stringBusqueda);
             }
         });
     }
@@ -64,7 +64,7 @@ $(document).ready(function() {
             data: clienteFisicoToJSON(),
             success: function() {
                 getPaginasFisicos(stringBusqueda);
-                getClientesFisicos(1, stringBusqueda);
+                getClientesFisicos(table_juridicos.page.info().page + 1, stringBusqueda);
             }
         });
     }
@@ -131,7 +131,7 @@ $(document).ready(function() {
             data: clienteJuridicoToJSON(),
             success: function() {
                 getPaginasJuridicos(stringBusqueda);
-                getClientesJuridicos(1, stringBusqueda);
+                getClientesJuridicos(table_juridicos.page.info().page + 1, stringBusqueda);
             }
         });
     }
@@ -147,7 +147,7 @@ $(document).ready(function() {
             data: clienteJuridicoToJSON(),
             success: function() {
                 getPaginasJuridicos(stringBusqueda);
-                getClientesJuridicos(1, stringBusqueda);
+                getClientesJuridicos(table_juridicos.page.info().page + 1, stringBusqueda);
             }
         });
     }
