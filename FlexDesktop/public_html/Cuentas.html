@@ -38,7 +38,7 @@
                 <div class="form-box">
                     <label>
                         Customer identification file:
-                        <input id="cedula-cliente" type="text" class="form-control">
+                        <input id="cif" type="text" class="form-control">
                     </label>
                     <button id="login-cliente" class="btn btn-info">Login</button>
                 </div>
@@ -66,23 +66,20 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <input type="text" class="form-control" id="cli-table-filter" data-action="filter" data-filters="#cue-table" placeholder="Buscar Cuentas" />
+                            <input type="text" class="form-control" id="cue-table-filter" data-action="filter" data-filters="#cue-table" placeholder="Buscar Cuentas" />
                         </div>
                         <div class="tab-content">
                             <div class="tab-pane active" id="cue-auto">
                                 <table id="cue-auto-table" class="display" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
-                                            <th>CIF</th>
-                                            <th>Cédula</th>
-                                            <th>Nombre</th>
-                                            <th>Apellido1</th>
-                                            <th>Apellido2</th>
-                                            <th>Direccion</th>
-                                            <th>Tel. Casa</th>
-                                            <th>Tel. Oficina</th>
-                                            <th>Celular</th>
-                                            <th></th>
+                                            <th>#Cuenta</th>
+                                            <th>Inicio</th>
+                                            <th>Descripcion</th>
+                                            <th>Monto</th>
+                                            <th>#Cuenta deduccion</th>
+                                            <th>Tiempo Ahorro</th>
+                                            <th>Deduccion cada</th>
                                             <th></th>
                                             <th></th>
                                             <th></th> 
@@ -91,18 +88,13 @@
                                     <tbody> </tbody>
                                 </table>
                             </div>
-                            <div class="tab-pane" id="cli-juridicos">
-                                <table id="cli-juridicos-table" class="display" cellspacing="0" width="100%">
+                            <div class="tab-pane" id="cue-vista">
+                                <table id="cue-vista-table" class="display" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
-                                            <th>CIF</th>
-                                            <th>Cédula Juridica</th>
-                                            <th>Nombre</th>
-                                            <th>Direccion</th>
-                                            <th>Tel. Casa</th>
-                                            <th>Tel. Oficina</th>
-                                            <th>Celular</th>
-                                            <th></th>
+                                            <th>#Cuenta</th>
+                                            <th>Descripcion</th>
+                                            <th>Moneda</th>
                                             <th></th>
                                             <th></th> 
                                         </tr>
@@ -117,7 +109,7 @@
         </div>
 
         <!-- Modal Edit/Add Clientes-->
-        <div class="modal fade" id="edit-cliente" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal fade" id="edit-cuenta" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -126,45 +118,45 @@
                     </div>
                     <div class="modal-body">
                         <label>
-                            Customer identification file:
-                            <input id="cif" type="text" placeholder="CIF" class="form-control" disabled>
+                            Numero de Cuenta:
+                            <input id="cuenta" type="text" placeholder="Cuenta" class="form-control" disabled>
                         </label>
                         <label>
-                            Numero de cedula:
-                            <input id="cedula" type="text" placeholder="Cédula" class="form-control">
+                            Fecha de inicio:
+                            <input id="cedula" type="text" placeholder="Inicio" class="form-control">
                         </label>
                         <label>
-                            Nombre:
-                            <input id="nombre" type="text" placeholder="Nombre" class="form-control">
+                            Descripcion:
+                            <input id="nombre" type="text" placeholder="Descripcion" class="form-control">
                         </label>
                         <label>
-                            Primer Apellido:
-                            <input id="apellido1" type="text" placeholder="Apellido1" class="form-control">
+                            Monto a debitar:
+                            <input id="apellido1" type="text" placeholder="Monto" class="form-control">
                         </label>
                         <label>
-                            Segundo Apellido:
-                            <input id="apellido2" type="text" placeholder="Apellido2" class="form-control">
+                            Numero de cuenta deduccion:
+                            <input id="apellido2" type="text" placeholder="Cuenta deduccion" class="form-control">
                         </label>
                         <label>
-                            Direccion:
-                            <input id="direccion" type="text" placeholder="Direccion" class="form-control">
+                            Tiempo de ahorro (meses):
+                            <input id="direccion" type="text" placeholder="Tiempo Ahorro" class="form-control">
                         </label>
                         <label>
-                            Telefono Casa:
-                            <input id="telcasa" type="text" placeholder="Telefono Casa" class="form-control">
+                            Tiempo de deduccion:
+                            <input id="telcasa" type="text" placeholder="Tiempo deduccion" class="form-control">
                         </label>
                         <label>
-                            Telefono Oficina:
-                            <input id="telofi" type="text" placeholder="Telefono Oficina" class="form-control">
+                            tipo tiempo:
+                            <input id="telofi" type="text" placeholder="futuro drop menu" class="form-control">
                         </label>
                         <label>
-                            Telefono Celular:
-                            <input id="celular" type="text" placeholder="Telefono Celular" class="form-control">
+                            moneda:
+                            <input id="telofi" type="text" placeholder="futuro drop menu" class="form-control">
                         </label>
                     </div>
                     <div class="modal-footer ">
-                        <button type="button" class="btn btn-info btn-lg btn-cli-post" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Agregar</button>
-                        <button type="button" class="btn btn-info btn-lg btn-cli-update" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+                        <button type="button" class="btn btn-info btn-lg btn-cue-post" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Agregar</button>
+                        <button type="button" class="btn btn-info btn-lg btn-cue-update" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
                     </div>
                 </div>
                 <!-- /.modal-content --> 
@@ -173,7 +165,7 @@
         </div>
 
         <!--modal delete-->
-        <div class="modal fade" id="delete-cliente" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal fade" id="delete-cuenta" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -181,45 +173,11 @@
                         <h4 class="modal-title custom_align" id="Heading">Borrar Esta Entrada</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="alert alert-info"><span class="glyphicon glyphicon-warning-sign"></span> Seguro que desea eliminar este cliente?</div>
+                        <div class="alert alert-info"><span class="glyphicon glyphicon-warning-sign"></span> Seguro que desea eliminar este cuenta?</div>
                     </div>
                     <div class="modal-footer ">
-                        <button type="button" class="btn btn-info btn-cli-delete" ><span class="glyphicon glyphicon-ok-sign"></span> Si</button>
+                        <button type="button" class="btn btn-info btn-cue-delete" ><span class="glyphicon glyphicon-ok-sign"></span> Si</button>
                         <button type="button" class="btn btn-info" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
-                    </div>
-                </div>
-                <!-- /.modal-content --> 
-            </div>
-            <!-- /.modal-dialog --> 
-        </div>
-
-        <!--modal adjuntos-->
-        <div class="modal fade" id="files-cliente" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title custom_align" id="Heading">Archivos adjuntos</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="alert alert-info"><span class="glyphicon glyphicon-warning-sign"></span> ?</div>
-                    </div>
-                </div>
-                <!-- /.modal-content --> 
-            </div>
-            <!-- /.modal-dialog --> 
-        </div>
-
-        <!--modal foto-->
-        <div class="modal fade" id="photo-cliente" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title custom_align" id="Heading">Foto</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="alert alert-info"><span class="glyphicon glyphicon-warning-sign"></span> ?</div>
                     </div>
                 </div>
                 <!-- /.modal-content --> 
