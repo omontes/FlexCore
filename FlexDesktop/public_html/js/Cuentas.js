@@ -46,14 +46,14 @@ $(document).ready(function() {
             success: function(data) {
                 var datastring = data;
                 var datastringaux = [];
-                datastringaux = emptyPages(['"numCuenta"', '"fechaInicio"', '"idProposito"', '"montoAhorro"', '"numCuentaDeduccion"', '"tiempoAhorroMeses"', '"tiempoDeducciones"', '"tipoTiempo"'],
+                datastringaux = emptyPages(['"numCuenta"', '"fechaInicio"', '"idProposito"','"saldoReal"', '"saldoTemporal"', '"montoAhorro"', '"numCuentaDeduccion"', '"tiempoAhorroMeses"', '"tiempoDeducciones"', '"tipoTiempo"'],
                         datastring, table_auto.page.info().page, paginasauto - 1 - table_auto.page.info().page);
                 table_auto.clear();
                 table_auto.rows.add(datastringaux).draw(false);
             }
         });
     }
-
+    
 // POST un cuenta
     function postCuentaAuto() {
         console.log('postCuenta');
@@ -129,7 +129,7 @@ $(document).ready(function() {
             success: function(data) {
                 var datastring = data;
                 var datastringaux = [];
-                datastringaux = emptyPages(['"numCuenta"', '"descripcion"', '"tipoMoneda"'],
+                datastringaux = emptyPages(['"numCuenta"', '"descripcion"','"saldoReal"', '"saldoTemporal"', '"tipoMoneda"'],
                         datastring, table_vista.page.info().page, paginasvista - 1 - table_vista.page.info().page);
                 table_vista.clear();
                 table_vista.rows.add(datastringaux).draw(false);
@@ -177,6 +177,8 @@ $(document).ready(function() {
             {"data": "numCuenta"},
             {"data": "fechaInicio"},
             {"data": "idProposito"},
+            {"data": "saldoReal"},
+            {"data": "saldoTemporal"},
             {"data": "montoAhorro"},
             {"data": "numCuentaDeduccion"},
             {"data": "tiempoAhorroMeses"},
@@ -206,6 +208,8 @@ $(document).ready(function() {
         "columns": [
             {"data": "numCuenta"},
             {"data": "descripcion"},
+            {"data": "saldoReal"},
+            {"data": "saldoTemporal"},
             {"data": "tipoMoneda"},
             {
                 "class": 'edit',
