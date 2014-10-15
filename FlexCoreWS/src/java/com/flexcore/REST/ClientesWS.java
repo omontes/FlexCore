@@ -207,7 +207,7 @@ public class ClientesWS {
         }
         return feeds;
     }
-    
+  
     @GET
     @Path("/getClientesFisicosPaginadosBusqueda/{pagina}/{busqueda}")
     @Produces("application/json")

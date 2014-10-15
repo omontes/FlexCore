@@ -35,7 +35,7 @@ public class CuentaWS {
     @GET
     @Path("/getCuentas")
     @Produces("application/json")
-    public String getClientes() {
+    public String getCuentas() {
         String feeds = null;
         try {
             CuentaDAO cuenta_dao = new CuentaDAO();
