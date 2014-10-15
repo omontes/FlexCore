@@ -25,7 +25,8 @@ public class CuentaAhorroAutomaticoDAO extends ConnectionManager implements Tran
          CallableStatement preparedCall = null;
          try{
             String SQL = "{call obtenerCuentasAhorroAutomatico()}";
-            ResultSet rs = statement.executeQuery(SQL);
+            preparedCall = conexion.prepareCall(SQL);
+            ResultSet rs =  preparedCall.executeQuery();
             while (rs.next()) {
                 CuentaAhorroAutomaticoDTO cuenta = new CuentaAhorroAutomaticoDTO();
                 cuenta.setNumCuenta(rs.getInt("numCuenta"));
