@@ -39,16 +39,26 @@ public class CuentaAhorroVistaDAO extends ConnectionManager implements Transacci
     }
 
     @Override
-    public ArrayList<CuentaAhorroVistaDTO> verCuentasAhorroVista() throws Exception {
-        ArrayList<CuentaAhorroVistaDTO> listaClientes = new ArrayList<>();
+    public ArrayList<CuentaAhorroVistaDTO> verCuentasAhorroVista(int pagina, String busqueda, int customerIF) throws Exception {
+         ArrayList<CuentaAhorroVistaDTO> listaClientes = new ArrayList<>();
+         CallableStatement preparedCall = null;
          try{
-            String SQL = "{call obtenerCuentasAhorroVista()}";
-            ResultSet rs = statement.executeQuery(SQL);
+            int datoInicial = (pagina - 1)*10;
+            int datoFinal = pagina*10;
+            String SQL = "{call obtenerCuentasAhorroVista(?,?,?,?)}";
+            preparedCall = conexion.prepareCall(SQL);
+            preparedCall.setInt(1, datoInicial);
+            preparedCall.setInt(2, datoFinal);
+            preparedCall.setString(3, busqueda);
+            preparedCall.setInt(4, customerIF);
+            ResultSet rs =  preparedCall.executeQuery();
             while (rs.next()) {
                 CuentaAhorroVistaDTO cuenta = new CuentaAhorroVistaDTO();
                 cuenta.setNumCuenta(rs.getInt("numCuenta"));
-                cuenta.setDescripcion(rs.getString("nombre"));
+                cuenta.setDescripcion(rs.getString("descripcion"));
                 cuenta.setTipoMoneda(rs.getInt("direccion"));
+                cuenta.setSaldoReal(rs.getBigDecimal("saldoReal"));
+                cuenta.setSaldoTemporal(rs.getBigDecimal("saldoTemporal"));
                 listaClientes.add(cuenta);
             }
             statement.close();
@@ -101,5 +111,30 @@ public class CuentaAhorroVistaDAO extends ConnectionManager implements Transacci
             this.cerrarConexion();
         }
     }
+
+    @Override
+    public int obtenerCantidadCuentasAhorroVista(String entrada, int customerIF) {
+         CallableStatement preparedCall = null;
+        int cantidadCuentasAhorroVista = 0;
+        try {
+            String SQL = "{call obtenerCantidadCuentasAhorroVista (?,?)}";
+            preparedCall = conexion.prepareCall(SQL);
+            preparedCall.setString(1, entrada);
+            preparedCall.setInt(2, customerIF);
+            preparedCall.executeQuery();
+            ResultSet rs = preparedCall.getResultSet();
+             while(rs.next()){
+                 cantidadCuentasAhorroVista = rs.getInt(1);
+             }
+             statement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            this.cerrarConexion();
+        }
+        return cantidadCuentasAhorroVista;
+    }
+
     
 }
