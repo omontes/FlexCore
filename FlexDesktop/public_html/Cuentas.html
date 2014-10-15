@@ -53,8 +53,8 @@
                         <div class="panel-heading">
                             <h3 class="panel-title">n</h3>
                             <div id="tab" class="btn-group" data-toggle="buttons-radio">
-                                <a href="#cue-auto" id="cli-fisicos-radio" class="btn btn-large btn-info active" data-toggle="tab">Cuentas de Ahorro Automatico</a>
-                                <a href="#cue-vista" id="cli-juridicos-radio" class="btn btn-large btn-info" data-toggle="tab">Cuentas de Ahorro Vista</a>
+                                <a href="#cue-auto" id="cue-auto-radio" class="btn btn-large btn-info active" data-toggle="tab">Cuentas de Ahorro Automatico</a>
+                                <a href="#cue-vista" id="cue-vista-radio" class="btn btn-large btn-info" data-toggle="tab">Cuentas de Ahorro Vista</a>
                             </div>
                             <div class="pull-right">
                                 <span class="clickable filter" data-toggle="tooltip" title="Buscar" data-container="body">
@@ -66,18 +66,22 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <input type="text" class="form-control" id="cli-table-filter" data-action="filter" data-filters="#cli-table" placeholder="Buscar Clientes" />
+                            <input type="text" class="form-control" id="cli-table-filter" data-action="filter" data-filters="#cue-table" placeholder="Buscar Cuentas" />
                         </div>
                         <div class="tab-content">
-                            <div class="tab-pane active" id="cli-fisicos">
-                                <table id="cli-fisicos-table" class="display" cellspacing="0" width="100%">
+                            <div class="tab-pane active" id="cue-auto">
+                                <table id="cue-auto-table" class="display" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
                                             <th>CIF</th>
                                             <th>Cédula</th>
                                             <th>Nombre</th>
+                                            <th>Apellido1</th>
+                                            <th>Apellido2</th>
                                             <th>Direccion</th>
-                                            <th>Telefono</th>
+                                            <th>Tel. Casa</th>
+                                            <th>Tel. Oficina</th>
+                                            <th>Celular</th>
                                             <th></th>
                                             <th></th>
                                             <th></th>
@@ -92,9 +96,12 @@
                                     <thead>
                                         <tr>
                                             <th>CIF</th>
-                                            <th>Cédula</th>
+                                            <th>Cédula Juridica</th>
+                                            <th>Nombre</th>
                                             <th>Direccion</th>
-                                            <th>Telefono</th>
+                                            <th>Tel. Casa</th>
+                                            <th>Tel. Oficina</th>
+                                            <th>Celular</th>
                                             <th></th>
                                             <th></th>
                                             <th></th> 
@@ -108,7 +115,6 @@
                 </div>
             </div>
         </div>
-
 
         <!-- Modal Edit/Add Clientes-->
         <div class="modal fade" id="edit-cliente" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
@@ -128,16 +134,32 @@
                             <input id="cedula" type="text" placeholder="Cédula" class="form-control">
                         </label>
                         <label>
-                            Nombre completo:
+                            Nombre:
                             <input id="nombre" type="text" placeholder="Nombre" class="form-control">
+                        </label>
+                        <label>
+                            Primer Apellido:
+                            <input id="apellido1" type="text" placeholder="Apellido1" class="form-control">
+                        </label>
+                        <label>
+                            Segundo Apellido:
+                            <input id="apellido2" type="text" placeholder="Apellido2" class="form-control">
                         </label>
                         <label>
                             Direccion:
                             <input id="direccion" type="text" placeholder="Direccion" class="form-control">
                         </label>
                         <label>
-                            Telefono:
-                            <input id="telefono" type="text" placeholder="Telefono" class="form-control">
+                            Telefono Casa:
+                            <input id="telcasa" type="text" placeholder="Telefono Casa" class="form-control">
+                        </label>
+                        <label>
+                            Telefono Oficina:
+                            <input id="telofi" type="text" placeholder="Telefono Oficina" class="form-control">
+                        </label>
+                        <label>
+                            Telefono Celular:
+                            <input id="celular" type="text" placeholder="Telefono Celular" class="form-control">
                         </label>
                     </div>
                     <div class="modal-footer ">
