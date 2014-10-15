@@ -383,7 +383,7 @@ $(document).ready(function() {
     });
     $('#cli-fisicos tbody').on('click', 'td.delete', function() {
         var tr = $(this).closest('tr');
-        var row = table_juridicos.row(tr);
+        var row = table_fisicos.row(tr);
         $("#delete-value").val(row.data().customerIF);
         if ($("#delete-value").val() !== "")
             $('#delete-cliente').modal();
