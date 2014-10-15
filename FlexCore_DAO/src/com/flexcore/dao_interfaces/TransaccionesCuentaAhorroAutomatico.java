@@ -14,9 +14,9 @@ import java.util.ArrayList;
  * @author Carlos
  */
 public interface TransaccionesCuentaAhorroAutomatico {
-    ArrayList<CuentaAhorroAutomaticoDTO> verCuentasAhorroAutomatico(int pagina, String busqueda) throws Exception;
+    ArrayList<CuentaAhorroAutomaticoDTO> verCuentasAhorroAutomatico(int pagina, String busqueda, int customerIF) throws Exception;
     CuentaAhorroAutomaticoDTO crearCuentaAhorroAutomatico(CuentaAhorroAutomaticoDTO cuenta) throws Exception;
     CuentaAhorroAutomaticoDTO actualizarCuentaAhorroAutomatico(CuentaAhorroAutomaticoDTO cuenta) throws Exception;
     void eliminarCuentaAhorroAutomatico(int numCuenta) throws Exception;
-    int obtenerCantidadCuentasAhorroAutomatico(String entrada) throws Exception;;
+    int obtenerCantidadCuentasAhorroAutomatico(String entrada, int customerIF) throws Exception;;
 }

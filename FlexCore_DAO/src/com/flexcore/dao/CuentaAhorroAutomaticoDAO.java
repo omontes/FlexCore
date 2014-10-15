@@ -20,17 +20,18 @@ import java.util.ArrayList;
 public class CuentaAhorroAutomaticoDAO extends ConnectionManager implements TransaccionesCuentaAhorroAutomatico {
     
     @Override
-    public ArrayList<CuentaAhorroAutomaticoDTO> verCuentasAhorroAutomatico(int pagina, String busqueda) throws Exception {
+    public ArrayList<CuentaAhorroAutomaticoDTO> verCuentasAhorroAutomatico(int pagina, String busqueda, int customerIF) throws Exception {
          ArrayList<CuentaAhorroAutomaticoDTO> listaClientes = new ArrayList<>();
          CallableStatement preparedCall = null;
          try{
             int datoInicial = (pagina - 1)*10;
             int datoFinal = pagina*10;
-            String SQL = "{call obtenerCuentasAhorroAutomatico(?,?,?)}";
+            String SQL = "{call obtenerCuentasAhorroAutomatico(?,?,?,?)}";
             preparedCall = conexion.prepareCall(SQL);
             preparedCall.setInt(1, datoInicial);
             preparedCall.setInt(2, datoFinal);
             preparedCall.setString(3, busqueda);
+            preparedCall.setInt(4, customerIF);
             ResultSet rs =  preparedCall.executeQuery();
             while (rs.next()) {
                 CuentaAhorroAutomaticoDTO cuenta = new CuentaAhorroAutomaticoDTO();
@@ -43,6 +44,8 @@ public class CuentaAhorroAutomaticoDAO extends ConnectionManager implements Tran
                 cuenta.setMontoAhorro(rs.getDouble("montoAhorro"));
                 cuenta.setEstadoAhorro(rs.getBoolean("estadoAhorro"));
                 cuenta.setIdProposito(rs.getString("idProposito"));
+                cuenta.setSaldoReal(rs.getBigDecimal("saldoReal"));
+                cuenta.setSaldoTemporal(rs.getBigDecimal("saldoTemporal"));
                 listaClientes.add(cuenta);
             }
             statement.close();
@@ -129,13 +132,14 @@ public class CuentaAhorroAutomaticoDAO extends ConnectionManager implements Tran
     }
 
     @Override
-    public int obtenerCantidadCuentasAhorroAutomatico(String entrada) {
+    public int obtenerCantidadCuentasAhorroAutomatico(String entrada, int customerIF) {
          CallableStatement preparedCall = null;
         int cantidadCuentasAhorro = 0;
         try {
-            String SQL = "{call obtenerCantidadCuentasAhorroAutomatico (?)}";
+            String SQL = "{call obtenerCantidadCuentasAhorroAutomatico (?,?)}";
             preparedCall = conexion.prepareCall(SQL);
             preparedCall.setString(1, entrada);
+            preparedCall.setInt(2, customerIF);
             preparedCall.executeQuery();
             ResultSet rs = preparedCall.getResultSet();
              while(rs.next()){

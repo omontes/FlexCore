@@ -34,14 +34,15 @@ import javax.ws.rs.core.UriInfo;
 public class CuentaAhorroAutomaticoWS {
     
     @GET
-    @Path("/getCuentasAhorroAutomatico/{pagina}/{busqueda}")
+    @Path("/getCuentasAutoPaginadosBusqueda/{pagina}/{busqueda}/{customerIF}")
     @Produces("application/json")
-    public String getCuentas(@PathParam("pagina") int pagina, @PathParam("busqueda") String busqueda) {
+    public String getCuentas(@PathParam("pagina") int pagina, @PathParam("busqueda") String busqueda,
+            @PathParam("customerIF") int customerIF) {
         String feeds = null;
         try {
             CuentaAhorroAutomaticoDAO cuenta_dao = new CuentaAhorroAutomaticoDAO();
             ArrayList<CuentaAhorroAutomaticoDTO> feedData = null;
-            feedData=cuenta_dao.verCuentasAhorroAutomatico(pagina,busqueda);
+            feedData=cuenta_dao.verCuentasAhorroAutomatico(pagina,busqueda,customerIF);
             Gson gson = new Gson();
             feeds = gson.toJson(feedData);
             
@@ -51,13 +52,13 @@ public class CuentaAhorroAutomaticoWS {
         return feeds;
     }
       @GET
-    @Path("/getCantidadCuentasAhorroAutomatico/{entrada}")
+    @Path("/getCantidadCuentasAutoBusqueda/{entrada}/{customerIF}")
     @Produces("application/json")
-    public String getCantidadClientesJuridicosBusqueda(@PathParam("entrada") String entrada) {
+    public String getCantidadClientesJuridicosBusqueda(@PathParam("entrada") String entrada,@PathParam("customerIF") int customerIF) {
         String feeds = null;
         try {
             CuentaAhorroAutomaticoDAO cuenta_dao = new CuentaAhorroAutomaticoDAO();
-            int feedData = cuenta_dao.obtenerCantidadCuentasAhorroAutomatico(entrada);
+            int feedData = cuenta_dao.obtenerCantidadCuentasAhorroAutomatico(entrada,customerIF);
             Gson gson = new Gson();
             feeds = gson.toJson(feedData);
             
