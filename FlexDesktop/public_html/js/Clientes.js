@@ -29,7 +29,7 @@ $(document).ready(function() {
             success: function(data) {
                 var datastring = data;
                 var datastringaux = [];
-                datastringaux = emptyPages(['"customerIF"', '"cedula"', '"nombre"', '"direccion"', '"telCasa"'],
+                datastringaux = emptyPages(['"customerIF"', '"cedula"', '"nombre"', '"primerApellido"', '"segundoApellido"', '"direccion"', '"telCasa"', '"telOficina"', '"celular"'],
                         datastring, table_fisicos.page.info().page, paginasfisicos - 1 - table_fisicos.page.info().page);
                 table_fisicos.clear();
                 table_fisicos.rows.add(datastringaux).draw(false);
@@ -74,7 +74,17 @@ $(document).ready(function() {
         console.log('deleteCliente');
         $.ajax({
             type: 'DELETE',
-            url: rootURL + 'clientes/' + $("#delete-value").val()
+            url: rootURL + 'clientes/' + $("#delete-value").val(),
+            success: function() {
+                if (cliente_actual === 0) {
+                    getPaginasFisicos(stringBusqueda);
+                    getClientesFisicos(1, stringBusqueda);
+                }
+                if (cliente_actual === 1) {
+                    getPaginasJuridicos(stringBusqueda);
+                    getClientesJuridicos(1, stringBusqueda);
+                }
+            }
         });
     }
 
@@ -100,12 +110,44 @@ $(document).ready(function() {
             url: rootURL + "clientes/getClientesJuridicosPaginadosBusqueda/" + pagina + "/" + busqueda,
             dataType: "json",
             success: function(data) {
-             var datastring = data;
-             var datastringaux = [];
-             datastringaux = emptyPages(['"customerIF"', '"cedulaJuridica"', '"nombre"', '"direccion"', '"telCasa"'],
-             datastring, table_juridicos.page.info().page, paginasjuridicos - 1 - table_juridicos.page.info().page);
-             table_juridicos.clear();
-             table_juridicos.rows.add(datastringaux).draw(false);
+                var datastring = data;
+                var datastringaux = [];
+                datastringaux = emptyPages(['"customerIF"', '"cedulaJuridica"', '"nombre"', '"direccion"', '"telCasa"', '"telOficina"', '"celular"'],
+                        datastring, table_juridicos.page.info().page, paginasjuridicos - 1 - table_juridicos.page.info().page);
+                table_juridicos.clear();
+                table_juridicos.rows.add(datastringaux).draw(false);
+            }
+        });
+    }
+
+    // POST un cliente
+    function postClienteJuridico() {
+        console.log('postCliente');
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json',
+            url: rootURL + "clientes/crearClientesJuridicos",
+            dataType: "json",
+            data: clienteJuridicoToJSON(),
+            success: function() {
+                getPaginasJuridicos(stringBusqueda);
+                getClientesJuridicos(1, stringBusqueda);
+            }
+        });
+    }
+
+// UPDATE un cliente
+    function updateClienteJuridico() {
+        console.log('updateCliente');
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json',
+            url: rootURL + "clientes/updateJuridico",
+            dataType: "json",
+            data: clienteJuridicoToJSON(),
+            success: function() {
+                getPaginasJuridicos(stringBusqueda);
+                getClientesJuridicos(1, stringBusqueda);
             }
         });
     }
@@ -119,8 +161,12 @@ $(document).ready(function() {
             {"data": "customerIF"},
             {"data": "cedula"},
             {"data": "nombre"},
+            {"data": "primerApellido"},
+            {"data": "segundoApellido"},
             {"data": "direccion"},
             {"data": "telCasa"},
+            {"data": "telOficina"},
+            {"data": "celular"},
             {
                 "class": 'photo',
                 "data": null,
@@ -161,23 +207,25 @@ $(document).ready(function() {
             {"data": "nombre"},
             {"data": "direccion"},
             {"data": "telCasa"},
+            {"data": "telOficina"},
+            {"data": "celular"},
             {
                 "class": 'files',
                 "data": null,
                 "defaultContent": '',
-                "width": "5%"
+                "width": "15%"
             },
             {
                 "class": 'edit',
                 "data": null,
                 "defaultContent": '',
-                "width": "5%"
+                "width": "15%"
             },
             {
                 "class": 'delete',
                 "data": null,
                 "defaultContent": '',
-                "width": "5%"
+                "width": "15%"
             }
         ]
     });
@@ -253,24 +301,63 @@ $(document).ready(function() {
 
     $("#delete-value").hide();
     $(".cli-add").click(function() {
-        $("#edit-cliente #Heading").html("Agregar Cliente");
+        if (cliente_actual === 0) {
+            $("#edit-cliente #Heading").html("Agregar Cliente Fisico");
+            $("#edit-cliente #apellido1").prop('disabled', false);
+            $("#edit-cliente #apellido2").prop('disabled', false);
+        }
+        if (cliente_actual === 1) {
+            $("#edit-cliente #Heading").html("Agregar Cliente Juridico");
+            $("#edit-cliente #apellido1").prop('disabled', true);
+            $("#edit-cliente #apellido2").prop('disabled', true);
+        }
         $("#edit-cliente #cif").val("");
         $("#edit-cliente #cedula").val("");
         $("#edit-cliente #nombre").val("");
+        $("#edit-cliente #apellido1").val("");
+        $("#edit-cliente #apellido2").val("");
         $("#edit-cliente #direccion").val("");
-        $("#edit-cliente #telefono").val("");
+        $("#edit-cliente #telcasa").val("");
+        $("#edit-cliente #telofi").val("");
+        $("#edit-cliente #celular").val("");
         $("#edit-cliente .btn-cli-post").show();
         $("#edit-cliente .btn-cli-update").hide();
     });
     $('#cli-fisicos tbody').on('click', 'td.edit', function() {
         var tr = $(this).closest('tr');
         var row = table_fisicos.row(tr);
+        $("#edit-cliente #apellido1").prop('disabled', false);
+        $("#edit-cliente #apellido1").prop('disabled', false);
         $("#edit-cliente #Heading").html("Editar Cliente");
         $("#edit-cliente #cif").val(row.data().customerIF);
         $("#edit-cliente #cedula").val(row.data().cedula);
         $("#edit-cliente #nombre").val(row.data().nombre);
+        $("#edit-cliente #apellido1").val(row.data().primerApellido);
+        $("#edit-cliente #apellido2").val(row.data().segundoApellido);
         $("#edit-cliente #direccion").val(row.data().direccion);
-        $("#edit-cliente #telefono").val(row.data().telCasa);
+        $("#edit-cliente #telcasa").val(row.data().telCasa);
+        $("#edit-cliente #telofi").val(row.data().telOficina);
+        $("#edit-cliente #celular").val(row.data().celular);
+        $("#edit-cliente .btn-cli-post").hide();
+        $("#edit-cliente .btn-cli-update").show();
+        if ($("#edit-cliente #nombre").val() !== "")
+            $('#edit-cliente').modal();
+    });
+    $('#cli-juridicos tbody').on('click', 'td.edit', function() {
+        var tr = $(this).closest('tr');
+        var row = table_juridicos.row(tr);
+        $("#edit-cliente #apellido1").prop('disabled', true);
+        $("#edit-cliente #apellido1").prop('disabled', true);
+        $("#edit-cliente #Heading").html("Editar Cliente");
+        $("#edit-cliente #cif").val(row.data().customerIF);
+        $("#edit-cliente #cedula").val(row.data().cedulaJuridica);
+        $("#edit-cliente #nombre").val(row.data().nombre);
+        $("#edit-cliente #apellido1").val("");
+        $("#edit-cliente #apellido2").val("");
+        $("#edit-cliente #direccion").val(row.data().direccion);
+        $("#edit-cliente #telcasa").val(row.data().telCasa);
+        $("#edit-cliente #telofi").val(row.data().telOficina);
+        $("#edit-cliente #celular").val(row.data().celular);
         $("#edit-cliente .btn-cli-post").hide();
         $("#edit-cliente .btn-cli-update").show();
         if ($("#edit-cliente #nombre").val() !== "")
@@ -278,15 +365,32 @@ $(document).ready(function() {
     });
     $(".btn-cli-post").click(function() {
         $('#edit-cliente').modal('hide');
-        postClienteFisico();
+        if (cliente_actual === 0) {
+            postClienteFisico();
+        }
+        if (cliente_actual === 1) {
+            postClienteJuridico();
+        }
     });
     $(".btn-cli-update").click(function() {
         $('#edit-cliente').modal('hide');
-        updateClienteFisico();
+        if (cliente_actual === 0) {
+            updateClienteFisico();
+        }
+        if (cliente_actual === 1) {
+            updateClienteJuridico();
+        }
     });
     $('#cli-fisicos tbody').on('click', 'td.delete', function() {
         var tr = $(this).closest('tr');
-        var row = table_fisicos.row(tr);
+        var row = table_juridicos.row(tr);
+        $("#delete-value").val(row.data().customerIF);
+        if ($("#delete-value").val() !== "")
+            $('#delete-cliente').modal();
+    });
+    $('#cli-juridicos tbody').on('click', 'td.delete', function() {
+        var tr = $(this).closest('tr');
+        var row = table_juridicos.row(tr);
         $("#delete-value").val(row.data().customerIF);
         if ($("#delete-value").val() !== "")
             $('#delete-cliente').modal();
@@ -307,6 +411,12 @@ $(document).ready(function() {
         if (row.data().nombre !== "")
             $('#files-cliente').modal();
     });
+    $('#cli-juridicos tbody').on('click', 'td.files', function() {
+        var tr = $(this).closest('tr');
+        var row = table_juridicos.row(tr);
+        if (row.data().nombre !== "")
+            $('#files-cliente').modal();
+    });
 });
 
 function clienteFisicoToJSON() {
@@ -314,7 +424,23 @@ function clienteFisicoToJSON() {
         "customerIF": $("#edit-cliente #cif").val(),
         "cedula": $("#edit-cliente #cedula").val(),
         "nombre": $("#edit-cliente #nombre").val(),
+        "primerApellido": $("#edit-cliente #apellido1").val(),
+        "segundoApellido": $("#edit-cliente #apellido2").val(),
         "direccion": $("#edit-cliente #direccion").val(),
-        "telCasa": $("#edit-cliente #telefono").val()
+        "telCasa": $("#edit-cliente #telcasa").val(),
+        "telOficina": $("#edit-cliente #telofi").val(),
+        "celular": $("#edit-cliente #celular").val()
+    });
+}
+
+function clienteJuridicoToJSON() {
+    return JSON.stringify({
+        "customerIF": $("#edit-cliente #cif").val(),
+        "cedulaJuridica": $("#edit-cliente #cedula").val(),
+        "nombre": $("#edit-cliente #nombre").val(),
+        "direccion": $("#edit-cliente #direccion").val(),
+        "telCasa": $("#edit-cliente #telcasa").val(),
+        "telOficina": $("#edit-cliente #telofi").val(),
+        "celular": $("#edit-cliente #celular").val()
     });
 }
