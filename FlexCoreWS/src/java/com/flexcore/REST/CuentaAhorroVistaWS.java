@@ -29,11 +29,11 @@ import javax.ws.rs.core.UriInfo;
  *
  * @author Carlos
  */
-@Path("cuentaAhorroVista")
+@Path("cuentas")
 public class CuentaAhorroVistaWS {
     
     @GET
-    @Path("/getCuentasAhorroPaginadosBusqueda/{pagina}/{busqueda}/{customerIF}")
+        @Path("/getCuentasVistaPaginadosBusqueda/{pagina}/{busqueda}/{customerIF}")
     @Produces("application/json")
     public String getCuentasAhorroVista(@PathParam("pagina") int pagina, @PathParam("busqueda") String busqueda,
             @PathParam("customerIF") int customerIF) {
@@ -51,7 +51,7 @@ public class CuentaAhorroVistaWS {
         return feeds;
     }
        @GET
-    @Path("/getCantidadCuentasAhorroBusqueda/{entrada}/{customerIF}")
+    @Path("/getCantidadCuentasVistaBusqueda/{entrada}/{customerIF}")
     @Produces("application/json")
     public String getCantidadClientesJuridicosBusqueda(@PathParam("entrada") String entrada,@PathParam("customerIF") int customerIF) {
         String feeds = null;
