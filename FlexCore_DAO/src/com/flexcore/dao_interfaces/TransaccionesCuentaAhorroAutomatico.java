@@ -18,4 +18,5 @@ public interface TransaccionesCuentaAhorroAutomatico {
     CuentaAhorroAutomaticoDTO crearCuentaAhorroAutomatico(CuentaAhorroAutomaticoDTO cuenta) throws Exception;
     CuentaAhorroAutomaticoDTO actualizarCuentaAhorroAutomatico(CuentaAhorroAutomaticoDTO cuenta) throws Exception;
     void eliminarCuentaAhorroAutomatico(int numCuenta) throws Exception;
+    int obtenerCantidadCuentasAhorroAutomatico(String entrada) throws Exception;;
 }

@@ -127,4 +127,29 @@ public class CuentaAhorroAutomaticoDAO extends ConnectionManager implements Tran
             this.cerrarConexion();
         }
     }
+
+    @Override
+    public int obtenerCantidadCuentasAhorroAutomatico(String entrada) {
+         CallableStatement preparedCall = null;
+        int cantidadCuentasAhorro = 0;
+        try {
+            String SQL = "{call obtenerCantidadCuentasAhorroAutomatico (?)}";
+            preparedCall = conexion.prepareCall(SQL);
+            preparedCall.setString(1, entrada);
+            preparedCall.executeQuery();
+            ResultSet rs = preparedCall.getResultSet();
+             while(rs.next()){
+                 cantidadCuentasAhorro = rs.getInt(1);
+             }
+             statement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            this.cerrarConexion();
+        }
+        return cantidadCuentasAhorro;
+    }
+
+   
 }
