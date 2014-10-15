@@ -14,7 +14,7 @@ function getClientes() {
         
         type: 'GET',
         //url: rootURL + "/cuentaAhorroAutomatico/getCuentasAhorroAutomatico/1/1"
-        url: rootURL + "/cuentaAhorroVista/getCantidadCuentasAhorroBusqueda/ALL/1234",
+        url: rootURL + "/cuentas/getCantidadCuentasVistaBusqueda/ALL/1234",
         dataType: "json",
         success: function(data) {
             $('#h1').append("Consulta Realizada");
