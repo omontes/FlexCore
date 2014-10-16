@@ -158,7 +158,7 @@ $(document).ready(function() {
         console.log('deleteCuenta');
         $.ajax({
             type: 'DELETE',
-            url: rootURL + 'cuentas/' + $("#delete-value").val(),
+            url: rootURL + 'cuenta/' + $("#delete-value").val(),
             success: function() {
                 if (cuenta_actual === 0) {
                     getPaginasAuto(stringBusqueda, stringCIF);
