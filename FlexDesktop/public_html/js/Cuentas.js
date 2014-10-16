@@ -5,9 +5,76 @@ $(document).ready(function() {
     var cuenta_actual = 0;
     var stringBusqueda = "ALL";
     var stringCIF;
+    getTiempos();
+    getPropositos();
+    getMonedas();
 
 
-// GET paginas de los cuentas auto
+// getPropositos
+    function getPropositos() {
+        $.ajax({
+            type: 'GET',
+            url: rootURL + "propositos/getPropositos",
+            dataType: "json",
+            success: function(data) {
+                var out = "";
+                for (var i = 0; i < data.length; i++) {
+                    out += '<option value=' + data[i].idProposito + '>'+data[i].Descripcion+'</option>';
+                }
+                $("#propositos").html(out);
+            }
+        });
+    }
+
+// getTiempos
+    function getTiempos() {
+        $.ajax({
+            type: 'GET',
+            url: rootURL + "tiempos/getTiempos",
+            dataType: "json",
+            success: function(data) {
+                var out = "";
+                for (var i = 0; i < data.length; i++) {
+                    out += '<option value=' + data[i].idTiempo + '>'+data[i].Descripcion+'</option>';
+                }
+                $("#tipotiempo").html(out);
+            }
+        });
+    }
+
+    // getPropositos
+    function getMonedas() {
+        $.ajax({
+            type: 'GET',
+            url: rootURL + "monedas/getMonedas",
+            dataType: "json",
+            success: function(data) {
+                var out = "";
+                for (var i = 0; i < data.length; i++) {
+                    out += '<option value=' + data[i].idMoneda + '>'+data[i].Descripcion+'</option>';
+                }
+                $("#tipomoneda").html(out);
+            }
+        });
+    }
+
+    // getCuentas
+    function getCuentas(CIF) {
+        $.ajax({
+            type: 'GET',
+            url: rootURL + "cuenta/getCuentas/"+CIF,
+            dataType: "json",
+            success: function(data) {
+                var out = "";
+                for (var i = 0; i < data.length; i++) {
+                    out += '<option value=' + data[i].numCuenta + '>'+'#Cuenta: '+data[i].numCuenta+'</option>';
+                }
+                $("#tipomoneda").html(out);
+            }
+        });
+    }
+
+// login
     function login(CIF) {
         $.ajax({
             type: 'GET',
@@ -46,14 +113,14 @@ $(document).ready(function() {
             success: function(data) {
                 var datastring = data;
                 var datastringaux = [];
-                datastringaux = emptyPages(['"numCuenta"', '"fechaInicio"', '"idProposito"','"saldoReal"', '"saldoTemporal"', '"montoAhorro"', '"numCuentaDeduccion"', '"tiempoAhorroMeses"', '"tiempoDeducciones"', '"tipoTiempo"'],
+                datastringaux = emptyPages(['"numCuenta"', '"fechaInicio"', '"idProposito"', '"saldoReal"', '"saldoTemporal"', '"montoAhorro"', '"numCuentaDeduccion"', '"tiempoAhorroMeses"', '"tiempoDeducciones"', '"tipoTiempo"'],
                         datastring, table_auto.page.info().page, paginasauto - 1 - table_auto.page.info().page);
                 table_auto.clear();
                 table_auto.rows.add(datastringaux).draw(false);
             }
         });
     }
-    
+
 // POST un cuenta
     function postCuentaAuto() {
         console.log('postCuenta');
@@ -129,7 +196,7 @@ $(document).ready(function() {
             success: function(data) {
                 var datastring = data;
                 var datastringaux = [];
-                datastringaux = emptyPages(['"numCuenta"', '"descripcion"','"saldoReal"', '"saldoTemporal"', '"tipoMoneda"'],
+                datastringaux = emptyPages(['"numCuenta"', '"descripcion"', '"saldoReal"', '"saldoTemporal"', '"tipoMoneda"'],
                         datastring, table_vista.page.info().page, paginasvista - 1 - table_vista.page.info().page);
                 table_vista.clear();
                 table_vista.rows.add(datastringaux).draw(false);
@@ -228,7 +295,7 @@ $(document).ready(function() {
 
     $("#container-cuentas").hide();
     $('#login-cliente').on('click', function() {
-        stringCIF=$('#cif').val();
+        stringCIF = $('#cif').val();
         login(stringCIF);
     });
 
@@ -341,6 +408,7 @@ $(document).ready(function() {
         $("#edit-cuenta .btn-cue-post").hide();
         $("#edit-cuenta .btn-cue-update").show();
         if ($("#edit-cuenta #cuenta").val() !== "")
+            getCuentas(stringCIF);
             $('#edit-cuenta').modal();
     });
     $('#cue-vista tbody').on('click', 'td.edit', function() {
