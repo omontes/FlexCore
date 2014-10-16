@@ -127,7 +127,7 @@ $(document).ready(function() {
         $.ajax({
             type: 'POST',
             contentType: 'application/json',
-            url: rootURL + "cuentaAhorroAutomatico/crearCuentasAuto",
+            url: rootURL + "cuentaAhorroAutomatico/crearCuentaAhorroAutomatico",
             dataType: "json",
             data: cuentaAutoToJSON(),
             success: function() {
