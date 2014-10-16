@@ -27,6 +27,7 @@ public class CuentaAhorroAutomaticoDTO {
     private int idProposito;
     private BigDecimal saldoTemporal;
     private BigDecimal saldoReal;
+    private int idCliente;
 
     /**
      * @return the numCuenta
@@ -211,5 +212,19 @@ public class CuentaAhorroAutomaticoDTO {
      */
     public void setIdProposito(int idProposito) {
         this.idProposito = idProposito;
+    }
+
+    /**
+     * @return the idCliente
+     */
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    /**
+     * @param idCliente the idCliente to set
+     */
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 }

@@ -61,22 +61,21 @@ public class CuentaAhorroAutomaticoDAO extends ConnectionManager implements Tran
             this.cerrarConexion();
         }
     }
-
     @Override
     public CuentaAhorroAutomaticoDTO crearCuentaAhorroAutomatico(CuentaAhorroAutomaticoDTO cuenta) throws Exception {
         CallableStatement preparedCall = null;
         try {
              String SQL = "{call crearCuentaAhorroAutomatico (?, ?, ?, ?, ?, ?, ?, ?, ?)}";
              preparedCall = conexion.prepareCall(SQL);
-             preparedCall.setInt(1, cuenta.getNumCuenta());
-             preparedCall.setInt(2, cuenta.getTiempoDeducciones());
-             preparedCall.setInt(3, cuenta.getTipoTiempo());
-             preparedCall.setDate(4, cuenta.getFechaInicio());
-             preparedCall.setInt(5, cuenta.getTiempoAhorroMeses());
-             preparedCall.setInt(6, cuenta.getNumCuentaDeduccion());
-             preparedCall.setDouble(7, cuenta.getMontoAhorro());
-             preparedCall.setBoolean(8, cuenta.isEstadoAhorro());
-             preparedCall.setInt(9, cuenta.getIdProposito());
+             preparedCall.setInt(1, cuenta.getTiempoDeducciones());
+             preparedCall.setInt(2, cuenta.getTipoTiempo());
+             preparedCall.setInt(3, cuenta.getTiempoAhorroMeses());
+             preparedCall.setInt(4, cuenta.getNumCuentaDeduccion());
+             preparedCall.setDouble(5, cuenta.getMontoAhorro());
+             preparedCall.setInt(6, cuenta.getIdProposito());
+             preparedCall.setBigDecimal(7, cuenta.getSaldoReal());
+             preparedCall.setBigDecimal(8, cuenta.getSaldoTemporal());
+             preparedCall.setInt(9, cuenta.getIdCliente());
              preparedCall.executeUpdate();
              preparedCall.close();
         } catch (Exception e) {
