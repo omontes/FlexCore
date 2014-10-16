@@ -33,14 +33,14 @@ import javax.ws.rs.core.UriInfo;
 public class CuentaWS {
 
     @GET
-    @Path("/getCuentas")
+    @Path("/getCuentas/{customerIF}")
     @Produces("application/json")
-    public String getCuentas() {
+    public String getCuentas(@PathParam("customerIF") int customerIF) {
         String feeds = null;
         try {
             CuentaDAO cuenta_dao = new CuentaDAO();
             ArrayList<CuentaDTO> feedData = null;
-            feedData=cuenta_dao.verCuentas();
+            feedData=cuenta_dao.verCuentas(customerIF);
             Gson gson = new Gson();
             feeds = gson.toJson(feedData);
             

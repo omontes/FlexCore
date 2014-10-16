@@ -20,11 +20,14 @@ import java.util.ArrayList;
 public class CuentaDAO extends ConnectionManager implements TransaccionesCuenta  {
 
     @Override
-    public ArrayList<CuentaDTO> verCuentas() throws Exception {
+    public ArrayList<CuentaDTO> verCuentas(int customerIF) throws Exception {
         ArrayList<CuentaDTO> listaCuentas = new ArrayList<>();
+        CallableStatement preparedCall = null;
          try{
-            String SQL = "{call obtenerCuentas ()}";
-            ResultSet rs = statement.executeQuery(SQL);
+            String SQL = "{call obtenerCuentas (?)}";
+            preparedCall = conexion.prepareCall(SQL);
+            preparedCall.setInt(1, customerIF);
+            ResultSet rs =  preparedCall.executeQuery();
             while (rs.next()) {
                 CuentaDTO cuenta = new CuentaDTO();
                 cuenta.setNumCuenta(rs.getInt("numCuenta"));
