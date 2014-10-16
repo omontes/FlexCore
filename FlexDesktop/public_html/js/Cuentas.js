@@ -19,7 +19,7 @@ $(document).ready(function() {
             success: function(data) {
                 var out = "";
                 for (var i = 0; i < data.length; i++) {
-                    out += '<option value=' + data[i].idcuentaPropositos + '>'+data[i].descripcion+'</option>';
+                    out += '<option value=' + data[i].idcuentaPropositos + '>' + data[i].descripcion + '</option>';
                 }
                 $("#propositos").html(out);
             }
@@ -35,7 +35,7 @@ $(document).ready(function() {
             success: function(data) {
                 var out = "";
                 for (var i = 0; i < data.length; i++) {
-                    out += '<option value=' + data[i].idTiempo + '>'+data[i].Descripcion+'</option>';
+                    out += '<option value=' + data[i].idTiempo + '>' + data[i].Descripcion + '</option>';
                 }
                 $("#tipotiempo").html(out);
             }
@@ -51,7 +51,7 @@ $(document).ready(function() {
             success: function(data) {
                 var out = "";
                 for (var i = 0; i < data.length; i++) {
-                    out += '<option value=' + data[i].idMoneda + '>'+data[i].Descripcion+'</option>';
+                    out += '<option value=' + data[i].idMoneda + '>' + data[i].Descripcion + '</option>';
                 }
                 $("#tipomoneda").html(out);
             }
@@ -62,12 +62,12 @@ $(document).ready(function() {
     function getCuentas(CIF) {
         $.ajax({
             type: 'GET',
-            url: rootURL + "cuenta/getCuentas/"+CIF,
+            url: rootURL + "cuenta/getCuentas/" + CIF,
             dataType: "json",
             success: function(data) {
                 var out = "";
                 for (var i = 0; i < data.length; i++) {
-                    out += '<option value=' + data[i].numCuenta + '>'+'#Cuenta: '+data[i].numCuenta+'</option>';
+                    out += '<option value=' + data[i].numCuenta + '>' + '#Cuenta: ' + data[i].numCuenta + '</option>';
                 }
                 $("#tipomoneda").html(out);
             }
@@ -372,23 +372,22 @@ $(document).ready(function() {
     $(".cue-add").click(function() {
         if (cuenta_actual === 0) {
             $("#edit-cuenta #Heading").html("Agregar Cuenta Auto");
-            $("#edit-cuenta #apellido1").prop('disabled', false);
-            $("#edit-cuenta #apellido2").prop('disabled', false);
+            $("label").hide();
+            $(".auto").show();
         }
         if (cuenta_actual === 1) {
             $("#edit-cuenta #Heading").html("Agregar Cuenta Vista");
-            $("#edit-cuenta #apellido1").prop('disabled', true);
-            $("#edit-cuenta #apellido2").prop('disabled', true);
+            $("label").hide();
+            $(".vista").show();
         }
-        $("#edit-cuenta #cif").val("");
-        $("#edit-cuenta #cedula").val("");
-        $("#edit-cuenta #nombre").val("");
-        $("#edit-cuenta #apellido1").val("");
-        $("#edit-cuenta #apellido2").val("");
-        $("#edit-cuenta #direccion").val("");
-        $("#edit-cuenta #telcasa").val("");
-        $("#edit-cuenta #telofi").val("");
-        $("#edit-cuenta #celular").val("");
+        $("#edit-cuenta #cuenta").val('');
+        $("#edit-cuenta #fecha").val('');
+        $("#edit-cuenta #real").val('');
+        $("#edit-cuenta #temporal").val('');
+        $("#edit-cuenta #monto").val('');
+        $("#edit-cuenta #meses").val('');
+        $("#edit-cuenta #tiempo").val('');
+        $("#edit-cuenta #descripcion").val('');
         $("#edit-cuenta .btn-cue-post").show();
         $("#edit-cuenta .btn-cue-update").hide();
     });
@@ -407,15 +406,17 @@ $(document).ready(function() {
         $(".auto").show();
         $("#edit-cuenta .btn-cue-post").hide();
         $("#edit-cuenta .btn-cue-update").show();
-        if ($("#edit-cuenta #cuenta").val() !== "")
+        if ($("#edit-cuenta #cuenta").val() !== "") {
             getCuentas(stringCIF);
             $('#edit-cuenta').modal();
+        }
     });
     $('#cue-vista tbody').on('click', 'td.edit', function() {
         var tr = $(this).closest('tr');
         var row = table_vista.row(tr);
-        $("#edit-cuentacuenta #Heading").html("Editar Cuenta");
+        $("#edit-cuenta #Heading").html("Editar Cuenta");
         $("#edit-cuenta #cuenta").val(row.data().numCuenta);
+        $("#edit-cuenta #descripcion").val(row.data().descripcion);
         $("#edit-cuenta #real").val(row.data().saldoReal);
         $("#edit-cuenta #temporal").val(row.data().saldoTemporal);
         $("label").hide();
@@ -446,14 +447,14 @@ $(document).ready(function() {
     $('#cue-auto tbody').on('click', 'td.delete', function() {
         var tr = $(this).closest('tr');
         var row = table_auto.row(tr);
-        $("#delete-value").val(row.data().customerIF);
+        $("#delete-value").val(row.data().numCuenta);
         if ($("#delete-value").val() !== "")
             $('#delete-cuenta').modal();
     });
     $('#cue-vista tbody').on('click', 'td.delete', function() {
         var tr = $(this).closest('tr');
         var row = table_vista.row(tr);
-        $("#delete-value").val(row.data().customerIF);
+        $("#delete-value").val(row.data().numCuenta);
         if ($("#delete-value").val() !== "")
             $('#delete-cuenta').modal();
     });
@@ -461,48 +462,30 @@ $(document).ready(function() {
         $('#delete-cuenta').modal('hide');
         deleteCuenta();
     });
-    $('#cue-auto tbody').on('click', 'td.photo', function() {
-        var tr = $(this).closest('tr');
-        var row = table_auto.row(tr);
-        if (row.data().nombre !== "")
-            $('#photo-cuenta').modal();
-    });
-    $('#cue-auto tbody').on('click', 'td.files', function() {
-        var tr = $(this).closest('tr');
-        var row = table_auto.row(tr);
-        if (row.data().nombre !== "")
-            $('#files-cuenta').modal();
-    });
-    $('#cue-vista tbody').on('click', 'td.files', function() {
-        var tr = $(this).closest('tr');
-        var row = table_vista.row(tr);
-        if (row.data().nombre !== "")
-            $('#files-cuenta').modal();
-    });
+
 });
 
 function cuentaAutoToJSON() {
     return JSON.stringify({
-        "customerIF": $("#edit-cuenta #cif").val(),
-        "cedula": $("#edit-cuenta #cedula").val(),
-        "nombre": $("#edit-cuenta #nombre").val(),
-        "primerApellido": $("#edit-cuenta #apellido1").val(),
-        "segundoApellido": $("#edit-cuenta #apellido2").val(),
-        "direccion": $("#edit-cuenta #direccion").val(),
-        "telCasa": $("#edit-cuenta #telcasa").val(),
-        "telOficina": $("#edit-cuenta #telofi").val(),
-        "celular": $("#edit-cuenta #celular").val()
+        "numCuenta": $("#edit-cuenta #cuenta").val(),
+        "fechaInicio": $("#edit-cuenta #fecha").val(),
+        "idProposito": $('#propositos').find('option:selected').attr('value'),
+        "saldoReal": $("#edit-cuenta #real").val(),
+        "saldoTemporal": $("#edit-cuenta #temporal").val(),
+        "montoAhorro": $("#edit-cuenta #monto").val(),
+        "numCuentaDeduccion": $('#cuentadeduccion').find('option:selected').attr('value'),
+        "tiempoAhorroMeses": $("#edit-cuenta #meses").val(),
+        "tiempoDeducciones": $("#edit-cuenta #tiempo").val(),
+        "tipoTiempo": $('#tipotiempo').find('option:selected').attr('value')
     });
 }
 
 function cuentaVistaToJSON() {
     return JSON.stringify({
-        "customerIF": $("#edit-cuenta #cif").val(),
-        "cedulaJuridica": $("#edit-cuenta #cedula").val(),
-        "nombre": $("#edit-cuenta #nombre").val(),
-        "direccion": $("#edit-cuenta #direccion").val(),
-        "telCasa": $("#edit-cuenta #telcasa").val(),
-        "telOficina": $("#edit-cuenta #telofi").val(),
-        "celular": $("#edit-cuenta #celular").val()
+        "numCuenta": $("#edit-cuenta #cuenta").val(),
+        "descripcion": $("#edit-cuenta #descripcion").val(),
+        "saldoReal": $("#edit-cuenta #real").val(),
+        "saldoTemporal": $("#edit-cuenta #temporal").val(),
+        "tipoMoneda": $('#tipomoneda').find('option:selected').attr('value')
     });
 }
