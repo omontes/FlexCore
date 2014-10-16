@@ -476,8 +476,8 @@ function cuentaAutoToJSON() {
         "numCuentaDeduccion": $('#cuentadeduccion').find('option:selected').attr('value'),
         "tiempoAhorroMeses": $("#edit-cuenta #meses").val(),
         "tiempoDeducciones": $("#edit-cuenta #tiempo").val(),
-        "tipoTiempo": $('#tipotiempo').find('option:selected').attr('value'),
-        "idCliente": $('#idCliente').find('option:selected').attr('value')
+        "tipoTiempo": $('#tipotiempo').find('option:selected').attr('value')
+        
     });
 }
 
