@@ -19,7 +19,7 @@ $(document).ready(function() {
             success: function(data) {
                 var out = "";
                 for (var i = 0; i < data.length; i++) {
-                    out += '<option value=' + data[i].idProposito + '>'+data[i].Descripcion+'</option>';
+                    out += '<option value=' + data[i].idcuentaPropositos + '>'+data[i].descripcion+'</option>';
                 }
                 $("#propositos").html(out);
             }
