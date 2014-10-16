@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package com.flexcore.REST;
 
-import com.flexcore.dao.PropositosDAO;
-import com.flexcore.dto.PropositosDTO;
+import com.flexcore.dao.MonedasDAO;
+import com.flexcore.dto.MonedasDTO;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import javax.ws.rs.core.Context;
@@ -23,23 +24,23 @@ import javax.ws.rs.Produces;
  *
  * @author Oscar Montes
  */
-@Path("propositos")
-public class PropositosWS {
+@Path("monedas")
+public class MonedasWS {
 
     @GET
-    @Path("/getPropositos")
+    @Path("/getMonedas")
     @Produces("application/json")
-    public String getPropositos() {
+    public String getMonedas() {
         String feeds = null;
         try {
-            PropositosDAO proposito_dao = new PropositosDAO();
-            ArrayList<PropositosDTO> feedData = null;
-            feedData = proposito_dao.verPropositos();
+            MonedasDAO moneda_dao = new MonedasDAO();
+            ArrayList<MonedasDTO> feedData = null;
+            feedData = moneda_dao.verMonedas();
             Gson gson = new Gson();
             feeds = gson.toJson(feedData);
 
         } catch (Exception e) {
-            System.out.println("No se pudo obtnener los propositos"); //Console 
+            System.out.println("No se pudo obtnener las monedas"); //Console 
         }
         return feeds;
     }
