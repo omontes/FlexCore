@@ -113,7 +113,7 @@ $(document).ready(function() {
             success: function(data) {
                 var datastring = data;
                 var datastringaux = [];
-                datastringaux = emptyPages(['"numCuenta"', '"fechaInicio"', '"idProposito"', '"saldoReal"', '"saldoTemporal"', '"montoAhorro"', '"numCuentaDeduccion"', '"tiempoAhorroMeses"', '"tiempoDeducciones"', '"tipoTiempo"'],
+                datastringaux = emptyPages(['"numCuenta"', '"fechaInicio"', '"idPropositoDescripcion"', '"saldoReal"', '"saldoTemporal"', '"montoAhorro"', '"numCuentaDeduccion"', '"tiempoAhorroMeses"', '"tiempoDeducciones"', '"tipoTiempoDescripcion"'],
                         datastring, table_auto.page.info().page, paginasauto - 1 - table_auto.page.info().page);
                 table_auto.clear();
                 table_auto.rows.add(datastringaux).draw(false);
@@ -243,14 +243,14 @@ $(document).ready(function() {
         "columns": [
             {"data": "numCuenta"},
             {"data": "fechaInicio"},
-            {"data": "idProposito"},
+            {"data": "idPropositoDescripcion"},
             {"data": "saldoReal"},
             {"data": "saldoTemporal"},
             {"data": "montoAhorro"},
             {"data": "numCuentaDeduccion"},
             {"data": "tiempoAhorroMeses"},
             {"data": "tiempoDeducciones"},
-            {"data": "tipoTiempo"},
+            {"data": "tipoTiempoDescripcion"},
             {
                 "class": 'edit',
                 "data": null,

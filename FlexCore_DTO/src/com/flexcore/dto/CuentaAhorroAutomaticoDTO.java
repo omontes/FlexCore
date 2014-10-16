@@ -16,13 +16,15 @@ import java.sql.Date;
 public class CuentaAhorroAutomaticoDTO {
     private int numCuenta;
     private int tiempoDeducciones;
-    private String tipoTiempo;
+    private String tipoTiempoDescripcion;
+    private int tipoTiempo;
     private Date fechaInicio;
     private int tiempoAhorroMeses;
     private int numCuentaDeduccion;
     private double montoAhorro;
     private boolean estadoAhorro;
-    private String idProposito;
+    private String idPropositoDescripcion;
+    private int idProposito;
     private BigDecimal saldoTemporal;
     private BigDecimal saldoReal;
 
@@ -54,19 +56,7 @@ public class CuentaAhorroAutomaticoDTO {
         this.tiempoDeducciones = tiempoDeducciones;
     }
 
-    /**
-     * @return the tipoTiempo
-     */
-    public String getTipoTiempo() {
-        return tipoTiempo;
-    }
-
-    /**
-     * @param tipoTiempo the tipoTiempo to set
-     */
-    public void setTipoTiempo(String tipoTiempo) {
-        this.tipoTiempo = tipoTiempo;
-    }
+   
 
     /**
      * @return the tiempoAhorroMeses
@@ -137,19 +127,7 @@ public class CuentaAhorroAutomaticoDTO {
         this.fechaInicio = fechaInicio;
     }
 
-    /**
-     * @return the idProposito
-     */
-    public String getIdProposito() {
-        return idProposito;
-    }
-
-    /**
-     * @param idProposito the idProposito to set
-     */
-    public void setIdProposito(String idProposito) {
-        this.idProposito = idProposito;
-    }
+   
 
     /**
      * @return the saldoTemporal
@@ -177,5 +155,61 @@ public class CuentaAhorroAutomaticoDTO {
      */
     public void setSaldoReal(BigDecimal saldoReal) {
         this.saldoReal = saldoReal;
+    }
+
+    /**
+     * @return the tipoTiempoDescripcion
+     */
+    public String getTipoTiempoDescripcion() {
+        return tipoTiempoDescripcion;
+    }
+
+    /**
+     * @param tipoTiempoDescripcion the tipoTiempoDescripcion to set
+     */
+    public void setTipoTiempoDescripcion(String tipoTiempoDescripcion) {
+        this.tipoTiempoDescripcion = tipoTiempoDescripcion;
+    }
+
+    /**
+     * @return the tipoTiempo
+     */
+    public int getTipoTiempo() {
+        return tipoTiempo;
+    }
+
+    /**
+     * @param tipoTiempo the tipoTiempo to set
+     */
+    public void setTipoTiempo(int tipoTiempo) {
+        this.tipoTiempo = tipoTiempo;
+    }
+
+    /**
+     * @return the idPropositoDescripcion
+     */
+    public String getIdPropositoDescripcion() {
+        return idPropositoDescripcion;
+    }
+
+    /**
+     * @param idPropositoDescripcion the idPropositoDescripcion to set
+     */
+    public void setIdPropositoDescripcion(String idPropositoDescripcion) {
+        this.idPropositoDescripcion = idPropositoDescripcion;
+    }
+
+    /**
+     * @return the idProposito
+     */
+    public int getIdProposito() {
+        return idProposito;
+    }
+
+    /**
+     * @param idProposito the idProposito to set
+     */
+    public void setIdProposito(int idProposito) {
+        this.idProposito = idProposito;
     }
 }

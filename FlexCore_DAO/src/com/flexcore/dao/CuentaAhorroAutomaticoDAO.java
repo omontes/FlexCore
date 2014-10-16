@@ -9,6 +9,7 @@ package com.flexcore.dao;
 import com.flexcore.connection_manager.ConnectionManager;
 import com.flexcore.dao_interfaces.TransaccionesCuentaAhorroAutomatico;
 import com.flexcore.dto.CuentaAhorroAutomaticoDTO;
+import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -37,13 +38,13 @@ public class CuentaAhorroAutomaticoDAO extends ConnectionManager implements Tran
                 CuentaAhorroAutomaticoDTO cuenta = new CuentaAhorroAutomaticoDTO();
                 cuenta.setNumCuenta(rs.getInt("numCuenta"));
                 cuenta.setTiempoDeducciones(rs.getInt("tiempoDeducciones"));
-                cuenta.setTipoTiempo(rs.getString("tipoTiempo"));
+                cuenta.setTipoTiempoDescripcion(rs.getString("tipoTiempo"));
                 cuenta.setFechaInicio(rs.getDate("fechaInicio"));
                 cuenta.setTiempoAhorroMeses(rs.getInt("tiempoAhorroMeses"));
                 cuenta.setNumCuentaDeduccion(rs.getInt("numCuentaDeduccion"));
                 cuenta.setMontoAhorro(rs.getDouble("montoAhorro"));
                 cuenta.setEstadoAhorro(rs.getBoolean("estadoAhorro"));
-                cuenta.setIdProposito(rs.getString("idProposito"));
+                cuenta.setIdPropositoDescripcion(rs.getString("idProposito"));
                 cuenta.setSaldoReal(rs.getBigDecimal("saldoReal"));
                 cuenta.setSaldoTemporal(rs.getBigDecimal("saldoTemporal"));
                 listaClientes.add(cuenta);
@@ -69,13 +70,13 @@ public class CuentaAhorroAutomaticoDAO extends ConnectionManager implements Tran
              preparedCall = conexion.prepareCall(SQL);
              preparedCall.setInt(1, cuenta.getNumCuenta());
              preparedCall.setInt(2, cuenta.getTiempoDeducciones());
-             preparedCall.setString(3, cuenta.getTipoTiempo());
+             preparedCall.setInt(3, cuenta.getTipoTiempo());
              preparedCall.setDate(4, cuenta.getFechaInicio());
              preparedCall.setInt(5, cuenta.getTiempoAhorroMeses());
              preparedCall.setInt(6, cuenta.getNumCuentaDeduccion());
              preparedCall.setDouble(7, cuenta.getMontoAhorro());
              preparedCall.setBoolean(8, cuenta.isEstadoAhorro());
-             preparedCall.setString(9, cuenta.getIdProposito());
+             preparedCall.setInt(9, cuenta.getIdProposito());
              preparedCall.executeUpdate();
              preparedCall.close();
         } catch (Exception e) {
@@ -91,17 +92,18 @@ public class CuentaAhorroAutomaticoDAO extends ConnectionManager implements Tran
     public CuentaAhorroAutomaticoDTO actualizarCuentaAhorroAutomatico(CuentaAhorroAutomaticoDTO cuenta) throws Exception {
         CallableStatement preparedCall = null;
         try {
-            String SQL = "{call actualizarCuentaAhorroAutomatico (?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+            String SQL = "{call actualizarCuentaAhorroAutomatico (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
             preparedCall = conexion.prepareCall(SQL);
             preparedCall.setInt(1, cuenta.getNumCuenta());
             preparedCall.setInt(2, cuenta.getTiempoDeducciones());
-            preparedCall.setString(3, cuenta.getTipoTiempo());
+            preparedCall.setInt(3, cuenta.getTipoTiempo());
             preparedCall.setDate(4, cuenta.getFechaInicio());
             preparedCall.setInt(5, cuenta.getTiempoAhorroMeses());
             preparedCall.setInt(6, cuenta.getNumCuentaDeduccion());
             preparedCall.setDouble(7, cuenta.getMontoAhorro());
-            preparedCall.setBoolean(8, cuenta.isEstadoAhorro());
-            preparedCall.setString(9, cuenta.getIdProposito());
+            preparedCall.setInt(8, cuenta.getIdProposito());
+            preparedCall.setBigDecimal(9,cuenta.getSaldoReal());
+            preparedCall.setBigDecimal(10,cuenta.getSaldoTemporal());
             preparedCall.executeUpdate();
             preparedCall.close();
         }

@@ -80,7 +80,7 @@ public class CuentaAhorroAutomaticoWS {
     }
     
     @POST
-    @Path("/updateCuentaAhorroAutomatico")
+    @Path("/updateAuto")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public CuentaAhorroAutomaticoDTO update(CuentaAhorroAutomaticoDTO cuenta) throws SQLException, NamingException, Exception {
