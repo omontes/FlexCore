@@ -23,13 +23,11 @@ public class PagosDAO extends ConnectionManager implements TransaccionesPagos {
     public PagosDTO crearPago(PagosDTO pago) throws Exception {
         CallableStatement preparedCall = null;
         try {
-             String SQL = "{call crearPago (?, ?, ?, ?, ?)}";
+             String SQL = "{call crearPago (?, ?, ?)}";
              preparedCall = conexion.prepareCall(SQL);
              preparedCall.setInt(1, pago.getIdCuentaOrigen());
              preparedCall.setInt(2, pago.getIdCuentaDestino());
-             preparedCall.setInt(3, pago.getIdPago());
-             preparedCall.setDouble(4, pago.getMonto());
-             preparedCall.setDate(5, pago.getFecha());
+             preparedCall.setDouble(3, pago.getMonto());
              preparedCall.executeUpdate();
              preparedCall.close();
         } catch (Exception e) {
