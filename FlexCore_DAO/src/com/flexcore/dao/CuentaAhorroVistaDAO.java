@@ -9,6 +9,7 @@ package com.flexcore.dao;
 import com.flexcore.connection_manager.ConnectionManager;
 import com.flexcore.dao_interfaces.TransaccionesCuentaAhorroVista;
 import com.flexcore.dto.CuentaAhorroVistaDTO;
+import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public class CuentaAhorroVistaDAO extends ConnectionManager implements Transacci
                 CuentaAhorroVistaDTO cuenta = new CuentaAhorroVistaDTO();
                 cuenta.setNumCuenta(rs.getInt("numCuenta"));
                 cuenta.setDescripcion(rs.getString("descripcion"));
-                cuenta.setTipoMoneda(rs.getString("tipoMoneda"));
+                cuenta.setTipoMonedaDescripcion(rs.getString("tipoMoneda"));
                 cuenta.setSaldoReal(rs.getBigDecimal("saldoReal"));
                 cuenta.setSaldoTemporal(rs.getBigDecimal("saldoTemporal"));
                 listaClientes.add(cuenta);
@@ -78,10 +79,13 @@ public class CuentaAhorroVistaDAO extends ConnectionManager implements Transacci
     public CuentaAhorroVistaDTO actualizarCuentaAhorroVista(CuentaAhorroVistaDTO cuenta) throws Exception {
         CallableStatement preparedCall = null;
         try {
-            String SQL = "{call actualizarCuentaAhorroVista (?, ?)}";
+            String SQL = "{call actualizarCuentaAhorroVista (?, ?, ?, ?, ?)}";
             preparedCall = conexion.prepareCall(SQL);
             preparedCall.setInt(1, cuenta.getNumCuenta());
             preparedCall.setString(2, cuenta.getDescripcion());
+            preparedCall.setBigDecimal(3, cuenta.getSaldoReal());
+            preparedCall.setBigDecimal(4, cuenta.getSaldoTemporal());
+            preparedCall.setInt(5, cuenta.getTipoMoneda());
             preparedCall.executeUpdate();
             preparedCall.close();
         }
