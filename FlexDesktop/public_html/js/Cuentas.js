@@ -51,7 +51,7 @@ $(document).ready(function() {
             success: function(data) {
                 var out = "";
                 for (var i = 0; i < data.length; i++) {
-                    out += '<option value=' + data[i].idMoneda + '>' + data[i].Descripcion + '</option>';
+                    out += '<option value=' + data[i].idMoneda + '>' + data[i].descripcion + '</option>';
                 }
                 $("#tipomoneda").html(out);
             }
@@ -69,7 +69,7 @@ $(document).ready(function() {
                 for (var i = 0; i < data.length; i++) {
                     out += '<option value=' + data[i].numCuenta + '>' + '#Cuenta: ' + data[i].numCuenta + '</option>';
                 }
-                $("#tipomoneda").html(out);
+                $("#cuentadeduccion").html(out);
             }
         });
     }
