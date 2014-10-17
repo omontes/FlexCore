@@ -15,7 +15,8 @@ import java.math.BigDecimal;
 public class CuentaAhorroVistaDTO {
     private int numCuenta;
     private String descripcion;
-    private String tipoMoneda;
+    private String tipoMonedaDescripcion;
+    private int tipoMoneda;
     private BigDecimal saldoReal;
     private BigDecimal saldoTemporal;
 
@@ -78,16 +79,32 @@ public class CuentaAhorroVistaDTO {
     }
 
     /**
+     * @return the tipoMonedaDescripcion
+     */
+    public String getTipoMonedaDescripcion() {
+        return tipoMonedaDescripcion;
+    }
+
+    /**
+     * @param tipoMonedaDescripcion the tipoMonedaDescripcion to set
+     */
+    public void setTipoMonedaDescripcion(String tipoMonedaDescripcion) {
+        this.tipoMonedaDescripcion = tipoMonedaDescripcion;
+    }
+
+    /**
      * @return the tipoMoneda
      */
-    public String getTipoMoneda() {
+    public int getTipoMoneda() {
         return tipoMoneda;
     }
 
     /**
      * @param tipoMoneda the tipoMoneda to set
      */
-    public void setTipoMoneda(String tipoMoneda) {
+    public void setTipoMoneda(int tipoMoneda) {
         this.tipoMoneda = tipoMoneda;
     }
+
+  
 }
