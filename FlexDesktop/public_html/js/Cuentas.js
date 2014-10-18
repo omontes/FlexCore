@@ -468,7 +468,6 @@ $(document).ready(function() {
 function cuentaAutoToJSON() {
     return JSON.stringify({
         "numCuenta": $("#edit-cuenta #cuenta").val(),
-        "fechaInicio": $("#edit-cuenta #fecha").val(),
         "idProposito": $('#propositos').find('option:selected').attr('value'),
         "saldoReal": $("#edit-cuenta #real").val(),
         "saldoTemporal": $("#edit-cuenta #temporal").val(),
