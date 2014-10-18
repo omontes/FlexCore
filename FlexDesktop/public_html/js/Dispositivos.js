@@ -1,113 +1,64 @@
 $(document).ready(function() {
     var rootURL = "http://192.168.0.28:8080/FlexCoreWS/webresources/";
-    var stringCIF = "";
-    var paginasDispositivos;
-    
+    getDispositivos();
 
-
-
-   
-    // GET paginas de los cuentas vista
-    function getPaginasDispositivos(CIF) {
-        console.log('getCantidadCuentasVista');
+    // GET todos los dispositivoes
+    function getDispositivos() {
+        console.log('getDispositivos');
         $.ajax({
             type: 'GET',
-            url: rootURL + "cuentaAhorroVista/getCantidadCuentasVistaBusqueda/" + CIF,
+            url: rootURL + "dispositivoAfiliado/getDispositivos",
             dataType: "json",
             success: function(data) {
-                paginasDispositivos = Math.ceil(data / 10);
+                renderDispositivos(data);
             }
         });
     }
-    
-    // POST un cuenta
-    function postDispositivos() {
+
+// POST un dispositivo
+    function postDispositivo() {
         console.log('postDispositivo');
         $.ajax({
             type: 'POST',
             contentType: 'application/json',
             url: rootURL + "dispositivoAfiliado/crearDispositivoAfiliado",
             dataType: "json",
-            data: cuentaDispositivosToJSON(),
+            data: dispositivoToJSON(),
             success: function() {
-                
+                getDispositivos();
             }
         });
     }
-    
-    
-    
-    
-    
-    // DELETE un cuenta
-    function deleteCuenta() {
-        console.log('deleteCuenta');
-        $.ajax({
-            type: 'DELETE',
-            url: rootURL + 'cuenta/' + $("#delete-value").val(),
-            success: function() {
-                if (cuenta_actual === 0) {
-                    getPaginasAuto(stringBusqueda, stringCIF);
-                    getCuentasAuto(1, stringBusqueda, stringCIF);
-                }
-            }
-        });
-    }
-    
-    
-    
-    $('#cue-auto tbody').on('click', 'td.delete', function() {
-        var tr = $(this).closest('tr');
-        var row = table_auto.row(tr);
-        $("#delete-value").val(row.data().numCuenta);
-        if ($("#delete-value").val() !== "")
-            $('#delete-cuenta').modal();
-    });
-    
-    
-    
-    var table_auto = $('#cue-auto-table').DataTable({
-        "info": false,
-        "lengthChange": false,
-        "ordering": false,
-        "bFilter": false,
-        "columns": [
-            {"data": "numCuenta"},
-            {"data": "idTarjeta"},
-            {
-                "class": 'delete',
-                "data": null,
-                "defaultContent": '',
-                "width": "5%"
-            }
-        ]
-    });
-    
-    
-    
-    $(".btn-cue-delete").click(function() {
-        $('#delete-cuenta').modal('hide');
-        deleteCuenta();
-    });
-    
-    
-    $("#bt_AceptarModal").click(function() {
-        postDispositivos();
-        $('#edit-cuenta').modal('hide');
-        $('#id_tarjeta').val("");
-        $('#num_cuenta').val("");
-        
+
+    $(".con-add").click(function() {
+        $("#edit-dispositivo #Heading").html("Agregar dispositivo");
+        $("#edit-dispositivo #tarjeta").val("");
+        $("#edit-dispositivo #cuenta").val("");
+        $("#edit-dispositivo #estado").val("");
+        $("#edit-dispositivo .btn-con-post").show();
     });
 
-    
-    
+    $(".btn-con-post").click(function() {
+        $('#edit-dispositivo').modal('hide');
+        postDispositivo();
     });
-    
-    
-    function cuentaDispositivosToJSON() {
-    return JSON.stringify({
-        "idCuenta": $('#id_tarjeta').val(),
-        "idTarjeta": $('#num_cuenta').val()
-        
-    });
-}
+
+    function renderDispositivos(data) {
+        var i;
+        var out = "";
+        for (i = 0; i < data.length; i++) {
+            out += "<tr>";
+            out += "<td id=\"campo-tarjeta\">" + data[i].idTarjeta + "</td>";
+            out += "<td id=\"campo-cuenta\">" + data[i].idCuenta + "</td>";
+            out += "</tr>";
+        }
+        $("#con-table-body").html(out);
+    }
+
+    function dispositivoToJSON() {
+        return JSON.stringify({
+            "idTarjeta": $("#edit-dispositivo #tarjeta").val(),
+            "idCuenta": $("#edit-dispositivo #cuenta").val()
+        });
+    }
+});
