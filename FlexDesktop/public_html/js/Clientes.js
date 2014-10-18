@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var rootURL = "http://localhost:8080/FlexCoreWS/webresources/";
+    var rootURL = "http://192.168.0.28:8080/FlexCoreWS/webresources/";
     var paginasfisicos;
     var paginasjuridicos;
     var cliente_actual = 0;
