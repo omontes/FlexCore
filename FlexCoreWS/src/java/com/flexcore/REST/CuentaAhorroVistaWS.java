@@ -68,7 +68,7 @@ public class CuentaAhorroVistaWS {
         return feeds;
     }
     @POST
-    @Path("/crearCuentaAhorroVista")
+    @Path("/crearCuentasVista")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public CuentaAhorroVistaDTO create(CuentaAhorroVistaDTO cuentaAhorroVista) throws SQLException, NamingException, Exception {

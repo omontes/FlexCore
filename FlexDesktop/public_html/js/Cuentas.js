@@ -488,6 +488,7 @@ function cuentaVistaToJSON() {
         "descripcion": $("#edit-cuenta #descripcion").val(),
         "saldoReal": $("#edit-cuenta #real").val(),
         "saldoTemporal": $("#edit-cuenta #temporal").val(),
-        "tipoMoneda": $('#tipomoneda').find('option:selected').attr('value')
+        "tipoMoneda": $('#tipomoneda').find('option:selected').attr('value'),
+        "idCliente": $('#cif').val()
     });
 }
