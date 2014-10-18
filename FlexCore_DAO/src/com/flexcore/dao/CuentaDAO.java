@@ -126,7 +126,7 @@ public class CuentaDAO extends ConnectionManager implements TransaccionesCuenta 
                 cuenta.setEstadoCuenta(rs.getBoolean("estadoAhorro"));
             }
             statement.close();
-            if(cuenta.getNumCuenta()==1||cuenta.isEstadoCuenta()==false){
+            if(cuenta.getNumCuenta()==1&&cuenta.isEstadoCuenta()==false){
                 return false;
             } else if(cuenta.getNumCuenta()==0){
                 return false;
