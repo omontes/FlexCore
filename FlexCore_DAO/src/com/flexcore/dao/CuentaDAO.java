@@ -137,7 +137,7 @@ public class CuentaDAO extends ConnectionManager implements TransaccionesCuenta 
             }else if(cuenta.getNumCuenta()==1 && cuenta.isEstadoCuenta()==true){
                 return true;
             }else {
-                return true;
+                return false;
             }
         } catch (Exception e) {
             System.out.println("Error al realizar la consulta de obtener "
