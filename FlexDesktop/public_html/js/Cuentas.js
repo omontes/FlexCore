@@ -440,11 +440,11 @@ $(document).ready(function() {
     
     $('#cue-vista tbody').on('click', 'td.pagos', function() {
         var tr = $(this).closest('tr');
-        var row = table_auto.row(tr);
+        var row = table_vista.row(tr);
         $("#edit-pagos #cuentaorigen").val(row.data().numCuenta);
         $("#edit-pagos #cuentadestino").val("");
         $("#edit-pagos #monto").val("");
-        if ($("#edit-pagos #cuenta").val() !== "") {
+        if ($("#edit-pagos #cuentaorigen").val() !== "") {
             $('#edit-pagos').modal();
         }
     });
