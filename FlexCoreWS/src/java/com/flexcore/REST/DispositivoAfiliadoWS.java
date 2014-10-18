@@ -10,6 +10,7 @@ import com.flexcore.dao.DispositivoAfiliadoDAO;
 import com.flexcore.dto.DispositivoAfiliadoDTO;
 import com.google.gson.Gson;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.naming.NamingException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -29,6 +30,41 @@ import javax.ws.rs.core.UriInfo;
  */
 @Path("dispositivoAfiliado")
 public class DispositivoAfiliadoWS {
+    
+    @GET
+    @Path("/getCantidadDispositivosDeCliente")
+    @Produces("application/json")
+    public String getCantidadClientesFisicos(int cliente) {
+        String feeds = null;
+        try {
+            DispositivoAfiliadoDAO dispositivo_dao = new DispositivoAfiliadoDAO();
+            int feedData = dispositivo_dao.obtenerCantidadTarjetas(cliente);
+            Gson gson = new Gson();
+            feeds = gson.toJson(feedData);
+            
+        } catch (Exception e) {
+            System.out.println("No se pudo obtnener la cantidad de dispositivos de un cliente"); //Console 
+        }
+        return feeds;
+    }
+    
+    @GET
+    @Path("/getClientesFisicosPaginados/{cliente}{pagina}")
+    @Produces("application/json")
+    public String getClientesFisicosPaginados(@PathParam("cliente") int cliente, @PathParam("pagina") int pagina) {
+        String feeds = null;
+        try {
+            DispositivoAfiliadoDAO dispositivo_dao = new DispositivoAfiliadoDAO();
+            ArrayList<DispositivoAfiliadoDTO> feedData = null;
+            feedData=dispositivo_dao.verDispositivosAfiliadosPaginados(cliente, pagina);
+            Gson gson = new Gson();
+            feeds = gson.toJson(feedData);
+            
+        } catch (Exception e) {
+            System.out.println("No se pudo obtnener los dispositivos"); //Console 
+        }
+        return feeds;
+    }
 
    @POST
     @Path("/crearDispositivoAfiliado")

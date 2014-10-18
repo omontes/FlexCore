@@ -11,6 +11,7 @@ import com.flexcore.dao_interfaces.TransaccionesDispositivoAfiliado;
 import com.flexcore.dto.DispositivoAfiliadoDTO;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 /**
  *
@@ -60,6 +61,62 @@ public class DispositivoAfiliadoDAO extends ConnectionManager implements Transac
         }
         return numTarjeta;
         
+    }
+
+    @Override
+    public ArrayList<DispositivoAfiliadoDTO> verDispositivosAfiliadosPaginados(int cliente, int pagina) throws Exception {
+        CallableStatement preparedCall = null;
+        ArrayList<DispositivoAfiliadoDTO> listaDispositivos = new ArrayList<>();
+         try{
+            int datoInicial = (pagina - 1)*10;
+            int datoFinal = pagina*10;
+            String SQL = "{call obtenerDispositivosPaginados (?, ?, ?)}";
+            preparedCall = conexion.prepareCall(SQL);
+            preparedCall.setInt(1, cliente);
+            preparedCall.setInt(2, datoInicial);
+            preparedCall.setInt(3, datoFinal);
+            preparedCall.executeQuery();
+            ResultSet rs = preparedCall.getResultSet();
+            while (rs.next()) {
+                DispositivoAfiliadoDTO tarjeta = new DispositivoAfiliadoDTO();
+                tarjeta.setIdTarjeta(rs.getInt("idTarjeta"));
+                tarjeta.setIdCuenta(rs.getInt("idCuenta"));
+                listaDispositivos.add(tarjeta);
+            }
+            statement.close();
+            return listaDispositivos;
+
+        } catch (Exception e) {
+            System.out.println("Error al realizar la consulta de obtener "
+                    + "todos los clientes fisicos");
+            throw (e);
+
+        } finally {
+            this.cerrarConexion();
+        }
+    }
+
+    @Override
+    public int obtenerCantidadTarjetas(int cliente) throws Exception {
+        CallableStatement preparedCall = null;
+        int cantidadClientes = 0;
+        try {
+             String SQL = "{call obtenerCantidadDispositivos(?)}";
+             preparedCall = conexion.prepareCall(SQL);
+             preparedCall.setInt(1, cliente);
+             preparedCall.executeQuery();
+             ResultSet rs = preparedCall.getResultSet();
+             while(rs.next()){
+                 cantidadClientes = rs.getInt(1);
+             }
+             statement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            this.cerrarConexion();
+        }
+        return cantidadClientes;
     }
     
 }
