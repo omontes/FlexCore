@@ -197,6 +197,14 @@ html,body{
     animation-name: fadeInUp;
 }
 
+td.pagos {
+    background: url('../img/pagos.png') no-repeat center center;
+    cursor: pointer;
+}
+tr.shown td.pagos{
+    background: url('../img/pagos.png') no-repeat center center;
+}
+
 td.edit {
     background: url('../img/edit.png') no-repeat center center;
     cursor: pointer;

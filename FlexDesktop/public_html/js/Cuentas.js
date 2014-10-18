@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var rootURL = "http://192.168.0.28:8080/FlexCoreWS/webresources/";
+    var rootURL = "http://192.168.43.53:8080/FlexCoreWS/webresources/";
     var paginasauto;
     var paginasvista;
     var cuenta_actual = 0;
@@ -132,7 +132,7 @@ $(document).ready(function() {
             data: cuentaAutoToJSON(),
             success: function() {
                 getPaginasAuto(stringBusqueda, stringCIF);
-                getCuentasAuto(1, stringBusqueda, stringCIF);
+                getCuentasAuto(table_auto.page.info().page + 1, stringBusqueda, stringCIF);
             }
         });
     }
@@ -148,7 +148,7 @@ $(document).ready(function() {
             data: cuentaAutoToJSON(),
             success: function() {
                 getPaginasAuto(stringBusqueda, stringCIF);
-                getCuentasAuto(1, stringBusqueda, stringCIF);
+                getCuentasAuto(table_auto.page.info().page + 1, stringBusqueda, stringCIF);
             }
         });
     }
@@ -162,11 +162,11 @@ $(document).ready(function() {
             success: function() {
                 if (cuenta_actual === 0) {
                     getPaginasAuto(stringBusqueda, stringCIF);
-                    getCuentasAuto(1, stringBusqueda, stringCIF);
+                    getCuentasAuto(table_auto.page.info().page + 1, stringBusqueda, stringCIF);
                 }
                 if (cuenta_actual === 1) {
                     getPaginasVista(stringBusqueda, stringCIF);
-                    getCuentasVista(1, stringBusqueda, stringCIF);
+                    getCuentasVista(table_auto.page.info().page + 1, stringBusqueda, stringCIF);
                 }
             }
         });
@@ -214,7 +214,7 @@ $(document).ready(function() {
             data: cuentaVistaToJSON(),
             success: function() {
                 getPaginasVista(stringBusqueda, stringCIF);
-                getCuentasVista(1, stringBusqueda, stringCIF);
+                getCuentasVista(table_auto.page.info().page + 1, stringBusqueda, stringCIF);
             }
         });
     }
@@ -230,7 +230,28 @@ $(document).ready(function() {
             data: cuentaVistaToJSON(),
             success: function() {
                 getPaginasVista(stringBusqueda, stringCIF);
-                getCuentasVista(1, stringBusqueda, stringCIF);
+                getCuentasVista(table_auto.page.info().page + 1, stringBusqueda, stringCIF);
+            }
+        });
+    }
+
+    function postPagos() {
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json',
+            url: rootURL + "pagos/crearPagos",
+            dataType: "json",
+            data: pagoToJSON(),
+            success: function() {
+                if (cuenta_actual === 0) {
+                    getPaginasAuto(stringBusqueda, stringCIF);
+                    getCuentasAuto(table_auto.page.info().page + 1, stringBusqueda, stringCIF);
+                }
+
+                if (cuenta_actual === 1) {
+                    getPaginasVista(stringBusqueda, stringCIF);
+                    getCuentasVista(table_auto.page.info().page + 1, stringBusqueda, stringCIF);
+                }
             }
         });
     }
@@ -252,16 +273,22 @@ $(document).ready(function() {
             {"data": "tiempoDeducciones"},
             {"data": "tipoTiempoDescripcion"},
             {
+                "class": 'pagos',
+                "data": null,
+                "defaultContent": '',
+                "width": "15%"
+            },
+            {
                 "class": 'edit',
                 "data": null,
                 "defaultContent": '',
-                "width": "5%"
+                "width": "15%"
             },
             {
                 "class": 'delete',
                 "data": null,
                 "defaultContent": '',
-                "width": "5%"
+                "width": "15%"
             }
         ]
     });
@@ -278,6 +305,12 @@ $(document).ready(function() {
             {"data": "saldoReal"},
             {"data": "saldoTemporal"},
             {"data": "tipoMonedaDescripcion"},
+            {
+                "class": 'pagos',
+                "data": null,
+                "defaultContent": '',
+                "width": "15%"
+            },
             {
                 "class": 'edit',
                 "data": null,
@@ -391,6 +424,18 @@ $(document).ready(function() {
         $("#edit-cuenta .btn-cue-post").show();
         $("#edit-cuenta .btn-cue-update").hide();
     });
+    $('#cue-auto tbody').on('click', 'td.pagos', function() {
+        var tr = $(this).closest('tr');
+        var row = table_auto.row(tr);
+        $("#edit-pagos #cuentaorigen").html(row.data().numCuenta);
+        $("#edit-pagos #cuentadestino").val("");
+        $("#edit-pagos #monto").val("");
+    });
+    $(".btn-cue-post").click(function() {
+        $('#edit-pagos').modal('hide');
+        postPago();
+    });
+
     $('#cue-auto tbody').on('click', 'td.edit', function() {
         var tr = $(this).closest('tr');
         var row = table_auto.row(tr);
@@ -458,8 +503,8 @@ $(document).ready(function() {
         if ($("#delete-value").val() !== "")
             $('#delete-cuenta').modal();
     });
-    
-    
+
+
     $(".btn-cue-delete").click(function() {
         $('#delete-cuenta').modal('hide');
         deleteCuenta();
@@ -479,7 +524,7 @@ function cuentaAutoToJSON() {
         "tiempoDeducciones": $("#edit-cuenta #tiempo").val(),
         "tipoTiempo": $('#tipotiempo').find('option:selected').attr('value'),
         "idCliente": $('#cif').val()
-        
+
     });
 }
 
@@ -491,5 +536,13 @@ function cuentaVistaToJSON() {
         "saldoTemporal": $("#edit-cuenta #temporal").val(),
         "tipoMoneda": $('#tipomoneda').find('option:selected').attr('value'),
         "idCliente": $('#cif').val()
+    });
+}
+
+function pagoToJSON() {
+    return JSON.stringify({
+        "idCuentaOrigen": $("#edit-pagos #cuentaorigen").val(),
+        "idCuentaDestino": $("#edit-pagos #cuentadestino").val(),
+        "monto": $("#edit-pagos #monto").val()
     });
 }
