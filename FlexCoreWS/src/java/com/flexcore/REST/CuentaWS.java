@@ -57,7 +57,7 @@ public class CuentaWS {
         String feeds = null;
         try {
             CuentaDAO cuenta_dao = new CuentaDAO();
-            boolean feedData = false;
+            boolean feedData;
             feedData=cuenta_dao.verificarCuentaValida(customerIF);
             Gson gson = new Gson();
             feeds = gson.toJson(feedData);
