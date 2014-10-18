@@ -128,8 +128,6 @@ public class CuentaDAO extends ConnectionManager implements TransaccionesCuenta 
                 isNULL = rs.getBoolean("isNull");
             }
             statement.close();
-            System.out.println(cuenta.getNumCuenta());
-            System.out.println(cuenta.isEstadoCuenta());
             if(cuenta.getNumCuenta()==1&&isNULL==true){
                 return true;
             }else if(cuenta.getNumCuenta()==0){

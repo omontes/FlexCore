@@ -43,7 +43,7 @@ public class DispositivoAfiliadoDAO extends ConnectionManager implements Transac
         CallableStatement preparedCall = null;
         int numTarjeta = 0;
         try {
-            String SQL = "{call obtenerDispositivoCuenta (?)}";
+            String SQL = "{call DispositivoCuenta (?)}";
             preparedCall = conexion.prepareCall(SQL);
             preparedCall.setString(1, entrada);
             preparedCall.executeQuery();
