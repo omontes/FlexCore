@@ -23,11 +23,13 @@ public class CuentaAhorroVistaDAO extends ConnectionManager implements Transacci
     public CuentaAhorroVistaDTO crearCuentaAhorroVista(CuentaAhorroVistaDTO cuenta) throws Exception {
         CallableStatement preparedCall = null;
         try {
-             String SQL = "{call crearCuentaAhorroVista (?, ?, ?)}";
+             String SQL = "{call crearCuentaAhorroVista (?, ?, ?, ?, ?)}";
              preparedCall = conexion.prepareCall(SQL);
-             preparedCall.setInt(1, cuenta.getNumCuenta());
-             preparedCall.setString(2, cuenta.getDescripcion());
-             //preparedCall.setInt(3, cuenta.getTipoMoneda());
+             preparedCall.setString(1, cuenta.getDescripcion());
+             preparedCall.setInt(2, cuenta.getTipoMoneda());
+             preparedCall.setBigDecimal(3,cuenta.getSaldoReal());
+             preparedCall.setBigDecimal(4,cuenta.getSaldoTemporal());
+             preparedCall.setInt(5,cuenta.getIdCliente());
              preparedCall.executeUpdate();
              preparedCall.close();
         } catch (Exception e) {

@@ -19,6 +19,7 @@ public class CuentaAhorroVistaDTO {
     private int tipoMoneda;
     private BigDecimal saldoReal;
     private BigDecimal saldoTemporal;
+    private int idCliente;
 
     /**
      * @return the numCuenta
@@ -104,6 +105,20 @@ public class CuentaAhorroVistaDTO {
      */
     public void setTipoMoneda(int tipoMoneda) {
         this.tipoMoneda = tipoMoneda;
+    }
+
+    /**
+     * @return the idCliente
+     */
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    /**
+     * @param idCliente the idCliente to set
+     */
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 
   
