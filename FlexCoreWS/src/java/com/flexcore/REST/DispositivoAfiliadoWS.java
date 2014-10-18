@@ -66,7 +66,7 @@ public class DispositivoAfiliadoWS {
         return feeds;
     }
 
-   @POST
+    @POST
     @Path("/crearDispositivoAfiliado")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
