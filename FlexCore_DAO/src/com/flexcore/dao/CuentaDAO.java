@@ -121,16 +121,22 @@ public class CuentaDAO extends ConnectionManager implements TransaccionesCuenta 
             preparedCall = conexion.prepareCall(SQL);
             preparedCall.setInt(1, numCuenta);
             ResultSet rs =  preparedCall.executeQuery();
+            boolean isNULL = false;
             while (rs.next()) {
                 cuenta.setNumCuenta(rs.getInt("numCuenta"));
                 cuenta.setEstadoCuenta(rs.getBoolean("estadoAhorro"));
+                isNULL = rs.getBoolean("isNull");
             }
             statement.close();
-            if(cuenta.getNumCuenta()==1&&cuenta.isEstadoCuenta()==false){
+            System.out.println(cuenta.getNumCuenta());
+            System.out.println(cuenta.isEstadoCuenta());
+            if(cuenta.getNumCuenta()==1&&isNULL==true){
+                return true;
+            }else if(cuenta.getNumCuenta()==0){
                 return false;
-            } else if(cuenta.getNumCuenta()==0){
-                return false;
-            } else {
+            }else if(cuenta.getNumCuenta()==1 && cuenta.isEstadoCuenta()==true){
+                return true;
+            }else {
                 return true;
             }
         } catch (Exception e) {
