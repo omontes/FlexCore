@@ -1,0 +1,134 @@
+
+<html>
+    <head>
+        <title>Dispositivos</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <!-- CSS -->
+        <!-- CSS Bootstrap -->
+        <link href="css/MyCSS.css" rel="stylesheet" type="text/css">
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+        <!-- DataTables CSS -->
+        <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+
+
+        <!-- Scripts -->
+        <!-- jQuery -->
+        <script src="js/jquery.min.js"></script>
+        <!-- JS Bootstrap -->
+        <script src="js/bootstrap.js"></script>
+        <!-- DataTables -->
+        <script type="text/javascript" src="js/jquery.dataTables.js"></script>
+        <!-- Metodos Javascript de la interfaz-->
+        <script src="js/DesignScripts.js"></script>
+        
+        
+        <script src="js/Dispositivos.js"></script>
+        
+        <script src=js/jquery.backstretch.min.js></script>
+        
+        <script>
+            $(document).ready(function(e){
+                 $.backstretch(["img/bg2.jpg"]);
+            });
+        </script>
+        
+        
+    </head>
+    <body>
+        <div class="bs-header" id="content">
+            <div class="container">
+                <h1>FlexDesktop - Dispositivos</h1>
+            </div>
+        </div>
+
+
+        <!-- Tabla Cuentas-->
+        <div class="container" id="container-dispositivos">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">I</h3>
+                            <div class="pull-right">
+                                <span class="clickable cue-add" title="Agregar Cuenta" data-container="body"  data-toggle="modal" data-target="#edit-cuenta" data-placement="top">
+                                    <i class="glyphicon glyphicon-plus-sign"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <input type="text" class="form-control" id="cue-table-filter" data-action="filter" data-filters="#cue-table" placeholder="Buscar Cuentas" />
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="cue-auto">
+                                <table id="cue-auto-table" class="display" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th># Cuenta</th>
+                                            <th>ID Tarjeta</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th> 
+                                        </tr>
+                                    </thead>
+                                    <tbody> </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Modal Edit/Add Clientes-->
+        <div class="modal fade" id="edit-cuenta" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 class="modal-title custom_align" id="Heading"></h3>
+                    </div>
+                    <div class="modal-body">
+                        <label class="auto vista">
+                            Numero de Cuenta:
+                            <input id="num_cuenta" type="text" placeholder="Cuenta" class="form-control" style="width: 100%;">
+                            
+                            Id Tarjeta:
+                            <input id="id_tarjeta" type="text" placeholder="Tarjeta" class="form-control" style="width: 100%;">
+                        </label>
+                        
+                    </div>
+                    <div class="modal-footer ">
+                        <button type="button" class="btn btn-info btn-lg btn-cue-post" id = "bt_AceptarModal" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Agregar</button>
+                    </div>
+                </div>
+                <!-- /.modal-content --> 
+            </div>
+            <!-- /.modal-dialog --> 
+        </div>
+
+        <!--modal delete-->
+        <div class="modal fade" id="delete-cuenta" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title custom_align" id="Heading">Borrar Esta Entrada</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info"><span class="glyphicon glyphicon-warning-sign"></span> Seguro que desea eliminar este cuenta?</div>
+                    </div>
+                    <div class="modal-footer ">
+                        <button type="button" class="btn btn-info btn-cue-delete" ><span class="glyphicon glyphicon-ok-sign"></span> Si</button>
+                        <button type="button" class="btn btn-info" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+                    </div>
+                </div>
+                <!-- /.modal-content --> 
+            </div>
+            <!-- /.modal-dialog --> 
+        </div>
+
+    </body>
+</html>
