@@ -437,6 +437,21 @@ $(document).ready(function() {
         $('#edit-pagos').modal('hide');
         postPago();
     });
+    
+    $('#cue-vista tbody').on('click', 'td.pagos', function() {
+        var tr = $(this).closest('tr');
+        var row = table_auto.row(tr);
+        $("#edit-pagos #cuentaorigen").val(row.data().numCuenta);
+        $("#edit-pagos #cuentadestino").val("");
+        $("#edit-pagos #monto").val("");
+        if ($("#edit-pagos #cuenta").val() !== "") {
+            $('#edit-pagos').modal();
+        }
+    });
+    $(".btn-pago-post").click(function() {
+        $('#edit-pagos').modal('hide');
+        postPago();
+    });
 
     $('#cue-auto tbody').on('click', 'td.edit', function() {
         var tr = $(this).closest('tr');
