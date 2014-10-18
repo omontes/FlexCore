@@ -30,6 +30,7 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(com.flexcore.REST.CierreWS.class);
         resources.add(com.flexcore.REST.ClientesWS.class);
         resources.add(com.flexcore.REST.CuentaAhorroAutomaticoWS.class);
         resources.add(com.flexcore.REST.CuentaAhorroVistaWS.class);

@@ -16,6 +16,6 @@ import java.util.ArrayList;
 public interface TransaccionesDispositivoAfiliado {
     DispositivoAfiliadoDTO crearDispositivoAfiliado(DispositivoAfiliadoDTO dispositovoAfiliado) throws Exception;
     int obtenerTarjeta(String entrada) throws Exception;
-    ArrayList<DispositivoAfiliadoDTO> verDispositivosAfiliadosPaginados(int cliente, int pagina) throws Exception;
+    ArrayList<DispositivoAfiliadoDTO> obtenerDispositivos() throws Exception;
     int obtenerCantidadTarjetas(int cliente) throws Exception;
 }
