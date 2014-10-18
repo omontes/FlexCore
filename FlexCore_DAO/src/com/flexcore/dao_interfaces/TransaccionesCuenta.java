@@ -7,6 +7,7 @@
 package com.flexcore.dao_interfaces;
 
 import com.flexcore.dto.CuentaDTO;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -19,4 +20,5 @@ public interface TransaccionesCuenta {
     CuentaDTO actualizarCuenta(CuentaDTO cuenta) throws Exception;
     void eliminarCuenta(int numCuenta) throws Exception;
     boolean verificarCuentaValida(int numCuenta) throws Exception;
+    BigDecimal obtenerSaldo(int numCuenta) throws Exception;
 }

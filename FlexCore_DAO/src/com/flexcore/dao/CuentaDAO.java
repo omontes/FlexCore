@@ -9,6 +9,7 @@ package com.flexcore.dao;
 import com.flexcore.connection_manager.ConnectionManager;
 import com.flexcore.dao_interfaces.TransaccionesCuenta;
 import com.flexcore.dto.CuentaDTO;
+import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -145,6 +146,29 @@ public class CuentaDAO extends ConnectionManager implements TransaccionesCuenta 
         } finally {
             this.cerrarConexion();
         }
+    }
+
+    @Override
+    public BigDecimal obtenerSaldo(int numCuenta) {
+        CallableStatement preparedCall = null;
+        BigDecimal saldo = BigDecimal.ZERO;
+        try {
+            String SQL = "{call obtenerSaldoCuenta (?)}";
+            preparedCall = conexion.prepareCall(SQL);
+            preparedCall.setInt(1, numCuenta);
+            preparedCall.executeQuery();
+            ResultSet rs = preparedCall.getResultSet();
+             while(rs.next()){
+                 saldo = rs.getBigDecimal(1);
+             }
+             statement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            this.cerrarConexion();
+        }
+        return saldo;
     }
     
 }

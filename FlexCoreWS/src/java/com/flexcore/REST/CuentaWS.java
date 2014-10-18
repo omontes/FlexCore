@@ -9,6 +9,7 @@ package com.flexcore.REST;
 import com.flexcore.dao.CuentaDAO;
 import com.flexcore.dto.CuentaDTO;
 import com.google.gson.Gson;
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.naming.NamingException;
@@ -67,7 +68,24 @@ public class CuentaWS {
         }
         return feeds;
     }
-
+    @GET
+    @Path("/getSaldoCuenta/{numCuenta}")
+    @Produces("application/json")
+    public String obtenerSaldoCuenta(@PathParam("numCuenta") int numCuenta) {
+        String feeds = null;
+        try {
+            CuentaDAO cuenta_dao = new CuentaDAO();
+            BigDecimal feedData;
+            feedData=cuenta_dao.obtenerSaldo(numCuenta);
+            Gson gson = new Gson();
+            feeds = gson.toJson(feedData);
+            
+        } catch (Exception e) {
+            System.out.println("No se pudo obtnener el saldo de la "
+                    + "cuenta"); //Console 
+        }
+        return feeds;
+    }
     @POST
     @Path("/crearCuenta")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
