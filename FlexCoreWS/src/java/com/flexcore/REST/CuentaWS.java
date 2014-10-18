@@ -51,7 +51,7 @@ public class CuentaWS {
     }
     
     @GET
-    @Path("/getCuentas/getCuentaValida")
+    @Path("/getCuentaValida/{customerIF}")
     @Produces("application/json")
     public String verificarCuenta(@PathParam("customerIF") int customerIF) {
         String feeds = null;
