@@ -1,6 +1,4 @@
 $(document).ready(function() {
-    //var rootURL = "http://192.168.0.28:8080/FlexCoreWS/webresources/";
-    rootURL = "http://localhost:8080/FlexCoreWS/webresources/";
     getDispositivos();
 
     // GET todos los dispositivoes

@@ -1,6 +1,4 @@
 $(document).ready(function() {
-    //var rootURL = "http://192.168.0.28:8080/FlexCoreWS/webresources/";
-    rootURL = "http://localhost:8080/FlexCoreWS/webresources/";
     var paginasauto;
     var paginasvista;
     var cuenta_actual = 0;
@@ -236,11 +234,11 @@ $(document).ready(function() {
         });
     }
 
-    function postPagos() {
+    function postPago() {
         $.ajax({
             type: 'POST',
             contentType: 'application/json',
-            url: rootURL + "pagos/crearPagos",
+            url: rootURL + "pagos/crearPago",
             dataType: "json",
             data: pagoToJSON(),
             success: function() {
@@ -428,11 +426,14 @@ $(document).ready(function() {
     $('#cue-auto tbody').on('click', 'td.pagos', function() {
         var tr = $(this).closest('tr');
         var row = table_auto.row(tr);
-        $("#edit-pagos #cuentaorigen").html(row.data().numCuenta);
+        $("#edit-pagos #cuentaorigen").val(row.data().numCuenta);
         $("#edit-pagos #cuentadestino").val("");
         $("#edit-pagos #monto").val("");
+        if ($("#edit-pagos #cuenta").val() !== "") {
+            $('#edit-pagos').modal();
+        }
     });
-    $(".btn-cue-post").click(function() {
+    $(".btn-pago-post").click(function() {
         $('#edit-pagos').modal('hide');
         postPago();
     });

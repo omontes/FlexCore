@@ -1,8 +1,4 @@
 
-    var rootURL = "http://192.168.43.53:8080/FlexCoreWS/webresources/";
-    //var rootURL = "http://localhost:8080/FlexCoreWS/webresources/";
-    
-
 
 function cierre(){
     postCierre();
