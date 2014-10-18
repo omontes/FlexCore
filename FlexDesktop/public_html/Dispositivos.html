@@ -42,66 +42,58 @@
             </div>
         </div>
 
-
-        <!-- Tabla Cuentas-->
-        <div class="container" id="container-dispositivos">
+ <!-- Tabla Contenedores-->
+        <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h3 class="panel-title">I</h3>
+                            <h3 class="panel-title">Dispositivos</h3>
                             <div class="pull-right">
-                                <span class="clickable cue-add" title="Agregar Cuenta" data-container="body"  data-toggle="modal" data-target="#edit-cuenta" data-placement="top">
+                                <span class="clickable con-add" title="Agregar Dispositivo" data-container="body"  data-toggle="modal" data-target="#edit-dispositivo" data-placement="top">
                                     <i class="glyphicon glyphicon-plus-sign"></i>
                                 </span>
                             </div>
                         </div>
-                        <div class="panel-body">
-                            <input type="text" class="form-control" id="cue-table-filter" data-action="filter" data-filters="#cue-table" placeholder="Buscar Cuentas" />
-                        </div>
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="cue-auto">
-                                <table id="cue-auto-table" class="display" cellspacing="0" width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th># Cuenta</th>
-                                            <th>ID Tarjeta</th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th> 
-                                        </tr>
-                                    </thead>
-                                    <tbody> </tbody>
-                                </table>
-                            </div>
-                            
-                        </div>
+                        <table class="table table-hover" id="con-table">
+                            <thead>
+                                <tr>
+                                    <th>idTarjeta</th>
+                                    <th>idCuenta</th>
+                                </tr>
+                            </thead>
+                            <tbody id="con-table-body">
+                                <tr>
+                                    <td id="campo-numero">101</td>
+                                    <td id="campo-ruta">1</td>
+                                    <td id="campo-peso">10</td>
+                                    <td><p><button class="btn btn-danger btn-xs con-delete" data-title="Delete-contenedor" data-toggle="modal" data-target="#delete-contenedor" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></button></p></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
 
 
-        <!-- Modal Edit/Add Clientes-->
-        <div class="modal fade" id="edit-cuenta" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal fade" id="edit-dispositivo" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h3 class="modal-title custom_align" id="Heading"></h3>
+                        <h3 class="modal-title custom_align" id="Heading">Agregar Dispositivo</h3>
                     </div>
                     <div class="modal-body">
-                        <label class="auto vista">
-                            Numero de Cuenta:
-                            <input id="num_cuenta" type="text" placeholder="Cuenta" class="form-control" style="width: 100%;">
-                            
-                            Id Tarjeta:
-                            <input id="id_tarjeta" type="text" placeholder="Tarjeta" class="form-control" style="width: 100%;">
-                        </label>
-                        
+                        <div>
+                            <input id="tarjeta" type="text" placeholder="ID de Dispositivo" class="form-control">
+                        </div>
+                        <div>
+                            <input id="cuenta" type="text" placeholder="ID de Cuenta" class="form-control">
+                        </div>
                     </div>
                     <div class="modal-footer ">
-                        <button type="button" class="btn btn-info btn-lg btn-cue-post" id = "bt_AceptarModal" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Agregar</button>
+                        <button type="button" class="btn btn-info btn-lg btn-con-post" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Agregar</button>
                     </div>
                 </div>
                 <!-- /.modal-content --> 
@@ -110,7 +102,7 @@
         </div>
 
         <!--modal delete-->
-        <div class="modal fade" id="delete-cuenta" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal fade" id="delete-contenedor" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -118,11 +110,11 @@
                         <h4 class="modal-title custom_align" id="Heading">Borrar Esta Entrada</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="alert alert-info"><span class="glyphicon glyphicon-warning-sign"></span> Seguro que desea eliminar este cuenta?</div>
+                        <div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> Seguro que desea eliminar este contenedor?</div>
                     </div>
                     <div class="modal-footer ">
-                        <button type="button" class="btn btn-info btn-cue-delete" ><span class="glyphicon glyphicon-ok-sign"></span> Si</button>
-                        <button type="button" class="btn btn-info" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+                        <button type="button" class="btn btn-warning btn-con-delete" ><span class="glyphicon glyphicon-ok-sign"></span> Si</button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
                     </div>
                 </div>
                 <!-- /.modal-content --> 

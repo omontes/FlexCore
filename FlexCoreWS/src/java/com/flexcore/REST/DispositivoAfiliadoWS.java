@@ -49,24 +49,24 @@ public class DispositivoAfiliadoWS {
     }
     
     @GET
-    @Path("/getClientesFisicosPaginados/{cliente}{pagina}")
+    @Path("/getDispositivos")
     @Produces("application/json")
-    public String getClientesFisicosPaginados(@PathParam("cliente") int cliente, @PathParam("pagina") int pagina) {
+    public String getClientesFisicosPaginados() {
         String feeds = null;
         try {
             DispositivoAfiliadoDAO dispositivo_dao = new DispositivoAfiliadoDAO();
             ArrayList<DispositivoAfiliadoDTO> feedData = null;
-            feedData=dispositivo_dao.verDispositivosAfiliadosPaginados(cliente, pagina);
+            feedData=dispositivo_dao.obtenerDispositivos();
             Gson gson = new Gson();
             feeds = gson.toJson(feedData);
             
         } catch (Exception e) {
-            System.out.println("No se pudo obtnener los dispositivos"); //Console 
+            System.out.println("No se pudo obtenener los dispositivos"); //Console 
         }
         return feeds;
     }
 
-   @POST
+    @POST
     @Path("/crearDispositivoAfiliado")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})

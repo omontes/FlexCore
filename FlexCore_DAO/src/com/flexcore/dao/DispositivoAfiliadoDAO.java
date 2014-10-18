@@ -64,23 +64,19 @@ public class DispositivoAfiliadoDAO extends ConnectionManager implements Transac
     }
 
     @Override
-    public ArrayList<DispositivoAfiliadoDTO> verDispositivosAfiliadosPaginados(int cliente, int pagina) throws Exception {
+    public ArrayList<DispositivoAfiliadoDTO> obtenerDispositivos() throws Exception {
         CallableStatement preparedCall = null;
         ArrayList<DispositivoAfiliadoDTO> listaDispositivos = new ArrayList<>();
          try{
-            int datoInicial = (pagina - 1)*10;
-            int datoFinal = pagina*10;
-            String SQL = "{call obtenerDispositivosPaginados (?, ?, ?)}";
+            String SQL = "{call obtenerDispositivos ()}";
             preparedCall = conexion.prepareCall(SQL);
-            preparedCall.setInt(1, cliente);
-            preparedCall.setInt(2, datoInicial);
-            preparedCall.setInt(3, datoFinal);
             preparedCall.executeQuery();
             ResultSet rs = preparedCall.getResultSet();
             while (rs.next()) {
                 DispositivoAfiliadoDTO tarjeta = new DispositivoAfiliadoDTO();
                 tarjeta.setIdTarjeta(rs.getInt("idTarjeta"));
                 tarjeta.setIdCuenta(rs.getInt("idCuenta"));
+                tarjeta.setEstado(rs.getBoolean("Estado"));
                 listaDispositivos.add(tarjeta);
             }
             statement.close();
