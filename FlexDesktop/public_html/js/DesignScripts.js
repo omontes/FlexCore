@@ -86,6 +86,9 @@
 // cada tabla tiene un array de objetos que tiene dentro
 //var datastringaux = [];
 
+
+    var rootURL = "http://192.168.43.53:8080/FlexCoreWS/webresources/";
+
 $(document).ready(function() {
     
 });
