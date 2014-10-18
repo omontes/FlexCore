@@ -196,7 +196,7 @@ $(document).ready(function() {
             success: function(data) {
                 var datastring = data;
                 var datastringaux = [];
-                datastringaux = emptyPages(['"numCuenta"', '"descripcion"', '"saldoReal"', '"saldoTemporal"', '"tipoMoneda"'],
+                datastringaux = emptyPages(['"numCuenta"', '"descripcion"', '"saldoReal"', '"saldoTemporal"', '"tipoMonedaDescripcion"'],
                         datastring, table_vista.page.info().page, paginasvista - 1 - table_vista.page.info().page);
                 table_vista.clear();
                 table_vista.rows.add(datastringaux).draw(false);
@@ -277,7 +277,7 @@ $(document).ready(function() {
             {"data": "descripcion"},
             {"data": "saldoReal"},
             {"data": "saldoTemporal"},
-            {"data": "tipoMoneda"},
+            {"data": "tipoMonedaDescripcion"},
             {
                 "class": 'edit',
                 "data": null,
@@ -476,7 +476,8 @@ function cuentaAutoToJSON() {
         "numCuentaDeduccion": $('#cuentadeduccion').find('option:selected').attr('value'),
         "tiempoAhorroMeses": $("#edit-cuenta #meses").val(),
         "tiempoDeducciones": $("#edit-cuenta #tiempo").val(),
-        "tipoTiempo": $('#tipotiempo').find('option:selected').attr('value')
+        "tipoTiempo": $('#tipotiempo').find('option:selected').attr('value'),
+        "idCliente": $('#cif').val()
         
     });
 }

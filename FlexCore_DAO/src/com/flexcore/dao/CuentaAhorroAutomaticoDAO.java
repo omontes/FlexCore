@@ -67,15 +67,15 @@ public class CuentaAhorroAutomaticoDAO extends ConnectionManager implements Tran
         try {
              String SQL = "{call crearCuentaAhorroAutomatico (?, ?, ?, ?, ?, ?, ?, ?, ?)}";
              preparedCall = conexion.prepareCall(SQL);
-             preparedCall.setInt(1, cuenta.getTiempoDeducciones());
-             preparedCall.setInt(2, cuenta.getTipoTiempo());
-             preparedCall.setInt(3, cuenta.getTiempoAhorroMeses());
-             preparedCall.setInt(4, cuenta.getNumCuentaDeduccion());
-             preparedCall.setDouble(5, cuenta.getMontoAhorro());
-             preparedCall.setInt(6, cuenta.getIdProposito());
-             preparedCall.setBigDecimal(7, cuenta.getSaldoReal());
-             preparedCall.setBigDecimal(8, cuenta.getSaldoTemporal());
-             preparedCall.setInt(9, cuenta.getIdCliente());
+             preparedCall.setInt(1, cuenta.getIdCliente());
+             preparedCall.setBigDecimal(2, cuenta.getSaldoTemporal());
+             preparedCall.setBigDecimal(3, cuenta.getSaldoReal());
+             preparedCall.setInt(4, cuenta.getTiempoDeducciones());
+             preparedCall.setInt(5, cuenta.getTipoTiempo());
+             preparedCall.setInt(6, cuenta.getTiempoAhorroMeses());
+             preparedCall.setInt(7, cuenta.getNumCuentaDeduccion());
+             preparedCall.setDouble(8, cuenta.getMontoAhorro());
+             preparedCall.setInt(9, cuenta.getIdProposito());
              preparedCall.executeUpdate();
              preparedCall.close();
         } catch (Exception e) {
