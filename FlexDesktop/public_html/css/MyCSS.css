@@ -119,6 +119,26 @@ body{
 
 /* Button  END */
 
+/*******************************
+          LOG
+*******************************/
+
+#log_Container {
+
+  padding-top: 120px;
+  margin: 0 auto 90px;
+}
+
+#log_Segmento{
+
+
+  width: 320px;
+  min-width: 120px;
+  margin: 0 auto;
+}
+
+
+
 html,body{
     position: relative;
     height: 100%;

@@ -46,16 +46,70 @@
             </div>
         </div>
 
-       
+
 
         <div class="ui page grid">            
             <div class="column" id = "log_Container">
-                <div class="ui primary segment" id = "log_Segmento" >
-                    <div class="ui left attached button">Left</div>
-                    <div class="right attached ui button">Right</div>
+                <div class="ui center aligned segment" id = "log_Segmento" >
+                    <div class="ui huge buttons">
+                        <div class="ui button red big" onclick="cierre()">Cierre</div>
+                        <div class="or"></div>
+                        <div class="ui button green big" onclick="iniciar()">Iniciar</div>
+                    </div>
                 </div>
             </div>
         </div>
+        
+        <div class="ui basic small modal transition" style="margin-top: -159px;" id ="modal1">
+            <div class="header">
+                CIERRE
+            </div>
+            <div class="content">
+                <div class="left">
+                    <i class="time icon"></i>
+                </div>
+                <div class="right">
+                    <p>El cierre se ha realizado exitosamente</p>
+                </div>
+            </div>
+            <div class="actions">
+                <div class="two fluid ui buttons">
+                    
+                    <div class="ui positive labeled icon button" onclick = "irVentanaPrincipal()">
+                        Aceptar
+                        <i class="checkmark icon" ></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+         <div class="ui basic modal transition" id ="mode2" style="margin-top: -159px;" id ="modal2">
+            <div class="header">
+                INICIAR
+            </div>
+            <div class="content">
+                <div class="left">
+                    <i class="time icon"></i>
+                </div>
+                <div class="right">
+                    <p>El cierre se ha iniciado correctamente</p>
+                </div>
+            </div>
+            <div class="actions">
+                <div class="two fluid ui buttons">
+                    
+                    <div class="ui positive labeled icon button" onclick = "irVentanaPrincipal()">
+                        Aceptar
+                        <i class="checkmark icon" ></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        
+        
 
 
     </body>
