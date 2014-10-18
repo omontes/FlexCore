@@ -14,4 +14,5 @@ import com.flexcore.dto.DispositivoAfiliadoDTO;
  */
 public interface TransaccionesDispositivoAfiliado {
     DispositivoAfiliadoDTO crearDispositivoAfiliado(DispositivoAfiliadoDTO dispositovoAfiliado) throws Exception;
+    int obtenerTarjeta(String entrada) throws Exception;
 }

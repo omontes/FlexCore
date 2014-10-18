@@ -10,6 +10,7 @@ import com.flexcore.connection_manager.ConnectionManager;
 import com.flexcore.dao_interfaces.TransaccionesDispositivoAfiliado;
 import com.flexcore.dto.DispositivoAfiliadoDTO;
 import java.sql.CallableStatement;
+import java.sql.ResultSet;
 
 /**
  *
@@ -35,6 +36,30 @@ public class DispositivoAfiliadoDAO extends ConnectionManager implements Transac
             this.cerrarConexion();
         }
         return dispositovoAfiliado;
+    }
+
+    @Override
+    public int obtenerTarjeta(String entrada) {
+        CallableStatement preparedCall = null;
+        int numTarjeta = 0;
+        try {
+            String SQL = "{call obtenerDispositivoCuenta (?)}";
+            preparedCall = conexion.prepareCall(SQL);
+            preparedCall.setString(1, entrada);
+            preparedCall.executeQuery();
+            ResultSet rs = preparedCall.getResultSet();
+             while(rs.next()){
+                 numTarjeta = rs.getInt(1);
+             }
+             statement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            this.cerrarConexion();
+        }
+        return numTarjeta;
+        
     }
     
 }

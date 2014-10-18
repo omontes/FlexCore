@@ -56,4 +56,6 @@ public class DispositivoAfiliadoDTO {
     public void setEstado(boolean Estado) {
         this.Estado = Estado;
     }
+
+   
 }

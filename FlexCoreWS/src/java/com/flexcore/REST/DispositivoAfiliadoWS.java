@@ -8,6 +8,7 @@ package com.flexcore.REST;
 
 import com.flexcore.dao.DispositivoAfiliadoDAO;
 import com.flexcore.dto.DispositivoAfiliadoDTO;
+import com.google.gson.Gson;
 import java.sql.SQLException;
 import javax.naming.NamingException;
 import javax.ws.rs.Consumes;
@@ -36,5 +37,23 @@ public class DispositivoAfiliadoWS {
     public DispositivoAfiliadoDTO create(DispositivoAfiliadoDTO dispositivoAfiliado) throws SQLException, NamingException, Exception {
         DispositivoAfiliadoDAO dispositivoAfiliado_dao = new DispositivoAfiliadoDAO();
         return dispositivoAfiliado_dao.crearDispositivoAfiliado(dispositivoAfiliado);
+    }
+    
+    @GET
+    @Path("/getTarjeta/{numCuenta}")
+    @Produces("application/json")
+    public String getCantidadClientesJuridicosBusqueda(@PathParam("numCuenta") String entrada) {
+        String feeds = null;
+        try {
+            DispositivoAfiliadoDAO dispositivo_dao = new DispositivoAfiliadoDAO();
+            int feedData = dispositivo_dao.obtenerTarjeta(entrada);
+            Gson gson = new Gson();
+            feeds = gson.toJson(feedData);
+            
+        } catch (Exception e) {
+            System.out.println("No se pudo obtenener el numero de tarjeta"
+                    + " de dicho dispositivo"); //Console 
+        }
+        return feeds;
     }
 }
