@@ -18,4 +18,5 @@ public interface TransaccionesCuenta {
     CuentaDTO crearCuenta(CuentaDTO cuenta) throws Exception;
     CuentaDTO actualizarCuenta(CuentaDTO cuenta) throws Exception;
     void eliminarCuenta(int numCuenta) throws Exception;
+    boolean verificarCuentaValida(int numCuenta) throws Exception;
 }

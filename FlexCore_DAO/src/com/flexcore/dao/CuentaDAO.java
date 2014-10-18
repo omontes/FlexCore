@@ -111,5 +111,36 @@ public class CuentaDAO extends ConnectionManager implements TransaccionesCuenta 
             this.cerrarConexion();
         }
     }
+
+    @Override
+    public boolean verificarCuentaValida(int numCuenta) throws Exception {
+        CuentaDTO cuenta = new CuentaDTO();
+        CallableStatement preparedCall = null;
+        try{
+            String SQL = "{call verificarCuenta (?)}";
+            preparedCall = conexion.prepareCall(SQL);
+            preparedCall.setInt(1, numCuenta);
+            ResultSet rs =  preparedCall.executeQuery();
+            while (rs.next()) {
+                cuenta.setNumCuenta(rs.getInt("numCuenta"));
+                cuenta.setEstadoCuenta(rs.getBoolean("estadoAhorro"));
+            }
+            statement.close();
+            if(cuenta.getNumCuenta()==1||cuenta.isEstadoCuenta()==false){
+                return false;
+            } else if(cuenta.getNumCuenta()==0){
+                return false;
+            } else {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("Error al realizar la consulta de obtener "
+                    + "todas las cuentas");
+            throw (e);
+
+        } finally {
+            this.cerrarConexion();
+        }
+    }
     
 }

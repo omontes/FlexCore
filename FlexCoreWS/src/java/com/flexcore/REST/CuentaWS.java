@@ -49,6 +49,24 @@ public class CuentaWS {
         }
         return feeds;
     }
+    
+    @GET
+    @Path("/getCuentas/getCuentaValida")
+    @Produces("application/json")
+    public String verificarCuenta(@PathParam("customerIF") int customerIF) {
+        String feeds = null;
+        try {
+            CuentaDAO cuenta_dao = new CuentaDAO();
+            boolean feedData = false;
+            feedData=cuenta_dao.verificarCuentaValida(customerIF);
+            Gson gson = new Gson();
+            feeds = gson.toJson(feedData);
+            
+        } catch (Exception e) {
+            System.out.println("No se pudo obtnener si la cuenta era valida"); //Console 
+        }
+        return feeds;
+    }
 
     @POST
     @Path("/crearCuenta")
