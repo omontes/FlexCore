@@ -27,7 +27,7 @@ public class CuentaAhorroVistaDAO extends ConnectionManager implements Transacci
              preparedCall = conexion.prepareCall(SQL);
              preparedCall.setInt(1, cuenta.getNumCuenta());
              preparedCall.setString(2, cuenta.getDescripcion());
-             //preparedCall.setInt(3, cuenta.getTipoMoneda());
+             preparedCall.setInt(3, cuenta.getTipoMoneda());
              preparedCall.executeUpdate();
              preparedCall.close();
         } catch (Exception e) {
