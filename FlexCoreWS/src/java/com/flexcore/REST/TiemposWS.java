@@ -33,9 +33,9 @@ public class TiemposWS {
     public String getTiempos() {
         String feeds = null;
         try {
-            TiemposDAO cliente_dao = new TiemposDAO();
+            TiemposDAO tiempos_dao = new TiemposDAO();
             ArrayList<TiemposDTO> feedData = null;
-            feedData = cliente_dao.verTiempos();
+            feedData = tiempos_dao.verTiempos();
             Gson gson = new Gson();
             feeds = gson.toJson(feedData);
 
