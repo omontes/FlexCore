@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 17, 2014 12:34:45 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.flexcore.dto_hibernate.Cliente" table="cliente" catalog="flexcore">
+        <id name="customerIf" type="java.lang.Integer">
+            <column name="customerIF" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="50" not-null="true" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="100" />
+        </property>
+        <property name="telCasa" type="java.lang.Integer">
+            <column name="telCasa" />
+        </property>
+        <property name="telOficina" type="java.lang.Integer">
+            <column name="telOficina" />
+        </property>
+        <property name="celular" type="java.lang.Integer">
+            <column name="celular" />
+        </property>
+        <set name="cuentas" table="cuenta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idCliente" not-null="true" />
+            </key>
+            <one-to-many class="com.flexcore.dto_hibernate.Cuenta" />
+        </set>
+        <one-to-one name="clientefisico" class="com.flexcore.dto_hibernate.Clientefisico"></one-to-one>
+        <one-to-one name="clientejuridico" class="com.flexcore.dto_hibernate.Clientejuridico"></one-to-one>
+    </class>
+</hibernate-mapping>

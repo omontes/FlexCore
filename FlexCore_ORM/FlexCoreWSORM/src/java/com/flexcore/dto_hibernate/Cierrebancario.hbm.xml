@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 17, 2014 12:34:45 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.flexcore.dto_hibernate.Cierrebancario" table="cierrebancario" catalog="flexcore">
+        <id name="idcierreBancario" type="java.lang.Integer">
+            <column name="idcierreBancario" />
+            <generator class="identity" />
+        </id>
+        <property name="fecha" type="timestamp">
+            <column name="fecha" length="19" not-null="true" />
+        </property>
+        <property name="estadoCierre" type="boolean">
+            <column name="estadoCierre" not-null="true" />
+        </property>
+        <property name="cantidadRegistrosModificados" type="java.lang.Integer">
+            <column name="cantidadRegistrosModificados" />
+        </property>
+    </class>
+</hibernate-mapping>

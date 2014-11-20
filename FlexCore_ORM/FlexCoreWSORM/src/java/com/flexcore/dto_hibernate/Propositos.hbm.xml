@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 17, 2014 12:34:45 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.flexcore.dto_hibernate.Propositos" table="propositos" catalog="flexcore">
+        <id name="idcuentaPropositos" type="int">
+            <column name="idcuentaPropositos" />
+            <generator class="assigned" />
+        </id>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="50" not-null="true" />
+        </property>
+        <set name="cuentaahorroautomaticos" table="propositosporcuenta" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="idProposito" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.flexcore.dto_hibernate.Cuentaahorroautomatico">
+                <column name="numCuenta" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="cuentaahorroautomaticos_1" table="cuentaahorroautomatico" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idProposito" not-null="true" />
+            </key>
+            <one-to-many class="com.flexcore.dto_hibernate.Cuentaahorroautomatico" />
+        </set>
+    </class>
+</hibernate-mapping>

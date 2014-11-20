@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 17, 2014 12:34:45 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.flexcore.dto_hibernate.Cuentaahorroautomatico" table="cuentaahorroautomatico" catalog="flexcore">
+        <id name="numCuenta" type="int">
+            <column name="numCuenta" />
+            <generator class="foreign">
+                <param name="property">cuenta</param>
+            </generator>
+        </id>
+        <many-to-one name="propositos" class="com.flexcore.dto_hibernate.Propositos" fetch="select">
+            <column name="idProposito" not-null="true" />
+        </many-to-one>
+        <one-to-one name="cuenta" class="com.flexcore.dto_hibernate.Cuenta" constrained="true"></one-to-one>
+        <many-to-one name="tipostiempo" class="com.flexcore.dto_hibernate.Tipostiempo" fetch="select">
+            <column name="tipoTiempo" not-null="true" />
+        </many-to-one>
+        <property name="tiempoDeducciones" type="int">
+            <column name="tiempoDeducciones" not-null="true" />
+        </property>
+        <property name="fechaInicio" type="timestamp">
+            <column name="fechaInicio" length="19" not-null="true" />
+        </property>
+        <property name="tiempoAhorroMeses" type="int">
+            <column name="tiempoAhorroMeses" not-null="true" />
+        </property>
+        <property name="numCuentaDeduccion" type="java.lang.Integer">
+            <column name="numCuentaDeduccion" />
+        </property>
+        <property name="montoAhorro" type="big_decimal">
+            <column name="montoAhorro" precision="15" not-null="true" />
+        </property>
+        <property name="estadoAhorro" type="boolean">
+            <column name="estadoAhorro" not-null="true" />
+        </property>
+        <property name="fechaUltimaActualizacion" type="timestamp">
+            <column name="fechaUltimaActualizacion" length="19" not-null="true" />
+        </property>
+        <set name="propositoses" table="propositosporcuenta" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="numCuenta" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.flexcore.dto_hibernate.Propositos">
+                <column name="idProposito" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

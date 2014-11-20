@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 17, 2014 12:34:45 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.flexcore.dto_hibernate.Cuenta" table="cuenta" catalog="flexcore">
+        <id name="numCuenta" type="java.lang.Integer">
+            <column name="numCuenta" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="cliente" class="com.flexcore.dto_hibernate.Cliente" fetch="select">
+            <column name="idCliente" not-null="true" />
+        </many-to-one>
+        <property name="saldoTemporal" type="big_decimal">
+            <column name="saldoTemporal" precision="15" not-null="true" />
+        </property>
+        <property name="saldoReal" type="big_decimal">
+            <column name="saldoReal" precision="15" not-null="true" />
+        </property>
+        <property name="estadoCuenta" type="java.lang.Boolean">
+            <column name="estadoCuenta" />
+        </property>
+        <set name="transaccionesvuelos" table="transaccionesvuelo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="numCuenta" not-null="true" />
+            </key>
+            <one-to-many class="com.flexcore.dto_hibernate.Transaccionesvuelo" />
+        </set>
+        <set name="pagosesForIdCuentaDestino" table="pagos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idCuentaDestino" not-null="true" />
+            </key>
+            <one-to-many class="com.flexcore.dto_hibernate.Pagos" />
+        </set>
+        <set name="personasbeneficiariases" table="relacionbenefeciariascuenta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="numCuenta" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.flexcore.dto_hibernate.Personasbeneficiarias">
+                <column name="idPersona" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="dispositivoafiliados" table="dispositivoafiliado" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idCuenta" not-null="true" />
+            </key>
+            <one-to-many class="com.flexcore.dto_hibernate.Dispositivoafiliado" />
+        </set>
+        <one-to-one name="cuentaahorroautomatico" class="com.flexcore.dto_hibernate.Cuentaahorroautomatico"></one-to-one>
+        <set name="retiroses" table="retiros" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idCuenta" not-null="true" />
+            </key>
+            <one-to-many class="com.flexcore.dto_hibernate.Retiros" />
+        </set>
+        <set name="historicotransaccionals" table="historicotransaccional" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="numCuenta" not-null="true" />
+            </key>
+            <one-to-many class="com.flexcore.dto_hibernate.Historicotransaccional" />
+        </set>
+        <one-to-one name="cuentaahorrovista" class="com.flexcore.dto_hibernate.Cuentaahorrovista"></one-to-one>
+        <set name="pagosesForIdCuentaOrigen" table="pagos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idCuentaOrigen" not-null="true" />
+            </key>
+            <one-to-many class="com.flexcore.dto_hibernate.Pagos" />
+        </set>
+    </class>
+</hibernate-mapping>
