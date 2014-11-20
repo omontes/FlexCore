@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Nov 17, 2014 12:34:45 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.flexcore.dto_hibernate.Clientefisico" table="clientefisico" catalog="flexcore">
+        <id name="idClienteFisico" type="int">
+            <column name="idClienteFisico" />
+            <generator class="foreign">
+                <param name="property">cliente</param>
+            </generator>
+        </id>
+        <one-to-one name="cliente" class="com.flexcore.dto_hibernate.Cliente" constrained="true"></one-to-one>
+        <property name="cedula" type="int">
+            <column name="cedula" not-null="true" />
+        </property>
+        <property name="fotografia" type="string">
+            <column name="fotografia" length="45" />
+        </property>
+        <property name="primerApellido" type="string">
+            <column name="primerApellido" length="45" />
+        </property>
+        <property name="segundoApellido" type="string">
+            <column name="segundoApellido" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/flexcore?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">123456</property>
+    <mapping resource="com/flexcore/dto_hibernate/Historicotransaccional.hbm.xml"/>
+    <mapping resource="com/flexcore/dto_hibernate/Personasbeneficiarias.hbm.xml"/>
+    <mapping resource="com/flexcore/dto_hibernate/Tipomovimiento.hbm.xml"/>
+    <mapping resource="com/flexcore/dto_hibernate/Pagos.hbm.xml"/>
+    <mapping resource="com/flexcore/dto_hibernate/Cuenta.hbm.xml"/>
+    <mapping resource="com/flexcore/dto_hibernate/Retiros.hbm.xml"/>
+    <mapping resource="com/flexcore/dto_hibernate/Propositos.hbm.xml"/>
+    <mapping resource="com/flexcore/dto_hibernate/Dispositivoafiliado.hbm.xml"/>
+    <mapping resource="com/flexcore/dto_hibernate/Cierrebancario.hbm.xml"/>
+    <mapping resource="com/flexcore/dto_hibernate/Cuentaahorrovista.hbm.xml"/>
+    <mapping resource="com/flexcore/dto_hibernate/Clientefisico.hbm.xml"/>
+    <mapping resource="com/flexcore/dto_hibernate/Tipostiempo.hbm.xml"/>
+    <mapping resource="com/flexcore/dto_hibernate/Clientejuridico.hbm.xml"/>
+    <mapping resource="com/flexcore/dto_hibernate/Cliente.hbm.xml"/>
+    <mapping resource="com/flexcore/dto_hibernate/Moneda.hbm.xml"/>
+    <mapping resource="com/flexcore/dto_hibernate/Cuentaahorroautomatico.hbm.xml"/>
+    <mapping resource="com/flexcore/dto_hibernate/Transaccionesvuelo.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

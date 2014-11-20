@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="flexcore"/>
+  <table-filter match-name="personasbeneficiarias"/>
+  <table-filter match-name="tipomovimiento"/>
+  <table-filter match-name="transaccionesvuelo"/>
+  <table-filter match-name="moneda"/>
+  <table-filter match-name="historicotransaccional"/>
+  <table-filter match-name="retiros"/>
+  <table-filter match-name="relacionbenefeciariascuenta"/>
+  <table-filter match-name="tipostiempo"/>
+  <table-filter match-name="cuentaahorrovista"/>
+  <table-filter match-name="clientejuridico"/>
+  <table-filter match-name="propositos"/>
+  <table-filter match-name="propositosporcuenta"/>
+  <table-filter match-name="cuentaahorroautomatico"/>
+  <table-filter match-name="dispositivoafiliado"/>
+  <table-filter match-name="cliente"/>
+  <table-filter match-name="pagos"/>
+  <table-filter match-name="cierrebancario"/>
+  <table-filter match-name="cuenta"/>
+  <table-filter match-name="clientefisico"/>
+</hibernate-reverse-engineering>

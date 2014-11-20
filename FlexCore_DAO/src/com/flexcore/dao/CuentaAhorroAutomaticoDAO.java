@@ -38,13 +38,13 @@ public class CuentaAhorroAutomaticoDAO extends ConnectionManager implements Tran
                 CuentaAhorroAutomaticoDTO cuenta = new CuentaAhorroAutomaticoDTO();
                 cuenta.setNumCuenta(rs.getInt("numCuenta"));
                 cuenta.setTiempoDeducciones(rs.getInt("tiempoDeducciones"));
-                cuenta.setTipoTiempoDescripcion(rs.getString("tipoTiempo"));
+                cuenta.setTipoTiempoDescripcion(rs.getString("tipoTiempoDescripcion"));
                 cuenta.setFechaInicio(rs.getDate("fechaInicio"));
                 cuenta.setTiempoAhorroMeses(rs.getInt("tiempoAhorroMeses"));
                 cuenta.setNumCuentaDeduccion(rs.getInt("numCuentaDeduccion"));
                 cuenta.setMontoAhorro(rs.getDouble("montoAhorro"));
                 cuenta.setEstadoAhorro(rs.getBoolean("estadoAhorro"));
-                cuenta.setIdPropositoDescripcion(rs.getString("idProposito"));
+                cuenta.setIdPropositoDescripcion(rs.getString("idPropositoDescripcion"));
                 cuenta.setSaldoReal(rs.getBigDecimal("saldoReal"));
                 cuenta.setSaldoTemporal(rs.getBigDecimal("saldoTemporal"));
                 listaClientes.add(cuenta);
