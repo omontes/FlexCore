@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import java.sql.Statement;
 
@@ -62,6 +63,11 @@ public class Direct_Control_BD_dashboard {
         }**/
 
     }
+     
+     public void cleanDashboard() throws SQLException{
+         String query = "UPDATE commits SET commits = 0, tiempo = 0;";
+         statement.executeQuery(query);
+     }
     
     private String readSql(String filePath) throws IOException {
         InputStream inputfile = Direct_Control_BD_FlexcoreSinOptimizar.class.getClass().getResourceAsStream(filePath);

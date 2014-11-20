@@ -1,13 +1,12 @@
 package com.db.connections;
 
 import java.io.BufferedReader;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
 import java.sql.Connection;
-
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 
@@ -57,6 +56,21 @@ public class Direct_Control_BD_FlexcoreSinOptimizar {
         }**/
 
     }
+     
+     public void flush() throws SQLException{
+         String query = "FLUSH STATUS;";
+         statement.executeQuery(query);
+     }
+     
+     public int getCommits() throws SQLException {
+         int commits = 0;
+         String query = "SHOW SESSION STATUS like 'Com_commit';";
+         ResultSet rs = statement.executeQuery(query);
+         while(rs.next()){
+             commits = rs.getInt("Value");
+         }
+         return commits;
+     }
     
     private String readSql(String filePath) throws IOException {
         InputStream inputfile = Direct_Control_BD_FlexcoreSinOptimizar.class.getClass().getResourceAsStream(filePath);
