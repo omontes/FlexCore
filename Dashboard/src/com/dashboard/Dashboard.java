@@ -10,13 +10,25 @@ package com.dashboard;
  *
  * @author Oscar Montes
  */
-public class Dashboard {
+public class Dashboard implements Runnable{
+  
+  int tiempoSegundos;
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+    
+  public Dashboard(int timeSegundos){
+      tiempoSegundos = timeSegundos;
+  }
+
+   public void run() {
+         System.out.println("Inicio");
+         try {
+            Thread.sleep(tiempoSegundos*1000, 0);
+         } catch (Exception e) {
+              System.out.println(e);
+         }
+         System.out.println("Termino");
+   }
+
+
     
 }
