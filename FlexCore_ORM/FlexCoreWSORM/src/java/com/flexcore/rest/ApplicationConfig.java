@@ -35,6 +35,7 @@ public class ApplicationConfig extends Application {
         resources.add(com.flexcore.rest.CuentaAhorroAutomaticoWS.class);
         resources.add(com.flexcore.rest.CuentaWS.class);
         resources.add(com.flexcore.rest.MonedasWS.class);
+        resources.add(com.flexcore.rest.PagosWS.class);
         resources.add(com.flexcore.rest.PropositosWS.class);
         resources.add(com.flexcore.rest.TiemposWS.class);
     }

@@ -31,6 +31,8 @@ public class Pagos  implements java.io.Serializable {
      private Cuenta cuentaByIdCuentaOrigen;
      private BigDecimal monto;
      private Date fecha;
+     private int idCuentaDestino;
+     private int idCuentaOrigen;
 
     public Pagos() {
     }
@@ -92,6 +94,34 @@ public class Pagos  implements java.io.Serializable {
     
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    /**
+     * @return the idCuentaDestino
+     */
+    public int getIdCuentaDestino() {
+        return idCuentaDestino;
+    }
+
+    /**
+     * @param idCuentaDestino the idCuentaDestino to set
+     */
+    public void setIdCuentaDestino(int idCuentaDestino) {
+        this.idCuentaDestino = idCuentaDestino;
+    }
+
+    /**
+     * @return the idCuentaOrigen
+     */
+    public int getIdCuentaOrigen() {
+        return idCuentaOrigen;
+    }
+
+    /**
+     * @param idCuentaOrigen the idCuentaOrigen to set
+     */
+    public void setIdCuentaOrigen(int idCuentaOrigen) {
+        this.idCuentaOrigen = idCuentaOrigen;
     }
 
 
