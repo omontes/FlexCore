@@ -14,7 +14,6 @@ import com.flexcore.dto_hibernate.Cuentaahorroautomatico;
 import com.flexcore.dto_hibernate.Propositos;
 import com.flexcore.dto_hibernate.Tipostiempo;
 import com.flexcore.hibernate.config.NewHibernateUtil;
-import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,7 +34,7 @@ public class CuentaAhorroAutomaticoDAO implements TransaccionesCuentaAhorroAutom
       this.session = NewHibernateUtil.getCurrentSession();
     }
     @Override
-    public List<Cuentaahorroautomatico> verCuentasAhorroAutomatico(int pagina, String busqueda, int customerIF) throws Exception {
+    public List<Cuentaahorroautomatico> verCuentasAhorroAutomatico(int pagina, String busqueda, int customerIF) {
             List<Cuentaahorroautomatico> listacuentaAhorro = new ArrayList<>();
          
             int datoInicial = (pagina - 1)*10;
@@ -58,7 +57,7 @@ public class CuentaAhorroAutomaticoDAO implements TransaccionesCuentaAhorroAutom
             return listacuentaAhorro;
     }
     @Override
-    public Cuentaahorroautomatico crearCuentaAhorroAutomatico(Cuentaahorroautomatico cuentaAhorro) throws Exception {
+    public Cuentaahorroautomatico crearCuentaAhorroAutomatico(Cuentaahorroautomatico cuentaAhorro) {
         Transaction trans  = session.beginTransaction();
         Cliente client = (Cliente) session.get(Cliente.class, cuentaAhorro.getIdCliente());
         Cuenta cuenta = new Cuenta(client,cuentaAhorro.getSaldoTemporal(),
@@ -87,50 +86,52 @@ public class CuentaAhorroAutomaticoDAO implements TransaccionesCuentaAhorroAutom
         return cuentaAhorro;
     }
 
-   /** @Override
-    public Cuentaahorroautomatico actualizarCuentaAhorroAutomatico(Cuentaahorroautomatico cuenta) throws Exception {
-        CallableStatement preparedCall = null;
-        try {
-            String SQL = "{call actualizarCuentaAhorroAutomatico (?, ?, ?, ?, ?, ?, ?, ?, ?)}";
-            preparedCall = conexion.prepareCall(SQL);
-            preparedCall.setInt(1, cuenta.getNumCuenta());
-            preparedCall.setInt(2, cuenta.getTiempoDeducciones());
-            preparedCall.setInt(3, cuenta.getTipoTiempo());
-            preparedCall.setInt(4, cuenta.getTiempoAhorroMeses());
-            preparedCall.setInt(5, cuenta.getNumCuentaDeduccion());
-            preparedCall.setDouble(6, cuenta.getMontoAhorro());
-            preparedCall.setInt(7, cuenta.getIdProposito());
-            preparedCall.setBigDecimal(8,cuenta.getSaldoReal());
-            preparedCall.setBigDecimal(9,cuenta.getSaldoTemporal());
-            preparedCall.executeUpdate();
-            preparedCall.close();
-        }
-    catch (Exception e) {
-            e.printStackTrace();
-        throw new RuntimeException(e);
-    }finally {
-            this.cerrarConexion();
-    }
-    return cuenta ;
+    @Override
+    public Cuentaahorroautomatico actualizarCuentaAhorroAutomatico(Cuentaahorroautomatico cuentaAuto)  {
+       
+        Transaction trans = session.beginTransaction();
+              
+        Cuentaahorroautomatico cuentaAhorroAutomatico = (Cuentaahorroautomatico)
+                session.get(Cuentaahorroautomatico.class, cuentaAuto.getNumCuenta());
+       
+        Tipostiempo tiempo = (Tipostiempo) session.get(Tipostiempo.class, cuentaAuto.getTipoTiempo());
+        cuentaAhorroAutomatico.setTipostiempo(tiempo);
+        
+        
+       
+        
+        cuentaAhorroAutomatico.setTiempoDeducciones(cuentaAuto.getTiempoDeducciones());
+        cuentaAhorroAutomatico.setTiempoAhorroMeses(cuentaAuto.getTiempoAhorroMeses());
+        cuentaAhorroAutomatico.setNumCuentaDeduccion(cuentaAuto.getNumCuentaDeduccion());
+        cuentaAhorroAutomatico.setMontoAhorro(cuentaAuto.getMontoAhorro());
+        
+        Propositos proposito = (Propositos) session.get(Propositos.class, cuentaAuto.getIdProposito());
+        cuentaAhorroAutomatico.setPropositos(proposito);
+        
+        cuentaAhorroAutomatico.setNumCuenta(cuentaAuto.getNumCuenta());
+        Cuenta cuenta = cuentaAhorroAutomatico.getCuenta();
+        cuenta.setSaldoReal(cuentaAuto.getSaldoReal());
+        cuenta.setSaldoTemporal(cuentaAuto.getSaldoTemporal());
+        session.merge(cuenta);
+        session.merge(cuentaAhorroAutomatico);
+             
+        trans.commit();
+        session.close();
+        return cuentaAuto;
+   
+       
     }
 
     @Override
-    public void eliminarCuentaAhorroAutomatico(int numCuenta) throws Exception {
-        CallableStatement preparedCall = null;
-        try {
-            String SQL = "{call eliminarCuentaAhorroAutomatico (?)}";
-            preparedCall = conexion.prepareCall(SQL);
-            preparedCall.setInt(1, numCuenta);
-            preparedCall.executeUpdate();
-            preparedCall.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-	       } finally {
-            this.cerrarConexion();
-        }
+    public void eliminarCuentaAhorroAutomatico(int numCuenta) {
+        Transaction trans = session.beginTransaction();
+        Cuenta cuenta = (Cuenta) session.get(Cuenta.class, numCuenta);
+        session.delete(cuenta);
+        trans.commit();
+        session.close();
+
     }
-    **/
+    
 
     public int obtenerCantidadCuentasAhorroAutomatico(String entrada, int customerIF) {
         int cantidadCuentasAhorro = 0;

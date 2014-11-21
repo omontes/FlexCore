@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.List;
 import javax.naming.NamingException;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -75,7 +76,7 @@ public class CuentaAhorroAutomaticoWS {
         CuentaAhorroAutomaticoDAO cliente_dao = new CuentaAhorroAutomaticoDAO();
         return cliente_dao.crearCuentaAhorroAutomatico(cuentaAhorroAutomatico);
     }
-    /**
+    
     @POST
     @Path("/updateAuto")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
@@ -91,5 +92,5 @@ public class CuentaAhorroAutomaticoWS {
     public void deleteCuentaAhorroAutomatico(@PathParam("id") int numCuenta) throws SQLException, NamingException, Exception {
 		CuentaAhorroAutomaticoDAO cuenta_dao = new CuentaAhorroAutomaticoDAO();
                 cuenta_dao.eliminarCuentaAhorroAutomatico(numCuenta);
-    }**/
+    }
 }
