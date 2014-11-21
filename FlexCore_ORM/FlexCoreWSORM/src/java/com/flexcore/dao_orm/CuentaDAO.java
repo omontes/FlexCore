@@ -9,6 +9,8 @@ package com.flexcore.dao_orm;
 
 import com.flexcore.dao_interfaces.TransaccionesCuenta;
 import com.flexcore.dto_hibernate.Cuenta;
+import com.flexcore.dto_hibernate.Cuentaahorroautomatico;
+import com.flexcore.dto_hibernate.Cuentaahorrovista;
 import com.flexcore.hibernate.config.NewHibernateUtil;
 import java.math.BigDecimal;
 import java.sql.CallableStatement;
@@ -95,6 +97,21 @@ public class CuentaDAO implements TransaccionesCuenta  {
         trans.commit();
         session.close();
         return saldo;
+    }
+
+    public void eliminarCuenta(int numCuenta) {
+        Transaction trans = session.beginTransaction();
+        Cuenta cuenta = (Cuenta) session.get(Cuenta.class, numCuenta);
+        Cuentaahorroautomatico cuentaAuto = cuenta.getCuentaahorroautomatico();
+        Cuentaahorrovista cuentaVista = cuenta.getCuentaahorrovista();
+        if(cuentaAuto!=null){
+        session.delete(cuentaAuto);}
+        if(cuentaVista!=null){
+            session.delete(cuentaVista);
+        }
+        session.delete(cuenta);
+        trans.commit();
+        session.close();
     }
     
 }

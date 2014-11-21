@@ -12,10 +12,12 @@ import com.flexcore.dto_hibernate.Cuenta;
 import com.google.gson.Gson;
 import java.math.BigDecimal;
 import java.util.List;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 
 /**
@@ -96,12 +98,12 @@ public class CuentaWS {
         CuentaDAO cuenta_dao = new CuentaDAO();
         return cuenta_dao.actualizarCuenta(cuenta);
     }
-    
+    **/
     @DELETE 
     @Path("{id}")
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    public void deleteCuentaAhorroVista(@PathParam("id") int numCuenta) throws SQLException, NamingException, Exception {
+    public void deleteCuentaAhorroVista(@PathParam("id") int numCuenta){
 		CuentaDAO cuenta_dao = new CuentaDAO();
                 cuenta_dao.eliminarCuenta(numCuenta);
-    }**/
+    }
 }
