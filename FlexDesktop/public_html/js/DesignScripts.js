@@ -1,5 +1,5 @@
 
-    var rootURL = "http://localhost:8080/FlexCoreWSORM/webresources/";
+    var rootURL = "http://localhost:8080/FlexCoreWS/webresources/";
 
 $(document).ready(function() {
     

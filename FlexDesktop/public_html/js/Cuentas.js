@@ -448,11 +448,7 @@ $(document).ready(function() {
             $('#edit-pagos').modal();
         }
     });
-    $(".btn-pago-post").click(function() {
-        $('#edit-pagos').modal('hide');
-        postPago();
-    });
-
+ 
     $('#cue-auto tbody').on('click', 'td.edit', function() {
         var tr = $(this).closest('tr');
         var row = table_auto.row(tr);
