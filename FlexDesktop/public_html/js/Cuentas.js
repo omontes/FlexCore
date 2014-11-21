@@ -34,7 +34,7 @@ $(document).ready(function() {
             success: function(data) {
                 var out = "";
                 for (var i = 0; i < data.length; i++) {
-                    out += '<option value=' + data[i].idTiempo + '>' + data[i].Descripcion + '</option>';
+                    out += '<option value=' + data[i].idTiempo + '>' + data[i].descripcion + '</option>';
                 }
                 $("#tipotiempo").html(out);
             }

@@ -22,7 +22,7 @@ public class Tipostiempo  implements java.io.Serializable {
 
 
      private int idTiempo;
-     private String descripcion;
+     private String Descripcion;
      private Set cuentaahorroautomaticos = new HashSet(0);
 
     public Tipostiempo() {
@@ -34,7 +34,7 @@ public class Tipostiempo  implements java.io.Serializable {
     }
     public Tipostiempo(int idTiempo, String descripcion, Set cuentaahorroautomaticos) {
        this.idTiempo = idTiempo;
-       this.descripcion = descripcion;
+       this.Descripcion = descripcion;
        this.cuentaahorroautomaticos = cuentaahorroautomaticos;
     }
    
@@ -53,11 +53,11 @@ public class Tipostiempo  implements java.io.Serializable {
     
     @Column(name="descripcion", length=45)
     public String getDescripcion() {
-        return this.descripcion;
+        return this.Descripcion;
     }
     
     public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+        this.Descripcion = descripcion;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="tipostiempo")

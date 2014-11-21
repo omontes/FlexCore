@@ -11,9 +11,13 @@ import com.flexcore.dao_interfaces.TransaccionesCuentaAhorroAutomatico;
 import com.flexcore.dto_hibernate.Cliente;
 import com.flexcore.dto_hibernate.Cuenta;
 import com.flexcore.dto_hibernate.Cuentaahorroautomatico;
+import com.flexcore.dto_hibernate.Propositos;
+import com.flexcore.dto_hibernate.Tipostiempo;
 import com.flexcore.hibernate.config.NewHibernateUtil;
+import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -59,10 +63,26 @@ public class CuentaAhorroAutomaticoDAO implements TransaccionesCuentaAhorroAutom
         Cliente client = (Cliente) session.get(Cliente.class, cuentaAhorro.getIdCliente());
         Cuenta cuenta = new Cuenta(client,cuentaAhorro.getSaldoTemporal(),
                 cuentaAhorro.getSaldoReal());
-        cuentaAhorro.setCuenta(cuenta);
-        session.save(cuentaAhorro);
+        cuenta.setEstadoCuenta(true);
+        session.save(cuenta);
+        Propositos proposito = (Propositos) session.get(Propositos.class, cuentaAhorro.getIdProposito());
+        Tipostiempo tipotiempo = (Tipostiempo) session.get(Tipostiempo.class, cuentaAhorro.getTipoTiempo());
+        Date date = new Date();
+        Cuentaahorroautomatico Cauto = new Cuentaahorroautomatico(
+                    proposito,
+                    null,
+                    tipotiempo,
+                    cuentaAhorro.getTiempoDeducciones(),
+                    date, 
+                    cuentaAhorro.getTiempoAhorroMeses(), 
+                    cuentaAhorro.getMontoAhorro(),
+                    true, 
+                    date);
+        Cauto.setNumCuenta(cuenta.getNumCuenta());
+        Cauto.setCuenta(cuenta);
+        Cauto.setNumCuentaDeduccion(cuentaAhorro.getNumCuentaDeduccion());
+        session.save(Cauto);
         trans.commit();
-        
         session.close();
         return cuentaAhorro;
     }
@@ -115,7 +135,7 @@ public class CuentaAhorroAutomaticoDAO implements TransaccionesCuentaAhorroAutom
     public int obtenerCantidadCuentasAhorroAutomatico(String entrada, int customerIF) {
         int cantidadCuentasAhorro = 0;
         Transaction trans = session.beginTransaction();
-        Query q = session.createSQLQuery(" { call obtenerCantidadCuentasAhorroAutomatico (?) }");
+        Query q = session.createSQLQuery(" { call obtenerCantidadCuentasAhorroAutomatico (?,?) }");
         q.setString(0, entrada);  
         q.setInteger(1, customerIF);  
         q.executeUpdate();

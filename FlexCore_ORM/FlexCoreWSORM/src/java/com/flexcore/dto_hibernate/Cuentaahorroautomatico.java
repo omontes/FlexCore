@@ -46,6 +46,8 @@ public class Cuentaahorroautomatico extends Cuenta implements java.io.Serializab
      private Date fechaUltimaActualizacion;
      private Set propositoses = new HashSet(0);
      private int idCliente;
+     private int idProposito;
+     private int tipoTiempo;
     public Cuentaahorroautomatico() {
     }
 
@@ -202,6 +204,34 @@ public class Cuentaahorroautomatico extends Cuenta implements java.io.Serializab
     
     public void setPropositoses(Set propositoses) {
         this.propositoses = propositoses;
+    }
+
+    /**
+     * @return the idProposito
+     */
+    public int getIdProposito() {
+        return idProposito;
+    }
+
+    /**
+     * @param idProposito the idProposito to set
+     */
+    public void setIdProposito(int idProposito) {
+        this.idProposito = idProposito;
+    }
+
+    /**
+     * @return the tipoTiempo
+     */
+    public int getTipoTiempo() {
+        return tipoTiempo;
+    }
+
+    /**
+     * @param tipoTiempo the tipoTiempo to set
+     */
+    public void setTipoTiempo(int tipoTiempo) {
+        this.tipoTiempo = tipoTiempo;
     }
 
 

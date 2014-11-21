@@ -12,7 +12,7 @@ package com.flexcore.dto;
  */
 public class TiemposDTO {
     private int idTiempo;
-    private String Descripcion;
+    private String descripcion;
 
     /**
      * @return the idTiempo
@@ -29,16 +29,16 @@ public class TiemposDTO {
     }
 
     /**
-     * @return the Descripcion
+     * @return the descripcion
      */
     public String getDescripcion() {
-        return Descripcion;
+        return descripcion;
     }
 
     /**
-     * @param Descripcion the Descripcion to set
+     * @param Descripcion the descripcion to set
      */
     public void setDescripcion(String Descripcion) {
-        this.Descripcion = Descripcion;
+        this.descripcion = Descripcion;
     }
 }
