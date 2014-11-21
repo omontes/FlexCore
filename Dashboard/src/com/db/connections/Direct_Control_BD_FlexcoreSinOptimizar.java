@@ -5,9 +5,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 
@@ -64,13 +67,15 @@ public class Direct_Control_BD_FlexcoreSinOptimizar {
      
      public int getCommits() throws SQLException {
          int commits = 0;
-         String query = "SHOW SESSION STATUS like 'Com_commit';";
+         String query = "SHOW GLOBAL STATUS like 'Com_commit';";
          ResultSet rs = statement.executeQuery(query);
          while(rs.next()){
              commits = rs.getInt("Value");
+           
          }
          return commits;
      }
+    
     
     private String readSql(String filePath) throws IOException {
         InputStream inputfile = Direct_Control_BD_FlexcoreSinOptimizar.class.getClass().getResourceAsStream(filePath);

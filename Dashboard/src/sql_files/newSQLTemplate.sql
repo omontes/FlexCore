@@ -1,0 +1,1 @@
+SHOW GLOBAL STATUS like 'Com_commit';

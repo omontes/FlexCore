@@ -12,9 +12,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 
@@ -26,7 +29,7 @@ public class Direct_Control_BD_dashboard {
     private final Connection conection;
     private final Statement statement;
     public Object[][] infoFact;
-    private static Direct_Control_BD_FlexcoreSinOptimizar AdminBD;
+    private static Direct_Control_BD_dashboard AdminBD;
 
     public Direct_Control_BD_dashboard (Connection conection, Statement statement) {
         this.conection = conection;
@@ -34,38 +37,29 @@ public class Direct_Control_BD_dashboard {
 
     }
 
-    public static Direct_Control_BD_FlexcoreSinOptimizar getInstance() {
+    public static Direct_Control_BD_dashboard getInstance() {
         if (AdminBD == null) {
-            Setting_Up_BD_flexcoreOptimizado setting = new Setting_Up_BD_flexcoreOptimizado();
-            AdminBD = new Direct_Control_BD_FlexcoreSinOptimizar(setting.getConection(), setting.getStatement());
+            Setting_Up_BD_dashboard setting = new Setting_Up_BD_dashboard();
+            AdminBD = new Direct_Control_BD_dashboard(setting.getConection(), setting.getStatement());
         }
         return AdminBD;
     }
 
-     public void valorInventario(String UbicacionInv) {// esta bien
-       /** try {
-
-            String valorInventario = this.readSql("/sql_files/ValorInventario.sql");
-            PreparedStatement stm = this.conection.prepareStatement(valorInventario);
-            stm.setString(1, UbicacionInv);
-            ResultSet resultset = stm.executeQuery();
-            //Imprime el resultado obtenido del valor del inventario
-            while (resultset.next()) {
-                System.out.println(resultset.getString(1)
-                        + "||" + resultset.getString(2) + "||"
-                        + resultset.getInt(3)
-                        + "||" + resultset.getInt(4) + "||"
-                        + resultset.getInt(5));
-            }
-
-        } catch (Exception e) {
-            System.out.println("Error al obtener el valor del inventario");
-        }**/
-
-    }
-     
+     public void insertCommit(int project, int time, int commits){
+          String query = "INSERT INTO commits(commits,tiempo,idProyecto)\n" +
+            "VALUES (?,?,?);";
+        try {
+            PreparedStatement stm = conection.prepareStatement(query);
+            stm.setInt(1, commits);
+            stm.setInt(2, time);
+            stm.setInt(3, project);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Direct_Control_BD_FlexcoreSinOptimizar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     }
      public void cleanDashboard() throws SQLException{
-         String query = "UPDATE commits SET commits = 0, tiempo = 0;";
+         String query = "DELETE from commits;";
          statement.executeQuery(query);
      }
     
