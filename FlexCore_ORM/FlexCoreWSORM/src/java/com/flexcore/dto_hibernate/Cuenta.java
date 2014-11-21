@@ -39,7 +39,8 @@ public class Cuenta  implements java.io.Serializable {
      private Set historicotransaccionals = new HashSet(0);
      private Cuentaahorrovista cuentaahorrovista;
      private Set pagosesForIdCuentaOrigen = new HashSet(0);
-
+     private int idCliente;
+     private boolean isNULL;
     public Cuenta() {
     }
 
@@ -196,6 +197,34 @@ public class Cuenta  implements java.io.Serializable {
     
     public void setPagosesForIdCuentaOrigen(Set pagosesForIdCuentaOrigen) {
         this.pagosesForIdCuentaOrigen = pagosesForIdCuentaOrigen;
+    }
+
+    /**
+     * @return the idCliente
+     */
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    /**
+     * @param idCliente the idCliente to set
+     */
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    /**
+     * @return the isNULL
+     */
+    public boolean isIsNULL() {
+        return isNULL;
+    }
+
+    /**
+     * @param isNULL the isNULL to set
+     */
+    public void setIsNULL(boolean isNULL) {
+        this.isNULL = isNULL;
     }
 
 

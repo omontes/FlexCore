@@ -33,6 +33,7 @@ public class ApplicationConfig extends Application {
         resources.add(com.flexcore.corsfilter.CorsFilter.class);
         resources.add(com.flexcore.rest.ClientesWS.class);
         resources.add(com.flexcore.rest.CuentaAhorroAutomaticoWS.class);
+        resources.add(com.flexcore.rest.CuentaWS.class);
         resources.add(com.flexcore.rest.MonedasWS.class);
         resources.add(com.flexcore.rest.PropositosWS.class);
         resources.add(com.flexcore.rest.TiemposWS.class);

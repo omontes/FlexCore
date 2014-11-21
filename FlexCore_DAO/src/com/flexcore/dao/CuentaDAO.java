@@ -125,7 +125,7 @@ public class CuentaDAO extends ConnectionManager implements TransaccionesCuenta 
             boolean isNULL = false;
             while (rs.next()) {
                 cuenta.setNumCuenta(rs.getInt("numCuenta"));
-                cuenta.setEstadoCuenta(rs.getBoolean("estadoAhorro"));
+                cuenta.setEstadoCuenta(rs.getBoolean("estadoCuenta"));
                 isNULL = rs.getBoolean("isNull");
             }
             statement.close();
