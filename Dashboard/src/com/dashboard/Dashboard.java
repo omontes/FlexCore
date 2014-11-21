@@ -50,7 +50,7 @@ public class Dashboard implements Runnable{
                 }
                 //INSERTA LOS COMMITS DE LA BASE SIN OPTIMIZAR
                 commitsActuales = adminBDSinOptmizar.getCommits() - commitsAnterior;
-                adminBDDashboard.insertCommit(4, tiempoSegundos, commitsActuales);
+                adminBDDashboard.insertCommit(4, tiempoSegundos, commitsActuales, i);
 
             }
             System.out.println("Termino");

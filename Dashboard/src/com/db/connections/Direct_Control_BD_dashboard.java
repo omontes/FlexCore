@@ -45,14 +45,15 @@ public class Direct_Control_BD_dashboard {
         return AdminBD;
     }
 
-     public void insertCommit(int project, int time, int commits){
-          String query = "INSERT INTO commits(commits,tiempo,idProyecto)\n" +
-            "VALUES (?,?,?);";
+     public void insertCommit(int project, int time, int commits, int indice){
+          String query = "INSERT INTO commits(commits,tiempo,idProyecto, indice)\n" +
+            "VALUES (?,?,?,?);";
         try {
             PreparedStatement stm = conection.prepareStatement(query);
             stm.setInt(1, commits);
             stm.setInt(2, time);
             stm.setInt(3, project);
+            stm.setInt(4, indice);
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(Direct_Control_BD_FlexcoreSinOptimizar.class.getName()).log(Level.SEVERE, null, ex);
