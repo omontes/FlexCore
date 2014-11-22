@@ -23,6 +23,7 @@ public class PagosDAO extends ConnectionManager implements TransaccionesPagos {
     public PagosDTO crearPago(PagosDTO pago) throws Exception {
         CallableStatement preparedCall = null;
         try {
+             System.out.println("call crearPago SIN ORM");
              String SQL = "{call crearPago (?, ?, ?)}";
              preparedCall = conexion.prepareCall(SQL);
              preparedCall.setInt(1, pago.getIdCuentaOrigen());

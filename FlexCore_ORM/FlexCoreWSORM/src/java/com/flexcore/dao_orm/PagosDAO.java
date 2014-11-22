@@ -36,7 +36,7 @@ public class PagosDAO implements TransaccionesPagos {
 
         Transaction trans  = session.beginTransaction();
      
-        Query q = session.createSQLQuery(" { call crearPago (?, ?, ?) }")
+        Query q = session.createSQLQuery(" { call crearPagoORM (?, ?, ?) }")
                 .setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
         q.setInteger(0,pago.getIdCuentaOrigen()); 
         q.setInteger(1,pago.getIdCuentaDestino()); 

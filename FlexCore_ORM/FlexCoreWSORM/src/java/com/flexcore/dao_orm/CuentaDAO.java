@@ -40,7 +40,7 @@ public class CuentaDAO implements TransaccionesCuenta  {
         Transaction trans = session.beginTransaction();
 
         Query q = session.createSQLQuery(" { call obtenerCuentas (?) }")
-                .setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+                 .setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
         q.setInteger(0, customerIF);
         q.executeUpdate();
 
