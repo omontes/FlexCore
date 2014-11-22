@@ -7,6 +7,7 @@
 package com.flexcore.REST;
 
 import com.flexcore.dao.CuentaDAO;
+import com.flexcore.dto.CuentaAUXDTO;
 import com.flexcore.dto.CuentaDTO;
 import com.google.gson.Gson;
 import java.math.BigDecimal;
@@ -40,7 +41,7 @@ public class CuentaWS {
         String feeds = null;
         try {
             CuentaDAO cuenta_dao = new CuentaDAO();
-            ArrayList<CuentaDTO> feedData = null;
+            ArrayList<CuentaAUXDTO> feedData = null;
             feedData=cuenta_dao.verCuentas(customerIF);
             Gson gson = new Gson();
             feeds = gson.toJson(feedData);

@@ -6,6 +6,7 @@
 
 package com.flexcore.dao_interfaces;
 
+import com.flexcore.dto.CuentaAUXDTO;
 import com.flexcore.dto.CuentaDTO;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
  * @author Carlos
  */
 public interface TransaccionesCuenta {
-    ArrayList<CuentaDTO> verCuentas(int customerIF) throws Exception;
+    ArrayList<CuentaAUXDTO> verCuentas(int customerIF) throws Exception;
     CuentaDTO crearCuenta(CuentaDTO cuenta) throws Exception;
     CuentaDTO actualizarCuenta(CuentaDTO cuenta) throws Exception;
     void eliminarCuenta(int numCuenta) throws Exception;

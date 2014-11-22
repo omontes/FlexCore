@@ -8,6 +8,7 @@ package com.flexcore.dao;
 
 import com.flexcore.connection_manager.ConnectionManager;
 import com.flexcore.dao_interfaces.TransaccionesCuenta;
+import com.flexcore.dto.CuentaAUXDTO;
 import com.flexcore.dto.CuentaDTO;
 import java.math.BigDecimal;
 import java.sql.CallableStatement;
@@ -21,8 +22,8 @@ import java.util.ArrayList;
 public class CuentaDAO extends ConnectionManager implements TransaccionesCuenta  {
 
     @Override
-    public ArrayList<CuentaDTO> verCuentas(int customerIF) throws Exception {
-        ArrayList<CuentaDTO> listaCuentas = new ArrayList<>();
+    public ArrayList<CuentaAUXDTO> verCuentas(int customerIF) throws Exception {
+        ArrayList<CuentaAUXDTO> listaCuentas = new ArrayList<>();
         CallableStatement preparedCall = null;
          try{
             String SQL = "{call obtenerCuentas (?)}";
@@ -30,7 +31,7 @@ public class CuentaDAO extends ConnectionManager implements TransaccionesCuenta 
             preparedCall.setInt(1, customerIF);
             ResultSet rs =  preparedCall.executeQuery();
             while (rs.next()) {
-                CuentaDTO cuenta = new CuentaDTO();
+                CuentaAUXDTO cuenta = new CuentaAUXDTO();
                 cuenta.setNumCuenta(rs.getInt("numCuenta"));
                 listaCuentas.add(cuenta);
             }
