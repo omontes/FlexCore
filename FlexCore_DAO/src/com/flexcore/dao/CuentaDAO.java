@@ -32,10 +32,6 @@ public class CuentaDAO extends ConnectionManager implements TransaccionesCuenta 
             while (rs.next()) {
                 CuentaDTO cuenta = new CuentaDTO();
                 cuenta.setNumCuenta(rs.getInt("numCuenta"));
-                cuenta.setIdCliente(rs.getInt("idCliente"));
-                cuenta.setSaldoTemporal(rs.getDouble("saldoTemporal"));
-                cuenta.setSaldoReal(rs.getDouble("saldoReal"));
-                cuenta.setEstadoCuenta(rs.getBoolean("estadoCuenta"));
                 listaCuentas.add(cuenta);
             }
             statement.close();
