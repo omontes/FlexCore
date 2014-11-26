@@ -5,7 +5,7 @@ var rootURL = "http://localhost:8080/FlexCoreWSORM/webresources";
 
 //postClienteFisico();
 
-getClientes();
+postClienteFisico();
 //GET
 function getClientes() {
     //console.log('getClientes');
@@ -15,8 +15,8 @@ function getClientes() {
         type: 'GET',
         //url: rootURL + "/cuentaAhorroAutomatico/getCuentasAhorroAutomatico/1/1"
         //url: rootURL + "/cuentaAhorroAutomatico/getCuentasAutoPaginadosBusqueda/1/ALL/1234",
-        url: rootURL + "/cuenta/getCuentas/300000",
-        
+        //url: rootURL + "/cuenta/getCuentas/30",
+        url: rootURL + "/tiempos/getTiempos",
         dataType: "json",
         success: function(data) {
             $('#h1').append("Consulta Realizada");
@@ -31,7 +31,7 @@ function postClienteFisico() {
     $.ajax({
         type: 'POST',
         contentType: 'application/json',
-        url: rootURL + "/clientes/crearClientesFisicos",
+        url: rootURL + "/cuentaAhorroAutomatico/crearCuentaAhorroAutomatico",
         dataType: "json",
         data: clienteFisicoToJSON(),
          success: function(data) {
@@ -45,17 +45,27 @@ function postClienteFisico() {
 //JSON de cliente Fisico
 function clienteFisicoToJSON() {
     var ol = JSON.stringify({
-        "customerIF": "003",
-        "nombre": "Maria",
-        "direccion": "Barrio Escalante",
-        "telCasa": "22920",
-        "telOficina": "311821",
-        "celular": "343354",
-        "cedula": "198211",
-        "fotografia": "not available",
-        "primerApellido": "del",
-        "segundoApellido": "mar",
-    });
+        "@type":"cuentaahorroautomatico",
+        "isNULL":false,
+        "cuenta":
+                {   "cliente":{
+                       "customerIF":1234,
+                     },
+                    "estadoCuenta":true,
+                    "isNULL":false,
+                    "saldoReal":1000,
+                    "saldoTemporal":1000},
+         "estadoAhorro":true,
+         "montoAhorro":7777,
+         "numCuentaDeduccion":25,
+         "propositos":
+                 {  "idcuentaPropositos":1
+                },
+        "tiempoAhorroMeses":10,
+        "tiempoDeducciones":10,
+        "tipostiempo":{"idTiempo":3}
+    }
+    );
     alert(ol);
     return ol;
 }

@@ -33,6 +33,7 @@ public class CuentaAhorroAutomaticoDAO implements TransaccionesCuentaAhorroAutom
         
       this.session = NewHibernateUtil.getCurrentSession();
     }
+   
     @Override
     public List<Cuentaahorroautomatico> verCuentasAhorroAutomatico(int pagina, String busqueda, int customerIF) {
             List<Cuentaahorroautomatico> listacuentaAhorro = new ArrayList<>();
@@ -43,7 +44,9 @@ public class CuentaAhorroAutomaticoDAO implements TransaccionesCuentaAhorroAutom
             Transaction trans  = session.beginTransaction();
      
             Query q = session.createSQLQuery(" { call obtenerCuentasAhorroAutomatico(?,?,?,?) }")
-                    .setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+                    .setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP)
+                    
+                    ;
             q.setInteger(0,datoInicial); 
             q.setInteger(1,datoFinal); 
             q.setString(2,busqueda);
@@ -59,6 +62,7 @@ public class CuentaAhorroAutomaticoDAO implements TransaccionesCuentaAhorroAutom
     @Override
     public Cuentaahorroautomatico crearCuentaAhorroAutomatico(Cuentaahorroautomatico cuentaAhorro) {
         Transaction trans  = session.beginTransaction();
+        /**System.out.println(cuentaAhorro.getIdCliente());
         Cliente client = (Cliente) session.get(Cliente.class, cuentaAhorro.getIdCliente());
         Cuenta cuenta = new Cuenta(client,cuentaAhorro.getSaldoTemporal(),
                 cuentaAhorro.getSaldoReal());
@@ -79,8 +83,22 @@ public class CuentaAhorroAutomaticoDAO implements TransaccionesCuentaAhorroAutom
                     date);
         Cauto.setNumCuenta(cuenta.getNumCuenta());
         Cauto.setCuenta(cuenta);
-        Cauto.setNumCuentaDeduccion(cuentaAhorro.getNumCuentaDeduccion());
-        session.save(Cauto);
+        Cauto.setNumCuentaDeduccion(cuentaAhorro.getNumCuentaDeduccion());**/
+        
+        /**Cambiar por Cauto **/
+        System.out.println("LLEGOOOOOOOOOOO AQUII");
+        System.out.println("Cuenta num cuenta");
+        //System.out.println(cuentaAhorro.getCuenta().getNumCuenta());
+        System.out.println("Cuenta");
+        //System.out.println(cuentaAhorro.getNumCuenta());
+        System.out.println("Cliente");
+        System.out.println(cuentaAhorro.getCuenta().getCliente().getCustomerIF());
+        System.out.println("Propositos Descripcion");
+        System.out.println(cuentaAhorro.getPropositos().getIdcuentaPropositos());
+        System.out.println("Cuenta deduccion");
+        System.out.println(cuentaAhorro.getNumCuentaDeduccion());
+        session.save(cuentaAhorro.getCuenta());
+        session.save(cuentaAhorro);
         trans.commit();
         session.close();
         return cuentaAhorro;

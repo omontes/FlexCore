@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 
 /**
@@ -70,6 +72,7 @@ public class Cuenta  implements java.io.Serializable {
 
     
     @Column(name="numCuenta", unique=true, nullable=false)
+    @XmlElement
     public Integer getNumCuenta() {
         return this.numCuenta;
     }
@@ -80,6 +83,7 @@ public class Cuenta  implements java.io.Serializable {
 
 @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="idCliente", nullable=false)
+    //@XmlTransient
     public Cliente getCliente() {
         return this.cliente;
     }
@@ -90,6 +94,7 @@ public class Cuenta  implements java.io.Serializable {
 
     
     @Column(name="saldoTemporal", nullable=false, precision=15)
+    @XmlElement
     public BigDecimal getSaldoTemporal() {
         return this.saldoTemporal;
     }
@@ -100,6 +105,7 @@ public class Cuenta  implements java.io.Serializable {
 
     
     @Column(name="saldoReal", nullable=false, precision=15)
+    @XmlElement
     public BigDecimal getSaldoReal() {
         return this.saldoReal;
     }
@@ -110,6 +116,7 @@ public class Cuenta  implements java.io.Serializable {
 
     
     @Column(name="estadoCuenta")
+    @XmlElement
     public Boolean getEstadoCuenta() {
         return this.estadoCuenta;
     }
@@ -117,8 +124,8 @@ public class Cuenta  implements java.io.Serializable {
     public void setEstadoCuenta(Boolean estadoCuenta) {
         this.estadoCuenta = estadoCuenta;
     }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="cuenta")
+    @XmlTransient
+    @OneToMany(fetch=FetchType.LAZY, mappedBy="cuenta")
     public Set<Transaccionesvuelo> getTransaccionesvuelos() {
         return this.transaccionesvuelos;
     }
@@ -128,6 +135,7 @@ public class Cuenta  implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="cuentaByIdCuentaDestino")
+ @XmlTransient
     public Set<Pagos> getPagosesForIdCuentaDestino() {
         return this.pagosesForIdCuentaDestino;
     }
@@ -137,6 +145,7 @@ public class Cuenta  implements java.io.Serializable {
     }
 
 @ManyToMany(fetch=FetchType.LAZY, mappedBy="cuentas")
+ @XmlTransient
     public Set<Personasbeneficiarias> getPersonasbeneficiariases() {
         return this.personasbeneficiariases;
     }
@@ -146,6 +155,7 @@ public class Cuenta  implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="cuenta")
+ @XmlTransient
     public Set<Dispositivoafiliado> getDispositivoafiliados() {
         return this.dispositivoafiliados;
     }
@@ -155,6 +165,7 @@ public class Cuenta  implements java.io.Serializable {
     }
 
 @OneToOne(fetch=FetchType.LAZY, mappedBy="cuenta")
+ @XmlTransient
     public Cuentaahorroautomatico getCuentaahorroautomatico() {
         return this.cuentaahorroautomatico;
     }
@@ -164,6 +175,7 @@ public class Cuenta  implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="cuenta")
+ @XmlTransient
     public Set<Retiros> getRetiroses() {
         return this.retiroses;
     }
@@ -173,6 +185,7 @@ public class Cuenta  implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="cuenta")
+ @XmlTransient
     public Set<Historicotransaccional> getHistoricotransaccionals() {
         return this.historicotransaccionals;
     }
@@ -182,6 +195,7 @@ public class Cuenta  implements java.io.Serializable {
     }
 
 @OneToOne(fetch=FetchType.LAZY, mappedBy="cuenta")
+ @XmlTransient
     public Cuentaahorrovista getCuentaahorrovista() {
         return this.cuentaahorrovista;
     }
@@ -191,6 +205,7 @@ public class Cuenta  implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="cuentaByIdCuentaOrigen")
+ @XmlTransient
     public Set<Pagos> getPagosesForIdCuentaOrigen() {
         return this.pagosesForIdCuentaOrigen;
     }
@@ -202,6 +217,7 @@ public class Cuenta  implements java.io.Serializable {
     /**
      * @return the idCliente
      */
+     @XmlElement
     public int getIdCliente() {
         return idCliente;
     }
@@ -216,6 +232,7 @@ public class Cuenta  implements java.io.Serializable {
     /**
      * @return the isNULL
      */
+    @XmlElement
     public boolean isIsNULL() {
         return isNULL;
     }

@@ -8,6 +8,7 @@ package com.flexcore.rest;
 
 import com.flexcore.dao_orm.TiemposDAO;
 import com.flexcore.dto_hibernate.Tipostiempo;
+import com.flexcore.hibernate.config.HibernateProxyTypeAdapter;
 import com.flexcore.hibernate.config.TipostiempoAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -37,9 +38,16 @@ public class TiemposWS {
             GsonBuilder gsonBuilder = new GsonBuilder();
             Gson gson = gsonBuilder.registerTypeAdapter
         (Tipostiempo.class, new TipostiempoAdapter()).create();
+            
+            /**GsonBuilder b = new GsonBuilder();
+            b.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY);
+            Gson gson = b.create();**/
+            
+            //Gson gson = new Gson();
             feeds = gson.toJson(feedData);
 
         } catch (Exception e) {
+            System.out.println(e);
             System.out.println("No se pudo obtnener los tipos tiempo");
           
         }

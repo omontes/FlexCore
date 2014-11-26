@@ -42,11 +42,11 @@ public class TiemposDAO implements TransaccionesTiempos {
                 .addEntity(Tipostiempo.class)            
                 ;
       
-        tiemposList = q.list();
-        /**Iterator<Tipostiempo> it = tiemposList.iterator();
+       tiemposList = q.list();/**
+        Iterator<Tipostiempo> it = tiemposList.iterator();
         while(it.hasNext()){
             try{
-                System.out.println(it.next().getDescripcion());}
+                System.out.println(it.next());}
             //System.out.println(it.next().getDescripcion());}
             catch(Exception e){
                 System.out.println(e);

@@ -73,8 +73,11 @@ public class CuentaAhorroAutomaticoWS {
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Cuentaahorroautomatico create(Cuentaahorroautomatico cuentaAhorroAutomatico) throws SQLException, NamingException, Exception {
+        
         CuentaAhorroAutomaticoDAO cliente_dao = new CuentaAhorroAutomaticoDAO();
         return cliente_dao.crearCuentaAhorroAutomatico(cuentaAhorroAutomatico);
+        
+      
     }
     
     @POST
