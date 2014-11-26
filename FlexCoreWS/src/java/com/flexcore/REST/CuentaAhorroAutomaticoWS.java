@@ -27,7 +27,6 @@ import javax.ws.rs.core.UriInfo;
 
 /**
  * REST Web Service
- *
  * @author Carlos
  */
 /*sd*/
